@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';//to get bootstrap cards working
-import noImage from './img/imageNotFound.jpg';
-
+//import noImage from './img/imageNotFound.jpg';
+import placeholder from './img/virusPictureFromStatisticsAPI.png'
 import Statistics from './components/CasesTracking';
 import Guidelines from './components/Guidelines';
 import HomePage from './components/HomePage';
@@ -24,8 +24,8 @@ function App() {
 			<div className='App'>
 				<header className='App-header'>
 					<br />
-					<img src={noImage} height="100" width="100"
-						alt='Covidash logo placeholder' title="Covidash image source" />
+					<img src={placeholder} height="100" width="100"
+						alt='Covidash logo placeholder' title="From the statistics API website" />
 					<h1><Link className='marvel' to='/'>
 						HOME
 					</Link></h1>

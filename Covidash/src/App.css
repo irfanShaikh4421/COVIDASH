@@ -57,3 +57,14 @@
 .tota11yLink {/*used to make a link tota11y compliant*/
   color: #0072ee !important;
 }
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border:2px solid black;
+}
+
+th, td{
+  min-width: 100px;
+  border: 1px solid black;
+}
