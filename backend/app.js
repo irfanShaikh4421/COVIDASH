@@ -17,6 +17,7 @@ const test = require('./routes/test')
 
 app.use("/test", test)
 
+// auth thingy
 
 // global error handler
 
