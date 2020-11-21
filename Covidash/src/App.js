@@ -13,6 +13,7 @@ import OutBreak from './components/OutbreakMap';
 import Symptoms from './components/Symptoms';
 import TestingLocations from './components/Testing';
 import Travel from './components/Travel';
+import Sources from './components/Sources';
 import Vaccine from './components/Vaccine';
 
 
@@ -73,6 +74,7 @@ function App() {
 						<Route exact path='/guidelines' component={Guidelines} />
 						<Route exact path='/news' component={News} />
 						<Route exact path='/login' component={Login} />
+						<Route exact path='/sources' component={Sources} />
 						<Route render = {() => (<h2>404: Invalid URL</h2>)} />
 					</Switch>
 				</div>

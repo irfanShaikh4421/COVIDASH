@@ -68,3 +68,25 @@ th, td{
   min-width: 100px;
   border: 1px solid black;
 }
+
+.subtitle{
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: grey;
+}
+
+.titleOfSubtitle {
+  margin-bottom:2px;
+}
+
+footer.casesTracking {
+  margin-bottom: 2%;
+  column-count: 2;
+}
+
+
+#dataSources li {
+  list-style-type: none;
+  text-align: left;
+  margin-left: 15%;
+}
