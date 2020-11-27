@@ -25,9 +25,19 @@ class NotFound extends Error{
     }
 }
 
+class Unauthorized extends Error{
+    constructor(message="Access denied"){
+        super()
+        this.name = 'Unauthorized'
+        this.message = message
+        this.status = 403
+    }
+}
+
 module.exports = {
     wrapErrorHandler :  (fn) => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(next) ,
     GeneralError,
     BadRequest,
-    NotFound
+    NotFound,
+    Unauthorized
 }
