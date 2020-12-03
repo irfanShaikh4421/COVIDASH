@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const News = (props) => {
     let [newsData, setData] = useState([]);
+    let [newsLoading, setNewsLoading] = useState(true);
 
     useEffect(() => {
         async function getData() {
@@ -12,34 +14,41 @@ const News = (props) => {
             try {
                 getData = await axios.get(url);
                 setData(getData.data.articles);
+                setNewsLoading(false);
             } catch (e) {
                 console.log(e);
             }
         }
         getData();
-        console.log(newsData);
     }, []);
+
+    if(newsLoading){
+        return <div>Loading...</div>;
+    }
+
+    console.log(newsData);
 
     return (
         <div>
             <h2>Latest News</h2>
             <br />
             {newsData.map((item, index) => (
-                <p key={index}>
-                    <img src={item.urlToImage} width="300"></img>
+                <div key={index}>
+                    {item.urlToImage && <img src={item.urlToImage} width="300" alt={`${item.source.name} article`}></img>}
                     <br />
-                    <a href={item.url} target="blank">
+                    <a className="tota11yLink" href={item.url} target="blank">
                         {item.title}
                     </a>
                     <br />
-                    {item.publishedAt}
+                    {new Date(item.publishedAt).toLocaleString('en-US')}
                     <br />
                     {item.description}
                     <br />
                     {item.content}
                     <br />
+                    <hr />
                     <br />
-                </p>
+                </div>
             ))}
         </div>
     );
