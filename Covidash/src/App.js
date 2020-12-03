@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; //to get bootstrap cards working
@@ -7,7 +7,7 @@ import placeholder from './img/virusPictureFromStatisticsAPI.png';
 import Statistics from './components/CasesTracking';
 import Guidelines from './components/Guidelines';
 import HomePage from './components/HomePage';
-import Login from './components/Login';
+//import Login from './components/Login';// Login has become an unnecessary component, as it is now handled in firebase
 import News from './components/News';
 import OutBreak from './components/OutbreakMap';
 import Symptoms from './components/Symptoms';
@@ -23,6 +23,9 @@ import { providers, firebaseAppAuth } from './auth/firebase'
 import FirebaseContext from './auth/context'
 
 function App(props) {
+	const [accountState, setAccountState] = useState(true);//displays a "Loading" while page confirms wether the user is signed in or not
+	useEffect(() => firebaseAppAuth.onAuthStateChanged(() => setAccountState(false)), []);//
+
 	return (
 		<FirebaseContext.Provider value={props}>
 			<Router>
@@ -41,7 +44,7 @@ function App(props) {
 								HOME
 							</Link>
 							<p style={{fontSize: "1.5rem", fontWeight: 300, padding: ".5rem"}}>
-								 { props.user ? (<> Hello {props.user.displayName}</>) : null }
+								 { props.user ? (<> Hello, {props.user.displayName}</>) : null }
 							</p>
 						</h1>
 						<br />
@@ -70,19 +73,19 @@ function App(props) {
 						<Link className="marvel" to="/news">
 							News
 						</Link>
-						<p>
+						<>
 							{/* Sample  */}
 							<FirebaseContext.Consumer>
 								{firebase => 
 									(<>
-										{ firebase.loading ? (<p>Loading</p>) : null }
-										{ (!firebase.loading && !firebase.user) ? <button className="marvel" onClick={()=> firebase.signInWithGoogle()}> Login with Google </button>  : null }
-										{ !firebase.loading && firebase.user ? (<><button className="marvel" onClick={() => firebase.signOut()}> Sign Out </button></>) : null }
+										{ accountState ? (<p>Loading</p>) : null }
+										{ (!accountState && !firebase.user) ? <button className="marvel" onClick={()=> firebase.signInWithGoogle()}> Login with Google </button>  : null }
+										{ !accountState && firebase.user ? <button className="marvel" onClick={() => firebase.signOut()}> Logout </button> : null }
 									</>
 									)
 								} 
 							</FirebaseContext.Consumer>
-						</p>
+						</>
 					</header>
 					<br />
 					<br />
@@ -102,7 +105,7 @@ function App(props) {
 							/>
 							<Route exact path="/guidelines" component={Guidelines} />
 							<Route exact path="/news" component={News} />
-							<Route exact path="/login" component={Login} />
+							{/*<Route exact path="/login" component={Login} /> */}
 							<Route exact path='/sources' component={Sources} />
 							<Route render={() => <h2>404: Invalid URL</h2>} />
 						</Switch>

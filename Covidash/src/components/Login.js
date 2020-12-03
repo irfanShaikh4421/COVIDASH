@@ -13,7 +13,7 @@ const Login = () => {
 						<>
 							<h1> Login with google</h1>
 							<button onClick= { () => firebase.signInWithGoogle() }> Sign me In </button>
-							{JSON.stringify(firebase.user)}
+							{console.log(JSON.stringify(firebase.user))}
 						</>
 					) : 
 					(<>

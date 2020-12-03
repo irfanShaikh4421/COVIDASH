@@ -35,6 +35,11 @@
   }
 }
 
+button.marvel {
+  border:none;
+  line-height: initial;
+}
+
 .marvel {/*my attempt to get the links as close to the "MARVEL" logo look as I could*/
 	font-weight: bolder;
   background-color: #ec1624;
