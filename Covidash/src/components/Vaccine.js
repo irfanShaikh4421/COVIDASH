@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const Vaccine = (props) => {
 	const [vaccineData, setVaccineData] = useState([]);
@@ -23,14 +24,17 @@ const Vaccine = (props) => {
 		<div>
 			{vaccineData.map((item, index) => (
 				<div key={index}>
-					<p>
-						{index + 1}. Sponsors:{' '}
-						{item.sponsors.map((sponsor) => (
-							<span>{sponsor} | </span>
+					<p>{index + 1}. Mechanism: {item.mechanism} </p>
+					<span className="hoverCause">
+					<p><span className="hoverResult">{item.details.replace(/&nbsp;/g," "/** FUN WITH REGEX*/).replace(/&.squo;|&#39;/g, "'").replace(/&.dquo;|&quot;/g,'"').replace(/&ndash;/g,'-')/**at this point, all that're left are literally greek to me. */}</span>
+						|{' '/**I replaced the 'Sponsors: ' with a leading | to make the final | look less out of place. */}
+						{item.sponsors.map((sponsor, index) => (
+							<span key={index}>{sponsor} | </span>
 						))}
 					</p>
-					<p>Mechanism: {item.mechanism}</p>
+						
 					<p>Trial phase: {item.trialPhase}</p>
+					</span>
 					<br />
 					<br />
 				</div>

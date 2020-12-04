@@ -14,7 +14,7 @@ const EachTestingLocation = (props) => {
 			let getData;
 			try {
 				getData = await axios.get(url);
-				let hospitalData = getData.data.map((item) => {
+				/*let hospitalData = */getData.data.forEach((item) => {
 					if (item.id === ID) {
 						setHospitalData(item);
 					}
@@ -27,7 +27,7 @@ const EachTestingLocation = (props) => {
 	}, [props.match.params.state, props.match.params.orgID]);
 	return (
 		<div>
-			<h2>{hospitalData.name}</h2>
+			<h2>{hospitalData.name}</h2><hr />
 			<p>{hospitalData.description}</p>
 			<p>Transportation: {hospitalData.transportation}</p>
 		</div>

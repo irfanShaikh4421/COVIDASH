@@ -60,8 +60,8 @@ const TestingLocations = (props) => {
 					))}
 				</select>
 				{locationsData.map((item, index) => (
-					<Link to={`/testing/${stateName}/${item.id}`}>
-						<p key={index}>
+					<Link key={index} className="tota11yLink" to={`/testing/${stateName}/${item.id}`}>
+						<p>
 							{item.id} {item.name}
 						</p>
 					</Link>

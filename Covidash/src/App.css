@@ -35,6 +35,11 @@
   }
 }
 
+button.marvel {
+  border:none;
+  line-height: initial;
+}
+
 .marvel {/*my attempt to get the links as close to the "MARVEL" logo look as I could*/
 	font-weight: bolder;
   background-color: #ec1624;
@@ -89,6 +94,22 @@ footer.casesTracking {
   list-style-type: none;
   text-align: left;
   margin-left: 15%;
+}
+
+/** cool hover effect for Vaccine page */
+span.hoverCause span.hoverResult {/** Soruce: w3 schools */
+  color: white;
+  background-color: #282c34;
+  border-radius: 10px;
+
+  padding: 10px;
+  visibility: hidden;
+
+  position: absolute;
+}
+
+span.hoverCause:hover span.hoverResult {
+  visibility: visible;
 }
 
 .travelContainer{
