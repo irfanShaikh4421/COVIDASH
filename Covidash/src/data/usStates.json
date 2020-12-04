@@ -10,11 +10,6 @@
 		"slug": "alaska"
 	},
 	{
-		"name": "American Samoa",
-		"abbreviation": "AS",
-		"slug": "american-samoa"
-	},
-	{
 		"name": "Arizona",
 		"abbreviation": "AZ",
 		"slug": "arizona"
@@ -45,16 +40,6 @@
 		"slug": "delaware"
 	},
 	{
-		"name": "District Of Columbia",
-		"abbreviation": "DC",
-		"slug": "district-of-columbia"
-	},
-	{
-		"name": "Federated States Of Micronesia",
-		"abbreviation": "FM",
-		"slug": "federated-states-of-micronesia"
-	},
-	{
 		"name": "Florida",
 		"abbreviation": "FL",
 		"slug": "florida"
@@ -63,11 +48,6 @@
 		"name": "Georgia",
 		"abbreviation": "GA",
 		"slug": "georgia"
-	},
-	{
-		"name": "Guam",
-		"abbreviation": "GU",
-		"slug": "guam"
 	},
 	{
 		"name": "Hawaii",
@@ -113,11 +93,6 @@
 		"name": "Maine",
 		"abbreviation": "ME",
 		"slug": "maine"
-	},
-	{
-		"name": "Marshall Islands",
-		"abbreviation": "MH",
-		"slug": "marshall-islands"
 	},
 	{
 		"name": "Maryland",
@@ -195,11 +170,6 @@
 		"slug": "north-dakota"
 	},
 	{
-		"name": "Northern Mariana Islands",
-		"abbreviation": "MP",
-		"slug": "northern-mariana-islands"
-	},
-	{
 		"name": "Ohio",
 		"abbreviation": "OH",
 		"slug": "ohio"
@@ -215,19 +185,9 @@
 		"slug": "oregon"
 	},
 	{
-		"name": "Palau",
-		"abbreviation": "PW",
-		"slug": "palau"
-	},
-	{
 		"name": "Pennsylvania",
 		"abbreviation": "PA",
 		"slug": "pennsylvania"
-	},
-	{
-		"name": "Puerto Rico",
-		"abbreviation": "PR",
-		"slug": "puerto-rico"
 	},
 	{
 		"name": "Rhode Island",
