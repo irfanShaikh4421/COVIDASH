@@ -32,17 +32,16 @@ function App(props) {
 				<div className="App">
 					<header className="App-header">
 						<br />
-						<img
-							src={placeholder}
-							height="100"
-							width="100"
-							alt="Covidash logo placeholder"
-							title="From the statistics API website"
-						/>
+						<Link to="/">
+							<img
+								src={placeholder}
+								height="100"
+								width="100"
+								alt="Covidash logo placeholder"
+								title="From the statistics API website"
+							/>
+						</Link>
 						<h1>
-							<Link className="marvel" to="/">
-								HOME
-							</Link>
 							<p style={{fontSize: "1.5rem", fontWeight: 300, padding: ".5rem"}}>
 								 { props.user ? (<> Hello, {props.user.displayName}{console.log("WHEN WE IMPLEMENT a database of some form to store the user pic's, use firebaseApp.auth().getInstance().uid as the primary key.\n EXAMPLE: " + props.user.uid)}</>) : null }
 							</p>

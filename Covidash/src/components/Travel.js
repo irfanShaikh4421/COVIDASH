@@ -9,7 +9,7 @@ const Travel = (props) => {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
 	const [countryData, setCountryData] = useState(null)
-	const options = countriesList.map(( k, i ) => (<option key={i} selected={k.value==='US' ? 'selected' : null} value={k.value}>{k.name}</option>) )
+	const options = countriesList.map(( k, i ) => (<option key={i} value={k.value} >{k.name}</option>) )
 
 	function handleSelect(e){
 		setCountry(e.target.value)
@@ -39,12 +39,12 @@ const Travel = (props) => {
 	return (
 		<div>
 			SELECT COUNTRY &nbsp;&nbsp;
-			<select onChange={handleSelect}>
+			<select value={country} onChange={handleSelect}>
 				{options}
 			</select>
 			<br/>
 			<hr></hr>
-			<div class="centeredFlex">
+			<div className="centeredFlex">
 				<div className="travelContainer" >
 					{ loading ? (<p>Loading</p>) : null }
 					{ !loading && countryData ? (
@@ -59,7 +59,7 @@ const Travel = (props) => {
 							</div>
 							<div style={{flex: '1 0 65%', textAlign: 'left'}}>
 								<h1 style={{fontWeight: 350}}>{countryData.name}</h1> <br></br>
-								<div class='chipsContainer' style={{display: 'flex', justifyContent: 'start', flexWrap: 'wrap', alignItems: 'start'}}>
+								<div className='chipsContainer' style={{display: 'flex', justifyContent: 'start', flexWrap: 'wrap', alignItems: 'start'}}>
 									<p>Lockdown status: </p> <div ><span className='chip'>{countryData.lockdownInfo.lockdown}</span></div>
 									<p>Tourists status: </p> <div ><span className='chip'> {countryData.lockdownInfo.touristEntry} </span> </div>
 									<p>Event Info: </p> <div ><span className='chip'>{countryData.lockdownInfo.events}</span> </div>
