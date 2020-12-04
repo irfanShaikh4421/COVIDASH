@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import '../App.css';
 import flagUN from './../img/unitedNationsFlag.png';
 import allCountries from '../data/countries.json';
+import allStates from '../data/usStates.json';
 
 const Statistics = () => {
     const [ countryData, setCountryData] = useState(undefined);
@@ -27,7 +28,7 @@ const Statistics = () => {
         }
        fetchWorld();
     },
-    [ ]//fires on page load
+    [ ]
 );
 
     const setSearch = async (newData) => {
@@ -36,21 +37,23 @@ const Statistics = () => {
         setCountryData(newData);
     }
 
-    const buildDisplay = (region) => {
+    const buildDisplay = (region, loading) => {
        
         return (
             <div>
                 {loading ? 
                 <p>loading...</p> : 
                 <div>
-                    <h2 className={region && region.continent && "titleOfSubtitle"}>{(region && region.country) || "World"}</h2>
-                    {region && region.continent && <h3 className="subtitle">{region.continent}</h3> }
-                    {region && region.population && <p >Population: {region.population.toString().replace(regexCommaNumbers, ",")}.</p>}
-                    <p>{region.active.toString().replace(regexCommaNumbers, ",")} currently infected. &nbsp;
-                    {region.critical.toString().replace(regexCommaNumbers, ",")} in critical condition.</p>
-                    {region && region.countryInfo && region.countryInfo.flag ? <img src={region.countryInfo.flag} alt="No Country Flag Found" title="Sourced from disease.sh, maybe do something with imagemagick" /> : <img src={flagUN} alt="No flag found" title="United Nations Flag" /> }
-                    <hr />
-                {region && region.tests && <div>{region.tests.toString().replace(regexCommaNumbers, ",")}&nbsp;People have been tested for Covid.</div> }
+                    <h2 className={region && region.continent && "titleOfSubtitle"}>{(region && region.country) || (region && region.state) || "World"}</h2>
+                    {(region && region.continent) ? <h3 className="subtitle">{region.continent}</h3> : null}
+                    {(region && region.population) ? <p >Population: {region.population.toString().replace(regexCommaNumbers, ",")}.</p> : null}
+                    {(region && region.active) ? <p>{region.active.toString().replace(regexCommaNumbers, ",")} currently infected. &nbsp;
+                    {(region && (region.critical || region.critical===0)) ? `${region.critical.toString().replace(regexCommaNumbers, ",")} in critical condition.` :<></>}</p> : null }
+                    {region && region.countryInfo && region.countryInfo.flag ? <img src={region.countryInfo.flag} alt="No Country Flag Found" title="Sourced from disease.sh, maybe do something with imagemagick" /> : (!(region && region.state)) && <img src={flagUN} alt="No flag found" title="United Nations Flag" /> }
+                    {(region && !region.state) ? <hr /> : null }
+                {(region && region.tests) ? <div>{region.tests.toString().replace(regexCommaNumbers, ",")}&nbsp;People have been tested for Covid.</div> : null}
+
+                {region && region.state && ((region.recovered) ? <div>{region.recovered.toString().replace(regexCommaNumbers, ",")}&nbsp;People have recovered from Covid.</div> /**States don't have critical field, nor the daily recoveries, but they do contain overall recoveries*/ : null )}
                     <table>
                         <thead>
                             <tr>
@@ -70,18 +73,18 @@ const Statistics = () => {
                                 <td>{region.todayCases.toString().replace(regexCommaNumbers, ",")}</td>
                                 <td>{region.cases.toString().replace(regexCommaNumbers, ",")}</td>
                             </tr>
-                            <tr>
+                            {!(region && region.state) ? (<tr>
                                 <th>Recoveries</th>
                                 <td>{region.todayRecovered.toString().replace(regexCommaNumbers, ",")}</td>
                                 <td>{region.recovered.toString().replace(regexCommaNumbers, ",")}</td>
-                            </tr>
+                            </tr>) : <></>}
                         </tbody>
                     </table>
                     <br />
                     
                     <hr />
                     <footer className="casesTracking">{region && region.updated && <div>Data last updated: &nbsp; 
-                    {new Date(region.updated).toLocaleString('en-US')//Should we allow for other formats?
+                    {new Date(region.updated).toLocaleString('en-US')
                 }.
                     <br /> <br /></div> }
                     <Link className="tota11yLink" to="./sources">View Data Sources</Link></footer>
@@ -102,13 +105,54 @@ const Statistics = () => {
         <div>
             <GetCountry setSearch={setSearch} setShowWorldData={setShowWorldData} setLoading={setLoading}/>
             {display}
+            { countryData && !showWorldData && countryData.countryInfo && (countryData.countryInfo._id === 840 /**America */) && <GetState buildState={buildDisplay} />}
         </div>
     );
 }
 
-const countryDropDown = allCountries.map((entry) => {
-    return <option key={entry._id} value={entry.iso3}>{entry.country}</option>
-});
+//modified to match Travel.js' dropdown
+const countryDropDown = allCountries.map((entry) => (<option key={entry._id} value={entry.iso3}>{entry.country}</option>));
+
+const GetState = ({buildState}) => {
+    const [state, setState] = useState("Alabama");
+    const [stateData, setStateData] = useState(undefined);
+    const [loading, setLoading] = useState(true);
+
+    const stateDropDown = allStates.map((entry, index) => (<option key={index} value={entry.name}>{entry.name}</option>));
+
+
+    useEffect(() => {
+        console.log('get state useeffect fired');
+        async function fetchData() {
+            try {
+                setLoading(true);
+                const { data: State } = await axios.get(`https://disease.sh/v3/covid-19/states/${state}`);
+                setStateData(State);
+                setLoading(false);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        if (state) {
+            fetchData();
+        }
+    }, [state]);
+
+    function handleSelect(e){
+		setState(e.target.value)
+		console.log(`State selected: ${e.target.value} `)
+	}
+
+    return (
+        <div> <br /> <hr /> 
+            <select onChange={handleSelect}>
+                {stateDropDown}
+            </select>
+            {!loading && buildState(stateData, loading)}
+        </div>
+    );
+
+}
 
 const GetCountry = ({setSearch, setLoading, setShowWorldData}) => {
     const [ country, setCountry ] = useState("");

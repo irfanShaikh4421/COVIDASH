@@ -34,6 +34,8 @@ const Travel = (props) => {
 		grabRegulation(country)
 	},[country])
 
+	if(error) return <div>ERROR: {error}.</div>
+
 	return (
 		<div>
 			SELECT COUNTRY &nbsp;&nbsp;
@@ -51,7 +53,7 @@ const Travel = (props) => {
 								<img  src={`https://flagcdn.com/h240/${country.toLowerCase()}.png`}
 									height='auto'
 									width="75%"
-									alt='Flag image'
+									alt={`${countryData.name}'s Flag`}
 								
 								/>
 							</div>
