@@ -111,3 +111,48 @@ span.hoverCause span.hoverResult {/** Soruce: w3 schools */
 span.hoverCause:hover span.hoverResult {
   visibility: visible;
 }
+
+.travelContainer{
+  background: #EAEAEA;
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  width: 65vw; 
+  text-align: center;
+  flex: shrink;
+
+}
+
+.centeredFlex {
+  display: flex;
+  justify-content: center;
+}
+
+.chip {
+  padding: 2px 8px;
+  border-radius: 1rem;
+  background-color: #016fb9;
+  color: white;
+  
+}
+
+.label, .chipsContainer > p {
+  line-height: 100%;
+  font-weight: 300;
+  font-size: 1.5rem !important;
+}
+
+.chipsContainer > *:nth-child(odd) {
+  flex: 1 0 25%;
+}
+
+.chipsContainer > *:nth-child(even) {
+  flex: 1 0 65%;
+  width: 35%
+}
+
+.para {
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-align: justify;
+  text-justify: newspaper;
+}
