@@ -47,7 +47,6 @@ function App(props) {
 								 { props.user ? (<> Hello, {props.user.displayName}{console.log("WHEN WE IMPLEMENT a database of some form to store the user pic's, use firebaseApp.auth().getInstance().uid as the primary key.\n EXAMPLE: " + props.user.uid)}</>) : null }
 							</p>
 						</h1>
-						<br />
 
 						<Link className="marvel" to="/statistics">
 							Statistics
