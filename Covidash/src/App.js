@@ -44,7 +44,7 @@ function App(props) {
 								HOME
 							</Link>
 							<p style={{fontSize: "1.5rem", fontWeight: 300, padding: ".5rem"}}>
-								 { props.user ? (<> Hello, {props.user.displayName}</>) : null }
+								 { props.user ? (<> Hello, {props.user.displayName}{console.log("WHEN WE IMPLEMENT a database of some form to store the user pic's, use firebaseApp.auth().getInstance().uid as the primary key.\n EXAMPLE: " + props.user.uid)}</>) : null }
 							</p>
 						</h1>
 						<br />
@@ -77,7 +77,7 @@ function App(props) {
 							{/* Sample  */}
 							<FirebaseContext.Consumer>
 								{firebase => 
-									(<>
+									(<> 
 										{ accountState ? (<p>Loading</p>) : null }
 										{ (!accountState && !firebase.user) ? <button className="marvel" onClick={()=> firebase.signInWithGoogle()}> Login with Google </button>  : null }
 										{ !accountState && firebase.user ? <button className="marvel" onClick={() => firebase.signOut()}> Logout </button> : null }
