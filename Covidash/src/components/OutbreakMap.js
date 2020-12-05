@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CovidMap from './CovidMap';
+import Legend from './Legend';
+import LoadCountriesTask from '../tasks/LoadCountriesTask';
+import legendItems from '../entities/LegendItems';
 
-const OutBreak = (props) => {
-	return (
-		<p>This is a placeholder for the Affected Locations Map Page</p>
-	);
-}
+const OutBreak = () => {
+    const [countries, setCountries] = useState([]);
+    const legendItemsRev = [...legendItems].reverse();
+
+    const load = () => {
+        let loadCountriesTask = new LoadCountriesTask();
+        loadCountriesTask.load((countries) => setCountries(countries));
+    };
+
+    useEffect(load, []);
+
+    return (
+        <div>
+            <h2>OutBreak Map</h2>
+            <br />
+            {countries.length === 0 ? (
+                'Loading...'
+            ) : (
+                <div>
+                    <CovidMap countries={countries} />
+                    <Legend legendItems={legendItemsRev} />
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default OutBreak;
