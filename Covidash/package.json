@@ -7,16 +7,16 @@
     "axios": "^0.20.0",
     "blueimp-md5": "^2.18.0",
     "firebase": "^8.1.1",
+    "leaflet": "^1.7.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1",
+    "react-leaflet": "^3.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-with-firebase-auth": "^1.3.2"
   },
-  "devDependencies": {
-    "bootstrap": "^4.5.3"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
