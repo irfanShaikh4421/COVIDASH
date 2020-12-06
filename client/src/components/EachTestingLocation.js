@@ -53,13 +53,13 @@ const EachTestingLocation = (props) => {
 
 	const getSchedule = () => {
 		const weekdays = [
+			'Sunday',
 			'Monday',
 			'Tuesday',
 			'Wednesday',
 			'Thursday',
 			'Friday',
 			'Saturday',
-			'Sunday',
 		];
 
 		if (hospitalData.regular_schedule) {
@@ -72,7 +72,8 @@ const EachTestingLocation = (props) => {
 						<p>Regular schedule: </p>
 						{schedule.map((item, key) => (
 							<p key={key}>
-								{weekdays[key]}: {item.opens_at} to {item.closes_at}
+								{weekdays[item.weekday - 1]}: {item.opens_at} to{' '}
+								{item.closes_at}
 							</p>
 						))}
 					</div>
