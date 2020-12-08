@@ -13,6 +13,7 @@ import Vaccine from './components/Vaccine';
 import BedUtilization from './components/HospitalBeds';
 import Guidelines from './components/Guidelines';
 import Sources from './components/Sources';
+import Account from './components/Account';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
@@ -59,6 +60,7 @@ function App() {
                                 component={Guidelines}
                             />
                             <Route exact path="/sources" component={Sources} />
+                            <PrivateRoute path="/account" component={Account} />
                             <Route path="/signin" component={SignIn} />
                             <Route path="/signup" component={SignUp} />
                             <Route render={() => <h2>404: Invalid URL</h2>} />
