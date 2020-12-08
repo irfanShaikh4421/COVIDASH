@@ -142,6 +142,7 @@ const Guidelines = () => {
             <a
                 href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/need-to-know.html"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 Source
             </a>

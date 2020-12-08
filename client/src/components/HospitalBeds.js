@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import usStates from '../data/usStates';
 const axios = require('axios');
 
-const HospitalBeds = (props) => {
+const HospitalBeds = () => {
     const [state, setState] = useState('Alabama');
     const [currentStateData, setCurrentStateData] = useState([]);
 
