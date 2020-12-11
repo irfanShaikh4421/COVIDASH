@@ -116,8 +116,11 @@ async function getNews(country) {
                     for (var member in news[i]) {
                         if (news[i][member] == null) news[i][member] = '';
                     }
+
                     await client.hmsetAsync(news[i].url, news[i]);
+                    await client.expireAsync(news[i].url, 86400);
                     await client.saddAsync(countryParam, news[i].url);
+                    await client.expireAsync(countryParam, 86400);
                 }
 
                 let showNews = new Array();
@@ -172,7 +175,9 @@ async function getNews(country) {
                         if (news[i][member] == null) news[i][member] = '';
                     }
                     await client.hmsetAsync(news[i].url, news[i]);
+                    await client.expireAsync(news[i].url, 86400);
                     await client.saddAsync('world', news[i].url);
+                    await client.expireAsync('world', 86400);
                 }
 
                 let showNews = new Array();
