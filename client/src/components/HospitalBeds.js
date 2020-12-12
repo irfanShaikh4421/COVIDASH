@@ -45,6 +45,7 @@ const HospitalBeds = () => {
 				{state}
 				{currentStateData.map((item, index) => (
 					<p key={index}>
+						<hr style={{width: '60%'}}/>
 						{index + 1}. {item.HOSPITAL_NAME}
 						<br />
 						Address: {item.HQ_ADDRESS}

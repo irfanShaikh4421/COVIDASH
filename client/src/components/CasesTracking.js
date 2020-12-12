@@ -44,7 +44,7 @@ const Statistics = () => {
                     <p>loading...</p>
                 ) : (
                     <div>
-                        <h2
+                        <h1
                             className={
                                 region && region.continent && 'titleOfSubtitle'
                             }
@@ -52,9 +52,9 @@ const Statistics = () => {
                             {(region && region.country) ||
                                 (region && region.state) ||
                                 'World'}
-                        </h2>
+                        </h1>
                         {region && region.continent ? (
-                            <h3 className="subtitle">{region.continent}</h3>
+                            <h2 className="subtitle">{region.continent}</h2>
                         ) : null}
                         {region && region.population ? (
                             <p>
@@ -195,9 +195,7 @@ const Statistics = () => {
                                     <br /> <br />
                                 </div>
                             )}
-                            <Link className="tota11yLink" to="./sources">
-                                View Data Sources
-                            </Link>
+                            <a className="tota11yLink" href="https://disease.sh/">disease.sh</a>
                         </footer>
                     </div>
                 )}

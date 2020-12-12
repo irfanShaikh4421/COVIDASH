@@ -15,8 +15,8 @@
 
 .App-header {
     background-color: #282c34;
-    min-height: 275px;
     align-items: center;
+    padding-bottom:20px;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
@@ -38,6 +38,7 @@
 button.marvel {
     border: none;
     line-height: initial;
+    cursor: pointer;
 }
 
 .marvel {
@@ -54,9 +55,10 @@ button.marvel {
     padding: 0.4rem 0.8rem;
     text-decoration: none !important;
     margin: 5px;
+    margin-top: 20px;
 }
 
-.marvel:hover {
+.navigation .marvel:hover {
     background-color: transparent;
     color: white;
     border: 2px solid white;
@@ -82,7 +84,7 @@ td {
 .subtitle {
     font-size: 15px;
     margin-bottom: 16px;
-    color: grey;
+    color: #767676;
 }
 
 .titleOfSubtitle {

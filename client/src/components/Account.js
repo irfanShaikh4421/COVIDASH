@@ -7,6 +7,8 @@ function Account() {
     return (
         <div className="Account">
             <p>Account</p>
+            <hr />
+            
             <ChangePassword />
             <SignOutButton />
         </div>
