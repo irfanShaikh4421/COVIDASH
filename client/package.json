@@ -15,7 +15,8 @@
         "react-leaflet": "^3.0.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "^3.4.3",
-        "react-with-firebase-auth": "^1.3.2"
+        "react-with-firebase-auth": "^1.3.2",
+        "recharts": "^1.8.5"
     },
     "devDependencies": {},
     "scripts": {
