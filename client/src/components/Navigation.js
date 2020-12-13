@@ -95,7 +95,7 @@ const NavigationAuth = () => {
             >
                 Account
             </NavLink>{' '}
-            <SignOutButton />
+            {/**<SignOutButton /> */}
         </nav>
     );
 };
