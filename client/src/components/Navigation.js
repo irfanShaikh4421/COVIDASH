@@ -19,7 +19,7 @@ const NavigationAuth = () => {
 				activeClassName="active"
 				className="marvel"
 			>
-				Statistics
+				Home
 			</NavLink>{' '}
 			<NavLink exact to="/news" activeClassName="active" className="marvel">
 				News
@@ -67,7 +67,12 @@ const NavigationUnauth = () => {
 	return (
 		<nav className="navigation">
 			{' '}
-			<NavLink exact to="/" activeClassName="active" className="marvel">
+			<NavLink
+				exact
+				to="/statistics"
+				activeClassName="active"
+				className="marvel"
+			>
 				Home
 				{/* <img
                     src={placeholder}

@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Dashboard from './components/Dashboard';
 import Statistics from './components/CasesTracking';
 import News from './components/News';
 import OutBreak from './components/OutbreakMap';
