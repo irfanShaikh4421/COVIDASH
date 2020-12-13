@@ -62,7 +62,7 @@ function App() {
                                     path="/guidelines"
                                     component={Guidelines}
                                 />
-                                <Route exact path="/sources" component={Sources} />
+                                <Route exact path="/sources" component={Sources} />{/**This Route No longer Does anything, can be deleted */} 
                                 <PrivateRoute path="/account" component={Account} />
                                 <Route path="/signin" component={SignIn} />
                                 <Route path="/signup" component={SignUp} />

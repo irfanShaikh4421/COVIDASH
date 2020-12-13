@@ -37,7 +37,6 @@
 
 button.marvel {
     border: none;
-    line-height: initial;
     cursor: pointer;
 }
 
@@ -54,8 +53,6 @@ button.marvel {
     padding: 0.4rem 0.8rem;
     text-decoration: none !important;
     margin: 5px;
-    margin-top: 20px;
-    border-top: 20px;
 }
 
 nav.navigation {

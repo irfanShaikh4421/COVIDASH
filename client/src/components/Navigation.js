@@ -37,7 +37,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Outbreak Map
+                Outbreak&nbsp;Map
             </NavLink>{' '}
             <NavLink
                 exact
@@ -45,7 +45,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Self Checker
+                Self&nbsp;Checker
             </NavLink>{' '}
             <NavLink
                 exact
@@ -53,7 +53,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Testing Locations
+                Testing&nbsp;Locations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -61,7 +61,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Travel Regulations
+                Travel&nbsp;Regulations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -77,7 +77,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Hospital Capacity
+                Hospital&nbsp;Capacity
             </NavLink>{' '}
             <NavLink
                 exact
@@ -85,7 +85,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Safety Guidelines
+                Safety&nbsp;Guidelines
             </NavLink>{' '}
             <NavLink
                 exact
@@ -121,7 +121,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Outbreak Map
+                Outbreak&nbsp;Map
             </NavLink>{' '}
             <NavLink
                 exact
@@ -129,7 +129,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Self Checker
+                Self&nbsp;Checker
             </NavLink>{' '}
             <NavLink
                 exact
@@ -137,7 +137,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Testing Locations
+                Testing&nbsp;Locations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -145,7 +145,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Travel Regulations
+                Travel&nbsp;Regulations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -161,7 +161,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Hospital Capacity
+                Hospital&nbsp;Capacity
             </NavLink>{' '}
             <NavLink
                 exact
@@ -169,7 +169,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Safety Guidelines
+                Safety&nbsp;Guidelines
             </NavLink>{' '}
             <NavLink
                 exact
@@ -185,7 +185,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Log In
+                Log&nbsp;In
             </NavLink>{' '}
         </nav>
     );
