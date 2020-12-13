@@ -23,15 +23,12 @@ router.get('/:id', async(req, res) => {
     }
 });
 
-router.post('/:id', async(req, res) => {//account creation
-    const userId = req.params.id;//still needs Syntax error checking for valid ID data type
+router.post('/:id', async(req, res) => {//account creation/ login
+    const userId = req.params.id;
+    console.log(userId);
     try{
         if((typeof userId !== "string") || (userId.length !==28)) throw SyntaxError("userId must be a valid uid");
-   /**Username stuff
-        if(!req.body) throw SyntaxError("Needs a request body");
-        if(!req.body.userName) throw SyntaxError("Request body needs a userName!");
-        if(typeof req.body.userName !== "string") throw TypeError("userName must be of type string"); */
-        user = await userData.createUser(userId/*, req.body.userName*/);//will return the newly created user
+        user = await userData.createUser(userId);//will return the newly created user
         res.json(user);
     }catch(e){
         if(e instanceof SyntaxError){//missing input param (ID or body)
@@ -54,13 +51,13 @@ router.patch('/:id', async(req, res) => {//adding either a picture or a country 
         if(!req.body) throw SyntaxError("Needs a request body");
         let oldUser = await userData.getUser(userId);//retrieves old user account info
         let newUser = {
- //           userName: ((req.body && req.body.userName) ? req.body.userName : oldUser.userName),
+            state: ((req.body && req.body.state) ? req.body.state : oldUser.state),
             countryCode: ((req.body && req.body.countryCode) ? req.body.countryCode : oldUser.countryCode),
-            image: ((req.body && req.body.image) ? req.body.image : oldUser.countryCode)
+            image: ((req.body && req.body.image) ? req.body.image : oldUser.image)
         }
         if(!userData.isUser(newUser)) throw TypeError("Missing or Invalid Request Body Input Parameter(s), Request body must be of format: \n" +
             "{"+//"\n userName: <string>"+
-            "\n countryCode: <number>,\n image: <imageURL> \n}");
+            "\n state: <two char String>, \n countryCode: <number>,\n image: <imageURL> \n}");
         console.log("In user PATCH route, need to update type error for images");
         let validUser = await userData.updateUser(userId, newUser);
         res.json(validUser);
