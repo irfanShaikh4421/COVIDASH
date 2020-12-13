@@ -18,6 +18,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './firebase/Auth';
+import { LocationProvider } from './LocationContext'; 
 
 function App() {
     return (
@@ -32,40 +33,42 @@ function App() {
                     <br />
                     <br />
                     <div className="App-body">
-                        <Switch>
-                            <Route exact path="/" component={Statistics} />
-                            <Route exact path="/news" component={News} />
-                            <Route exact path="/map" component={OutBreak} />
-                            <Route
-                                exact
-                                path="/symptoms"
-                                component={Symptoms}
-                            />
-                            <PrivateRoute
-                                path="/testing"
-                                component={TestingLocations}
-                            />
-                            <PrivateRoute
-                                path="/testing/:state/:orgID"
-                                component={EachTestingLocation}
-                            />
-                            <PrivateRoute path="/travel" component={Travel} />
-                            <Route exact path="/vaccine" component={Vaccine} />
-                            <PrivateRoute
-                                path="/bed-utilization"
-                                component={BedUtilization}
-                            />
-                            <Route
-                                exact
-                                path="/guidelines"
-                                component={Guidelines}
-                            />
-                            <Route exact path="/sources" component={Sources} />
-                            <PrivateRoute path="/account" component={Account} />
-                            <Route path="/signin" component={SignIn} />
-                            <Route path="/signup" component={SignUp} />
-                            <Route render={() => <h2>404: Invalid URL</h2>} />
-                        </Switch>
+                        <LocationProvider>
+                            <Switch>
+                                <Route exact path="/" component={Statistics} />
+                                <Route exact path="/news" component={News} />
+                                <Route exact path="/map" component={OutBreak} />
+                                <Route
+                                    exact
+                                    path="/symptoms"
+                                    component={Symptoms}
+                                />
+                                <PrivateRoute
+                                    path="/testing"
+                                    component={TestingLocations}
+                                />
+                                <PrivateRoute
+                                    path="/testing/:state/:orgID"
+                                    component={EachTestingLocation}
+                                />
+                                <PrivateRoute path="/travel" component={Travel} />
+                                <Route exact path="/vaccine" component={Vaccine} />
+                                <PrivateRoute
+                                    path="/bed-utilization"
+                                    component={BedUtilization}
+                                />
+                                <Route
+                                    exact
+                                    path="/guidelines"
+                                    component={Guidelines}
+                                />
+                                <Route exact path="/sources" component={Sources} />
+                                <PrivateRoute path="/account" component={Account} />
+                                <Route path="/signin" component={SignIn} />
+                                <Route path="/signup" component={SignUp} />
+                                <Route render={() => <h2>404: Invalid URL</h2>} />
+                            </Switch>
+                        </LocationProvider>
                     </div>
                 </div>
             </Router>
