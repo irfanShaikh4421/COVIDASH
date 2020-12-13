@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
@@ -9,27 +9,8 @@ import allStates from '../data/usStates.json';
 const ChangeCountry = () => {
     const { currentUser } = useContext(AuthContext);
     const [ location, setLocation ] = useContext(LocationContext);
-    //const [loading, setLoading] = useState(true);
-    //const [userCountry, setUserCountry] = useState(0);
-    const [userImage, setUserImage] = useState(undefined);
-    //const [userState, setUserState] = useState("AL");
+    
     const userId = currentUser.uid;
-
-    /*useEffect(() => {
-        async function fetchUserInfo() {
-            try{
-                setLoading(true);
-                const {data: response} = await axios.get(`/user/${userId}`);
-                setUserCountry(response.countryCode);
-                setUserState(response.state);
-                setUserImage(response.image);///should be eventually replaced with IRfan's stuff
-                setLoading(false);
-            }catch(e){
-                console.log(e);
-            };
-        };
-        fetchUserInfo();
-    }, []);*/
 
     const countryDropDown = allCountries.map((entry) => (
         <option key={entry._id} value={entry._id}>
@@ -41,10 +22,6 @@ const ChangeCountry = () => {
             {entry.name}
         </option>
     ));
-
-    /*if(loading){
-        return <p>Loading user info...</p>
-    };*/
 
     async function handleCountryChange(elem) {
         console.log(`Country code: ${location.countryCode} to be replaced with: ${elem.target.value}`);
@@ -79,7 +56,7 @@ const ChangeCountry = () => {
 
     return (
         <div>
-            <img src={userImage} alt="PLACEHOLDER TILL IMAGEMAGICK" /> <br /> <hr />
+            <img src={undefined} alt="PLACEHOLDER TILL IMAGEMAGICK" /> <br /> <hr />
             User's Location: <select defaultValue={location.countryCode} onChange={handleCountryChange}>{countryDropDown}</select>
             {(location.countryCode===840) ? <select defaultValue={location.state} onChange={handleStateChange}>{stateDropDown} </select> : null}
         </div>

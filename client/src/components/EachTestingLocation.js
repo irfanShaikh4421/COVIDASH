@@ -14,7 +14,7 @@ const EachTestingLocation = (props) => {
 			let getData;
 			try {
 				getData = await axios.get(url);
-				/*let hospitalData = */ getData.data.forEach((item) => {
+				getData.data.forEach((item) => {
 					if (item.id === ID) {
 						setHospitalData(item);
 					}

@@ -7,59 +7,7 @@ import allStates from '../data/usStates.json';
 import { LocationContext } from '../LocationContext';
 
 const Statistics = () => {
-    //const [countryData, setCountryData] = useState(undefined);
-    //const [worldData, setWorldData] = useState(undefined);
-    //const [showWorldData, setShowWorldData] = useState(true);
-    //const [ location ] = useContext(LocationContext);
-    //let display = null;
     const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
-
-    
-    /*
-
-    useEffect(() => {
-        console.log('Statistics world data useEffect fired');
-        async function fetchWorld() {
-            try {
-                setLoading(true);
-                const { data: World } = await axios.get(
-                    `https://disease.sh/v3/covid-19/all`
-                );
-                setWorldData(World);
-                setLoading(false);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
-        async function fetchMyCountry(country) {
-            try {
-                setLoading(true);
-                const countryIso3 = await findIso3(country);
-                const { data: World } = await axios.get(
-                    `https://disease.sh/v3/covid-19/countries/${countryIso3}`
-                );
-                setWorldData(World);
-                setLoading(false);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
-        if(!worldData){
-            if(location.countryCode !== 0){
-                fetchMyCountry(location.countryCode);
-            }else{
-                fetchWorld();
-            }
-        }
-    }, []);*/
-
-    /*const setSearch = async (newData) => {
-        console.log('recieved data from getCountry');
-        console.log(JSON.stringify(newData));
-        setCountryData(newData);
-    };*/
 
     const buildDisplay = (region, loading) => {
         return (
@@ -226,36 +174,12 @@ const Statistics = () => {
             </div>
         );
     };
-    /*if (loading) {
-        return loading;
-    //} else if (showWorldData) {
-    //    display = worldData && buildDisplay(worldData);
-    } else {
-        display = countryData && buildDisplay(countryData);
-    }*/
 
     return (
         <div>
             <GetCountry
                 buildCountry= {buildDisplay}
-               // defaultCountry = {defaultCountry}
-                //setSearch={setSearch}
-                //setShowWorldData={setShowWorldData}
-                //setLoading={setLoading}
             />
-            {/*display*/}
-            {/*countryData &&
-            //    !showWorldData &&
-                countryData.countryInfo &&
-                countryData.countryInfo._id === 840 && (//America
-                    <GetState buildState={buildDisplay} />
-                )}
-            {/*worldData &&
-                !countryData &&
-                worldData.countryInfo &&
-                worldData.countryInfo._id === 840 && (
-                    <GetState buildState={buildDisplay} />
-                )*/}
         </div>
     );
 };
@@ -310,7 +234,7 @@ const GetState = ({ buildState }) => {
     );
 };
 
-const GetCountry = ({ buildCountry/*setSearch, setLoading, setShowWorldData */}) => {
+const GetCountry = ({ buildCountry }) => {
     const [ location ] = useContext(LocationContext);
     const [loading, setLoading] = useState(true);
    
@@ -321,9 +245,7 @@ const GetCountry = ({ buildCountry/*setSearch, setLoading, setShowWorldData */})
                     return allCountries[i].iso3;
                 }
             }
-        }/* else {
-            setShowWorldData(true);
-        }*/
+        }
         return "";
     }
     const defaultCountry = findIso3(location.countryCode);
@@ -368,7 +290,7 @@ const GetCountry = ({ buildCountry/*setSearch, setLoading, setShowWorldData */})
                 fetchData();
             }
         }, //fires every time the country iso3 changes
-        [country/*, setSearch, setShowWorldData*/] //these "sets" are just passed in from parent component
+        [country]
     );
 
     const handleChange = (e) => {

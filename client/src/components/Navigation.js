@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
-import placeholder from '../img/virusPictureFromStatisticsAPI.png';
 import SignOutButton from './SignOut';
 import '../App.css';
 
@@ -107,13 +106,6 @@ const NavigationUnauth = () => {
             {' '}
             <NavLink exact to="/" activeClassName="active" className="marvel">
                 Home
-                {/* <img
-                    src={placeholder}
-                    height="100"
-                    width="100"
-                    alt="Covidash logo placeholder"
-                    title="From the statistics API website"
-                /> */}
             </NavLink>{' '}
             <NavLink
                 exact

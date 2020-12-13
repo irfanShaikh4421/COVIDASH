@@ -41,7 +41,7 @@ const Vaccine = () => {
                                         .replace(
                                             /&ndash;/g,
                                             '-'
-                                        ) /**at this point, all that're left are literally greek to me. */
+                                        ) /**at this point, all that're left are literally greek characters. */
                                 }
                             </span>
                             |
