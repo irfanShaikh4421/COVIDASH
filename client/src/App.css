@@ -55,6 +55,11 @@ button.marvel {
     text-decoration: none !important;
     margin: 5px;
     margin-top: 20px;
+    border-top: 20px;
+}
+
+nav.navigation {
+    line-height: 2.5;
 }
 
 .navigation .marvel:hover {

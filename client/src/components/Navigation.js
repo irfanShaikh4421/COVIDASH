@@ -133,11 +133,35 @@ const NavigationUnauth = () => {
             </NavLink>{' '}
             <NavLink
                 exact
+                to="/testing"
+                activeClassName="active"
+                className="marvel"
+            >
+                Testing Locations
+            </NavLink>{' '}
+            <NavLink
+                exact
+                to="/travel"
+                activeClassName="active"
+                className="marvel"
+            >
+                Travel Regulations
+            </NavLink>{' '}
+            <NavLink
+                exact
                 to="/vaccine"
                 activeClassName="active"
                 className="marvel"
             >
                 Vaccine
+            </NavLink>{' '}
+            <NavLink
+                exact
+                to="/bed-utilization"
+                activeClassName="active"
+                className="marvel"
+            >
+                Hospital Capacity
             </NavLink>{' '}
             <NavLink
                 exact

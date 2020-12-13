@@ -43,17 +43,17 @@ function App() {
                                     path="/symptoms"
                                     component={Symptoms}
                                 />
-                                <PrivateRoute
+                                <Route
                                     path="/testing"
                                     component={TestingLocations}
                                 />
-                                <PrivateRoute
+                                <Route
                                     path="/testing/:state/:orgID"
                                     component={EachTestingLocation}
                                 />
-                                <PrivateRoute path="/travel" component={Travel} />
+                                <Route path="/travel" component={Travel} />
                                 <Route exact path="/vaccine" component={Vaccine} />
-                                <PrivateRoute
+                                <Route
                                     path="/bed-utilization"
                                     component={BedUtilization}
                                 />
