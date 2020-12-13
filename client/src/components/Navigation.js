@@ -13,9 +13,6 @@ const NavigationAuth = () => {
 	return (
 		<nav className="navigation">
 			{' '}
-			<NavLink exact to="/" activeClassName="active" className="marvel">
-				Dashboard
-			</NavLink>{' '}
 			<NavLink
 				exact
 				to="/statistics"
