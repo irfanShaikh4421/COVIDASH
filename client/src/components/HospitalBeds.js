@@ -44,7 +44,7 @@ const HospitalBeds = () => {
 			<div>
 				{state}
 				{currentStateData.map((item, index) => (
-					<p key={index}>
+					<div key={index}>
 						<hr style={{width: '60%'}}/>
 						{index + 1}. {item.HOSPITAL_NAME}
 						<br />
@@ -52,7 +52,7 @@ const HospitalBeds = () => {
 						<br />
 						{item.HQ_CITY}
 						<br />
-						{item.HQ_STATE}
+						{/*item.HQ_STATE //This Item seems a bit unnecessary, as the state is selected by the user (and thus all entries on any single given page would be Identical*/}
 						<br />
 						<a
 							href={`http://maps.google.com/?q=${
@@ -70,7 +70,7 @@ const HospitalBeds = () => {
 						</a>
 						<br />
 						Bed utilization rate: {+(item.BED_UTILIZATION * 100).toFixed(2)}%
-					</p>
+					</div>
 				))}
 			</div>
 		</div>

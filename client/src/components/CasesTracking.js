@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import flagUN from './../img/unitedNationsFlag.png';
 import allCountries from '../data/countries.json';
 import allStates from '../data/usStates.json';
+import { LocationContext } from '../LocationContext';
 
 const Statistics = () => {
-    const [countryData, setCountryData] = useState(undefined);
-    const [worldData, setWorldData] = useState(undefined);
-    const [showWorldData, setShowWorldData] = useState(true);
-    const [loading, setLoading] = useState(true);
-    let display = null;
+    //const [countryData, setCountryData] = useState(undefined);
+    //const [worldData, setWorldData] = useState(undefined);
+    //const [showWorldData, setShowWorldData] = useState(true);
+    //const [ location ] = useContext(LocationContext);
+    //let display = null;
     const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
+
+    
+    /*
 
     useEffect(() => {
         console.log('Statistics world data useEffect fired');
@@ -28,14 +31,35 @@ const Statistics = () => {
                 console.log(e);
             }
         }
-        fetchWorld();
-    }, []);
 
-    const setSearch = async (newData) => {
+        async function fetchMyCountry(country) {
+            try {
+                setLoading(true);
+                const countryIso3 = await findIso3(country);
+                const { data: World } = await axios.get(
+                    `https://disease.sh/v3/covid-19/countries/${countryIso3}`
+                );
+                setWorldData(World);
+                setLoading(false);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        if(!worldData){
+            if(location.countryCode !== 0){
+                fetchMyCountry(location.countryCode);
+            }else{
+                fetchWorld();
+            }
+        }
+    }, []);*/
+
+    /*const setSearch = async (newData) => {
         console.log('recieved data from getCountry');
         console.log(JSON.stringify(newData));
         setCountryData(newData);
-    };
+    };*/
 
     const buildDisplay = (region, loading) => {
         return (
@@ -202,41 +226,46 @@ const Statistics = () => {
             </div>
         );
     };
-    if (loading) {
+    /*if (loading) {
         return loading;
-    } else if (showWorldData) {
-        display = worldData && buildDisplay(worldData);
+    //} else if (showWorldData) {
+    //    display = worldData && buildDisplay(worldData);
     } else {
         display = countryData && buildDisplay(countryData);
-    }
+    }*/
 
     return (
         <div>
             <GetCountry
-                setSearch={setSearch}
-                setShowWorldData={setShowWorldData}
-                setLoading={setLoading}
+                buildCountry= {buildDisplay}
+               // defaultCountry = {defaultCountry}
+                //setSearch={setSearch}
+                //setShowWorldData={setShowWorldData}
+                //setLoading={setLoading}
             />
-            {display}
-            {countryData &&
-                !showWorldData &&
+            {/*display*/}
+            {/*countryData &&
+            //    !showWorldData &&
                 countryData.countryInfo &&
-                countryData.countryInfo._id === 840 /**America */ && (
+                countryData.countryInfo._id === 840 && (//America
                     <GetState buildState={buildDisplay} />
                 )}
+            {/*worldData &&
+                !countryData &&
+                worldData.countryInfo &&
+                worldData.countryInfo._id === 840 && (
+                    <GetState buildState={buildDisplay} />
+                )*/}
         </div>
     );
 };
 
-//modified to match Travel.js' dropdown
-const countryDropDown = allCountries.map((entry) => (
-    <option key={entry._id} value={entry.iso3}>
-        {entry.country}
-    </option>
-));
+
 
 const GetState = ({ buildState }) => {
-    const [state, setState] = useState('Alabama');
+    const [ location ] = useContext(LocationContext);
+    const stateIndex = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+    const [state, setState] = useState(allStates[stateIndex.indexOf(location.state)].name);
     const [stateData, setStateData] = useState(undefined);
     const [loading, setLoading] = useState(true);
 
@@ -246,6 +275,7 @@ const GetState = ({ buildState }) => {
         </option>
     ));
 
+    
     useEffect(() => {
         console.log('get state useeffect fired');
         async function fetchData() {
@@ -274,61 +304,111 @@ const GetState = ({ buildState }) => {
         <div>
             {' '}
             <br /> <hr />
-            <select onChange={handleSelect}>{stateDropDown}</select>
+            <select defaultValue={state} onChange={handleSelect}>{stateDropDown}</select>
             {!loading && buildState(stateData, loading)}
         </div>
     );
 };
 
-const GetCountry = ({ setSearch, setLoading, setShowWorldData }) => {
-    const [country, setCountry] = useState('');
+const GetCountry = ({ buildCountry/*setSearch, setLoading, setShowWorldData */}) => {
+    const [ location ] = useContext(LocationContext);
+    const [loading, setLoading] = useState(true);
+   
+    function findIso3(targetValue) {
+        if (targetValue > 0) {
+            for(let i = 0; i<allCountries.length; i++) {
+                if(allCountries[i]._id === targetValue){
+                    return allCountries[i].iso3;
+                }
+            }
+        }/* else {
+            setShowWorldData(true);
+        }*/
+        return "";
+    }
+    const defaultCountry = findIso3(location.countryCode);
+
+    const [country, setCountry] = useState(defaultCountry);
+    const [countryData, setCountryData] = useState(undefined);
+    let display;
+
+    
 
     useEffect(
         () => {
-            console.log(`getCountry useEffect fired ${country}`);
             async function fetchData() {
                 try {
                     setLoading(true);
-                    setShowWorldData(false);
-                    console.log(`iso3 in fetch country: ${country}`);
-                    const { data: Country } = await axios.get(
-                        `https://disease.sh/v3/covid-19/countries/${country}`
-                    );
-                    setSearch(Country);
-                    setLoading(false);
+                    //setShowWorldData(false);
+                    console.log(`iso3 in fetch country: ${country || "Planet Earth"}`);
+                    if(country){
+                        const { data: Country } = await axios.get(
+                            `https://disease.sh/v3/covid-19/countries/${country}`
+                        );
+                        
+                        console.log('recieved data from getCountry');
+                        console.log(JSON.stringify(Country));
+                        setCountryData(Country);
+                        setLoading(false);
+                    }else{
+                        const { data: World } = await axios.get(
+                            `https://disease.sh/v3/covid-19/all`
+                        );
+                        console.log('recieved data from getWorld');
+                        console.log(JSON.stringify(World));
+                        setCountryData(World);
+                        setLoading(false);
+                    }
                 } catch (e) {
                     console.log(e);
                 }
             }
 
-            if (country) {
+            if (typeof country === "string") {
                 fetchData();
             }
         }, //fires every time the country iso3 changes
-        [country, setLoading, setSearch, setShowWorldData] //these "sets" are just passed in from parent component
+        [country/*, setSearch, setShowWorldData*/] //these "sets" are just passed in from parent component
     );
 
-    const handleChange = async (e) => {
-        if (e.target.value) {
-            setCountry(e.target.value);
-        } else {
-            setShowWorldData(true);
-        }
+    const handleChange = (e) => {
+        setCountry(e.target.value);
     };
 
+    if(loading){
+        return <p>Loading Country data...</p>
+    }else {
+        display = countryData && buildCountry(countryData);
+    }
+
+    //modified to match Travel.js' dropdown
+    const countryDropDown = allCountries.map((entry) => (
+        <option key={entry._id} value={entry.iso3}>
+            {entry.country}
+        </option>
+    ));
+
     return (
-        <form
-            method="POST"
-            name="searchFrom"
-            onSubmit={(e) => {
-                e.preventDefault();
-            }}
-        >
-            <label>
-                Get Specific Country Data: &nbsp;
-                <select onChange={handleChange}>{countryDropDown}</select>
-            </label>
-        </form>
+        <div>
+            <form
+                method="POST"
+                name="searchFrom"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                }}
+            >
+                <label>
+                    Get Location Specific Data: &nbsp;
+                    <select value={country} onChange={handleChange}>{countryDropDown}</select>
+                </label>
+            </form>
+            {display}
+            {countryData &&
+                countryData.countryInfo &&
+                countryData.countryInfo._id === 840 /**America */ && (
+                    <GetState buildState={buildCountry} />
+            )}
+        </div>
     );
 };
 
