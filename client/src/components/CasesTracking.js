@@ -262,22 +262,21 @@ const GetCountry = ({ buildCountry }) => {
                 try {
                     setLoading(true);
                     //setShowWorldData(false);
-                    console.log(`iso3 in fetch country: ${country || "Planet Earth"}`);
+                    //console.log(`iso3 in fetch country: ${country || "Planet Earth"}`);
                     if(country){
                         const { data: Country } = await axios.get(
                             `https://disease.sh/v3/covid-19/countries/${country}`
                         );
-                        
-                        console.log('recieved data from getCountry');
-                        console.log(JSON.stringify(Country));
+                        console.log(`recieved ${country} data from getCountry useEffect`);
+                        //console.log(JSON.stringify(Country));
                         setCountryData(Country);
                         setLoading(false);
                     }else{
                         const { data: World } = await axios.get(
                             `https://disease.sh/v3/covid-19/all`
                         );
-                        console.log('recieved data from getWorld');
-                        console.log(JSON.stringify(World));
+                        console.log('recieved world data from getCountry useEffect');
+                        //console.log(JSON.stringify(World));
                         setCountryData(World);
                         setLoading(false);
                     }

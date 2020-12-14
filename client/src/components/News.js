@@ -14,9 +14,12 @@ const News = () => {
 
     function findCountry(countryId){//countryID should be passed as location context.countryCode
         let countryIndex = null;
+        if (countryId === 0 ) {
+            return 'zz';//'zz' signifies that world news is the originally desired return data
+        }
         countryIndex = iso2Indexer.indexOf(countryId);//getting the index of the Iso2 in iso2.json using countryId
         if(countryIndex === -1){//if not in iso2.json, then default to the World
-            return 'aa';//this will represent the world's iso2
+            return 'aa';//this will result in an output of world news, but 'aa' specificly will signify that the desired data was not originally the world data (and is not contained in the iso2) 
         }else{
             return countries[countryIndex]["alpha-2"];//the user's preferred  country's iso2
         }
@@ -52,7 +55,7 @@ const News = () => {
         <div>
             <label htmlFor="state">Select country: &nbsp;&nbsp;</label>
             <select defaultValue={country} onChange={handleChange}>
-                <option value="aa">Planet Earth</option>
+                <option value="zz">Planet Earth</option>
                 {countries.map((country, index) => (
                     <option key={index} value={country['alpha-2']}>
                         {country.name}
@@ -62,16 +65,17 @@ const News = () => {
             <br />
             <br />
             <div>
-                <h1>Latest News</h1>
-                <br />
+                <h1>Latest Covid News</h1>
+                <hr style={{width: '27%'}} />
                 {tailored ? (
-                    <h2>News for your region</h2>
-                ) : (
-                    <h2>
-                        Sorry, no news found for your region - here are some top
-                        news for COVID-19
-                    </h2>
-                )}
+                    <h2>News for region</h2>
+                ) : (country==="zz") ? 
+                        <h2>News for World</h2> :
+                        <h2>
+                            Sorry, no recent news found for the desired region - here is the top
+                            news for COVID-19 from around the world
+                        </h2>
+                }
                 <br />
                 {newsData.map((item, index) => (
                     <div key={index}>
