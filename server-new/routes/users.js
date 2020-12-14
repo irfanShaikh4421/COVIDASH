@@ -19,6 +19,7 @@ router.get('/:id', async(req, res) => {
             res.status(404).json({"ERROR": e.name + ": " + e.message});
         }else{
             console.log(e);
+            res.status(500).json({"ERROR": "bug in the code"});
         }
     }
 });
@@ -42,6 +43,7 @@ router.post('/:id', async(req, res) => {//account creation/ login
             res.status(400).json({"ERROR": e.name + ": " + e.message});
         }else{
             console.log(e);
+            res.status(500).json({"ERROR": "bug in the code"});
         }
     }//accounts are created with the country code set to 0, states set to "AL"
 });
@@ -72,6 +74,7 @@ router.patch('/:id', async(req, res) => {//altering either a state or a country 
             res.status(400).json({"ERROR": e.name + ": " + e.message});
         }else{
             console.log(e);
+            res.status(500).json({"ERROR": "bug in the code"});
         }
     }
 });

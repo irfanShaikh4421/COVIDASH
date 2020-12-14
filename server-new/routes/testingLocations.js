@@ -20,6 +20,7 @@ router.get('/:state/:hospitalId', async(req, res) => {
             res.status(500).json({"ERROR": e.name + ": " + e.message});
         }else{
             console.log(e);
+            res.status(500).json({"ERROR": "bug in the code"});
         }
     }
 });
@@ -38,6 +39,7 @@ router.get('/:state', async(req, res) => {
             res.status(500).json({"ERROR": e.name + ": " + e.message});
         }else{
             console.log(e);
+            res.status(500).json({"ERROR": "bug in the code"});
         }
     }
 });

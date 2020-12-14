@@ -13,10 +13,12 @@ async function getTestState(stateName) {
     if(!validStates.includes(stateName)) throw SyntaxError("Not a valid stateName!");
     let stateCacheExists = await client.existsAsync(`testing/${stateName}`);
     if(stateCacheExists){
+        console.log(`get ${stateName} testing locations from cache`);
         let state = await client.getAsync(`testing/${stateName}`);
         state = JSON.parse(state);
         return state;
     }else{
+        console.log(`get ${stateName} testing locations from source`);
         const baseUrl = 'https://covid-19-testing.github.io/locations/';
         const jsonUrl = '/complete.json';
         const url = baseUrl + stateName + jsonUrl;
@@ -41,9 +43,11 @@ async function getTestHospital(stateName, hospitalId) {
     let stateCacheExists = await client.existsAsync(`testing/${stateName}`);
     let state;
     if(stateCacheExists){
+        console.log(`get ${stateName} hospital #${hospitalId} from cache`);
         state = await client.getAsync(`testing/${stateName}`);
         state = JSON.parse(state);
     }else{
+        console.log(`get ${stateName} hospital #${hospitalId} from source`);
         state = await getTestState(stateName);
     }
     for (const item of state){

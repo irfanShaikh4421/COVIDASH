@@ -11,13 +11,15 @@ const geoDataIso = ['PT', 'PW', 'PY', 'QA', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 
 
 async function getRegulations(iso2) {
     if(!iso2.match(/^([A-Z][A-Z])$/)) throw SyntaxError("Country param must be a valid iso2 (Two uppercase letters)");
-    if(!geoDataIso.includes(iso2)) throw ReferenceError("Country Iso-2 not found in geoData");
+    if(!geoDataIso.includes(iso2)) throw ReferenceError(`${iso2} not found in geoData iso-2 set`);
     let regulationsCacheExists = await client.existsAsync(`regulations/${iso2}`);
     if(regulationsCacheExists) {
+        console.log(`get ${iso2} travel regulations from cache`);
         let regulations = await client.getAsync(`regulations/${iso2}`);
         regulations = JSON.parse(regulations);
         return regulations;
     }else {
+        console.log(`get ${iso2} travel regulations from source`);
         try{
             let {data} = await axios.get(
                 `https://prod.greatescape.co/api/travel/countries/${iso2}/corona`,
