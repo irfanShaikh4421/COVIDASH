@@ -15,14 +15,15 @@ const TestingLocations = () => {
 
     useEffect(() => {
         async function getData() {
-            const baseUrl = 'https://covid-19-testing.github.io/locations/';
+           /*  const baseUrl = 'https://covid-19-testing.github.io/locations/';
             const jsonUrl = '/complete.json';
 
             const url = baseUrl + stateName + jsonUrl;
-            let getData;
+            let getData; */
             try {
                 setNoData(false);
-                getData = await axios.get(url);
+                //getData = await axios.get(url);
+                const getData = await axios.get(`/testing/${stateName}`);
                 setData(getData.data);
             } catch (e) {
                 setNoData(true);
