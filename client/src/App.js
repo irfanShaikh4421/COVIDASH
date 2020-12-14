@@ -44,12 +44,12 @@ function App() {
                                     component={Symptoms}
                                 />
                                 <Route
-                                    path="/testing"
-                                    component={TestingLocations}
-                                />
-                                <Route
                                     path="/testing/:state/:orgID"
                                     component={EachTestingLocation}
+                                />
+                                <Route
+                                    path="/testing"
+                                    component={TestingLocations}
                                 />
                                 <Route path="/travel" component={Travel} />
                                 <Route exact path="/vaccine" component={Vaccine} />
