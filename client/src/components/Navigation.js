@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
-import placeholder from '../img/virusPictureFromStatisticsAPI.png';
 import SignOutButton from './SignOut';
 import '../App.css';
 
@@ -14,15 +13,21 @@ const NavigationAuth = () => {
     return (
         <nav className="navigation">
             {' '}
-            <NavLink exact to="/" activeClassName="active" className="marvel">
+            <NavLink
+                exact
+                to="/statistics"
+                activeClassName="active"
+                className="marvel"
+            >
                 Home
-                {/* <img
-                    src={placeholder}
-                    height="100"
-                    width="100"
-                    alt="Covidash logo placeholder"
-                    title="From the statistics API website"
-                /> */}
+            </NavLink>{' '}
+            <NavLink
+                exact
+                to="/charts"
+                activeClassName="active"
+                className="marvel"
+            >
+                Charts
             </NavLink>{' '}
             <NavLink
                 exact
@@ -105,7 +110,12 @@ const NavigationUnauth = () => {
     return (
         <nav className="navigation">
             {' '}
-            <NavLink exact to="/" activeClassName="active" className="marvel">
+            <NavLink
+                exact
+                to="/statistics"
+                activeClassName="active"
+                className="marvel"
+            >
                 Home
                 {/* <img
                     src={placeholder}
@@ -165,7 +175,7 @@ const NavigationUnauth = () => {
             </NavLink>{' '}
             <NavLink
                 exact
-                to="/signin"
+                to="/login"
                 activeClassName="active"
                 className="marvel"
             >

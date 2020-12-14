@@ -56,13 +56,7 @@ const HospitalBeds = () => {
 						<br />
 						<a
 							href={`http://maps.google.com/?q=${
-								item.HOSPITAL_NAME +
-								' ' +
-								item.HQ_ADDRESS +
-								' ' +
-								item.HQ_CITY +
-								' ' +
-								item.HQ_STATE
+								item.HOSPITAL_NAME + ' ' + item.HQ_ADDRESS + ' ' + item.HQ_CITY
 							}`}
 							target="blank"
 						>
