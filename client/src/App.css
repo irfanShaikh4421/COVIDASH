@@ -1,85 +1,86 @@
 .App {
-    text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-    background-color: #282c34;
-    align-items: center;
-    padding-bottom:20px;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+	display: flex;
+	background-color: #0f4557;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: #fcfcfc;
+	padding: 50px 20px;
 }
 
 .App-link {
-    color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 button.marvel {
-    border: none;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .marvel {
-    font-weight: bolder;
-    background-color: #ec1624;
-    color: #fefefe;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-size: calc(10px + 2vmin);
-    letter-spacing: -0.15rem;
-    padding: 0.4rem 0.8rem;
-    text-decoration: none !important;
-    margin: 5px;
+	font-weight: bold;
+	background-color: #028090;
+	color: #fcfcfc;
+	font-size: 1rem;
+	padding: 0.4rem 0.8rem;
+	text-decoration: none !important;
+	margin: 20px 5px;
+	border: 2px solid transparent;
+	transition: all 100ms ease-in-out;
 }
 
-nav.navigation {
+/*nav.navigation {
     line-height: 2.5;
 }
 
 .navigation .marvel:hover {
     background-color: transparent;
     color: white;
-    border: 2px solid white;
+	border: 2px solid white;
+}*/
+
+.marvel:hover {
+	border: 2px solid #fcfcfc;
 }
 
 .tota11yLink {
-    /*used to make a link tota11y compliant*/
-    color: #0072ee !important;
+	/*used to make a link tota11y compliant*/
+	color: #0072ee !important;
 }
 
 table {
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid black;
 }
 
 th,
 td {
-    min-width: 100px;
-    border: 1px solid black;
+	min-width: 100px;
+	border: 1px solid black;
 }
 
 .subtitle {
@@ -89,111 +90,115 @@ td {
 }
 
 .titleOfSubtitle {
-    margin-bottom: 2px;
+	margin-bottom: 2px;
 }
 
 footer.casesTracking {
-    margin-bottom: 2%;
-    column-count: 2;
+	margin-bottom: 2%;
+	column-count: 2;
 }
 
 #dataSources li {
-    list-style-type: none;
-    text-align: left;
-    margin-left: 15%;
+	list-style-type: none;
+	text-align: left;
+	margin-left: 15%;
 }
 
 /** cool hover effect for Vaccine page */
 span.hoverCause span.hoverResult {
-    /** Source: w3 schools */
-    color: white;
-    background-color: #282c34;
-    border-radius: 10px;
+	/** Soruce: w3 schools */
+	color: #fcfcfc;
+	background-color: #0f4557;
+	border-radius: 10px;
 
-    padding: 10px;
-    visibility: hidden;
+	padding: 10px;
+	visibility: hidden;
 
-    position: absolute;
+	position: absolute;
 }
 
 span.hoverCause:hover span.hoverResult {
-    visibility: visible;
+	visibility: visible;
 }
 
 .travelContainer {
-    background: #eaeaea;
-    border-radius: 1rem;
-    padding: 2rem 1rem;
-    width: 65vw;
-    text-align: center;
-    flex: shrink;
+	background: #eaeaea;
+	border-radius: 1rem;
+	padding: 2rem 1rem;
+	width: 65vw;
+	text-align: center;
+	flex: shrink;
 }
 
 .centeredFlex {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .chip {
-    padding: 2px 8px;
-    border-radius: 1rem;
-    background-color: #016fb9;
-    color: white;
+	padding: 2px 8px;
+	border-radius: 1rem;
+	background-color: #016fb9;
+	color: #fcfcfc;
 }
 
 .label,
 .chipsContainer > p {
-    line-height: 100%;
-    font-weight: 300;
-    font-size: 1.5rem !important;
+	line-height: 100%;
+	font-weight: 300;
+	font-size: 1.5rem !important;
 }
 
 .chipsContainer > *:nth-child(odd) {
-    flex: 1 0 25%;
+	flex: 1 0 25%;
 }
 
 .chipsContainer > *:nth-child(even) {
-    flex: 1 0 65%;
-    width: 35%;
+	flex: 1 0 65%;
+	width: 35%;
 }
 
 .para {
-    font-size: 1.1rem;
-    font-weight: 400;
-    text-align: justify;
-    text-justify: newspaper;
+	font-size: 1.1rem;
+	font-weight: 400;
+	text-align: justify;
+	text-justify: newspaper;
 }
 
 .navigation {
-    background: #282c34;
+	background: #0f4557;
 }
 
 .navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
 .navigation a:link,
 .navigation a:visited {
-    color: white;
-    text-decoration: none;
+	color: #fcfcfc;
+	text-decoration: none;
 }
 
 .error {
-    font-weight: bold;
-    color: red !important;
+	font-weight: bold;
+	color: red !important;
 }
 
 .forgotPassword {
-    background: none !important;
-    border: none !important;
-    text-decoration: underline;
-    margin-left: 5px;
-    color: #069;
+	background: none !important;
+	border: none !important;
+	text-decoration: underline;
+	margin-left: 5px;
+	color: #069;
 }
 
 .forgotPassword:hover {
-    text-decoration: none;
-    color: red;
+	text-decoration: none;
+	color: red;
+}
+
+.chart {
+	justify-content: center;
 }
