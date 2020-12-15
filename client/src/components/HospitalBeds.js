@@ -13,21 +13,25 @@ const HospitalBeds = () => {
 
 	useEffect(() => {
 		async function getData() {
-			setLoading(true);
-			const url =
-				'https://opendata.arcgis.com/datasets/1044bb19da8d4dbfb6a96eb1b4ebf629_0.geojson';
+            console.log("get Hospital Beds data useEffect launched");
+			try{ 
+				setLoading(true);
+				//const url ='https://opendata.arcgis.com/datasets/1044bb19da8d4dbfb6a96eb1b4ebf629_0.geojson';
+			
+				const { data } = await axios.get('/hospitals');
 
-			const { data } = await axios.get(url);
+				setCurrentStateData([]);
 
-			setCurrentStateData([]);
-
-			for (let i = 0; i < data.features.length; i++) {
-				if (data.features[i].properties.STATE_NAME === state) {
-					setCurrentStateData((currentStateData) => [
-						...currentStateData,
-						data.features[i].properties,
-					]);
+				for (let i = 0; i < data.features.length; i++) {
+					if (data.features[i].properties.STATE_NAME === state) {
+						setCurrentStateData((currentStateData) => [
+							...currentStateData,
+							data.features[i].properties,
+						]);
+					}
 				}
+			}catch(e){
+				console.log(e);
 			}
 			setLoading(false);
 		}

@@ -6,19 +6,23 @@ const EachTestingLocation = (props) => {
 
 	useEffect(() => {
 		async function getData() {
-			const baseUrl = 'https://covid-19-testing.github.io/locations/';
-			const jsonUrl = '/complete.json';
+			//const baseUrl = 'https://covid-19-testing.github.io/locations/';
+			//const jsonUrl = '/complete.json';
 			const state = props.match.params.state;
 			const ID = props.match.params.orgID;
-			const url = baseUrl + state + jsonUrl;
-			let getData;
+			//const url = baseUrl + state + jsonUrl;
+			//let getData;
 			try {
-				getData = await axios.get(url);
-				getData.data.forEach((item) => {
+				//getData = await axios.get(url);
+				console.log(state);
+				const {data: getData} = await axios.get(`/testing/${state}/${ID}`);
+				console.log(getData);
+				setHospitalData(getData);
+				/*getData.data.forEach((item) => {
 					if (item.id === ID) {
 						setHospitalData(item);
 					}
-				});
+				});*/
 			} catch (e) {
 				console.log(e);
 			}
