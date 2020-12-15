@@ -88,7 +88,7 @@ async function getNews(country) {
         try {
             let countryCacheExists = await client.existsAsync(countryParam);
             if (countryCacheExists) {
-                console.log(`from ${countryParam} cache`);
+                console.log(`from ${countryParam} news cache`);
                 let showNews = new Array();
                 let newsIds = await client.smembersAsync(countryParam);
 
@@ -105,7 +105,7 @@ async function getNews(country) {
 
                 return newsObj;
             } else {
-                console.log(`not from ${countryParam} cache`);
+                console.log(`not from ${countryParam} news cache`);
                 response = await axios.get(url);
                 data = response.data.articles;
                 for (let i = 0; i < data.length; i++) {
@@ -146,7 +146,7 @@ async function getNews(country) {
         try {
             let worldCacheExists = await client.existsAsync('world');
             if (worldCacheExists) {
-                console.log('from world cache');
+                console.log('from world news cache');
                 let showNews = new Array();
                 let newsIds = await client.smembersAsync('world');
 
@@ -163,7 +163,7 @@ async function getNews(country) {
 
                 return newsObj;
             } else {
-                console.log('not from world cache');
+                console.log('not from world news cache');
                 response = await axios.get(baseUrl + '?' + q + '&' + apiKey);
                 data = response.data.articles;
                 for (let i = 0; i < data.length; i++) {
