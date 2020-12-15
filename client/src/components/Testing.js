@@ -72,7 +72,7 @@ const TestingLocations = () => {
                         to={`/testing/${stateName}/${item.id}`}
                     >
                         <p>
-                            {item.id} {item.name}
+                           {index+1}. {item.name}
                         </p>
                     </Link>
                 ))}

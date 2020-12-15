@@ -52,18 +52,16 @@ button.marvel {
 	transition: all 100ms ease-in-out;
 }
 
-/*nav.navigation {
+nav.navigation {
     line-height: 2.5;
 }
 
 .navigation .marvel:hover {
-    background-color: transparent;
-    color: white;
-	border: 2px solid white;
-}*/
+	border: 2px solid #fcfcfc;
+}
 
 .marvel:hover {
-	border: 2px solid #fcfcfc;
+	border: 4px solid #0f4557;
 }
 
 .tota11yLink {

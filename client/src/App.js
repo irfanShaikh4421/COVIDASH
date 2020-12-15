@@ -13,7 +13,6 @@ import Travel from './components/Travel';
 import Vaccine from './components/Vaccine';
 import BedUtilization from './components/HospitalBeds';
 import Guidelines from './components/Guidelines';
-import Sources from './components/Sources';
 import UserDetailsForm from './components/UserDetailsForm';
 import Account from './components/Account';
 import UploadImage from './components/UploadImage';

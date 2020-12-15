@@ -56,7 +56,7 @@ router.patch('/:id', async(req, res) => {//altering either a state or a country 
         let oldUser = await userData.getUser(userId);//retrieves old user account info
         let newUser = {
             state: ((req.body && req.body.state) ? req.body.state : oldUser.state),
-            countryCode: ((req.body && req.body.countryCode) ? req.body.countryCode : oldUser.countryCode)
+            countryCode: ((req.body && (req.body.countryCode || (req.body.countryCode===0))) ? req.body.countryCode : oldUser.countryCode)
         }
         if(!userData.isUser(newUser)) throw TypeError("Missing or Invalid Request Body Input Parameter(s), Request body must be of format: \n" +
             "{\n state: <two char String>, \n countryCode: <number>\n}");

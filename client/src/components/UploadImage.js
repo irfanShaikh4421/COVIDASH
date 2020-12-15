@@ -8,14 +8,13 @@ const db = app.firestore();
 
 function UploadImage() {
 	const { currentUser } = useContext(AuthContext);
-	let uid;
 	const [userData, setUserData] = useState({});
 	const [file, setFile] = useState(null);
 	const [url, setURL] = useState('');
 
 	useEffect(() => {
 		async function getUserData() {
-			var docRef = db.collection('users').doc(uid);
+			var docRef = db.collection('users').doc(currentUser.uid);//this is a private route, the user must be signed in to get here in the first place
 
 			docRef
 				.get()
@@ -33,11 +32,7 @@ function UploadImage() {
 				});
 		}
 		getUserData();
-	}, [url]);
-
-	if (currentUser) {
-		uid = currentUser.uid;
-	}
+	}, [url, currentUser.uid]);
 
 	const updateUserImage = (uid, imgUrl) =>
 		db.collection('users').doc(uid).set(
@@ -62,7 +57,7 @@ function UploadImage() {
 				.then(async (url) => {
 					setFile(null);
 					setURL(url);
-					await updateUserImage(uid, url);
+					await updateUserImage(currentUser.uid, url);
 				});
 		});
 	}

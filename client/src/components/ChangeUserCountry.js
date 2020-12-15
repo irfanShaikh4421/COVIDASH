@@ -55,11 +55,10 @@ const ChangeCountry = () => {
     }
 
     return (
-        <div>
-            <img src={undefined} alt="PLACEHOLDER TILL IMAGEMAGICK" /> <br /> <hr />
-            User's Location: <select defaultValue={location.countryCode} onChange={handleCountryChange}>{countryDropDown}</select>
+        <p>
+            Location: <select defaultValue={location.countryCode} onChange={handleCountryChange}>{countryDropDown}</select>&nbsp;
             {(location.countryCode===840) ? <select defaultValue={location.state} onChange={handleStateChange}>{stateDropDown} </select> : null}
-        </div>
+        </p>
     )
 
 }

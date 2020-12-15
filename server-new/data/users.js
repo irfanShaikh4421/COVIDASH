@@ -9,9 +9,6 @@ bluebird.promisifyAll(redis.Multi.prototype);
 let states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 function isUser(userObject){
-    //console.log(states.includes(userObject.state));
-    //console.log(userObject.state);
-    //console.log(JSON.stringify(userObject));
     return ((typeof userObject === "object") && 
     (typeof userObject.state === "string") && (userObject.state.length === 2) && userObject.state.match(/^([A-W][A-Z])$/) && states.includes(userObject.state) && //some of these are redundant. But, its better to be over-prepared than under-prepared
     ((typeof userObject.countryCode === "number") && (userObject.countryCode >=0) && userObject.countryCode < 1000) ///a number Identifying the user's country, for countries-iso2.json and countries.json, which can then be used to get keys for countriesGeo and geoData

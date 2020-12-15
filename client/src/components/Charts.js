@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../App.css';
 import {
-    LineChart,
-    Line,
+    //LineChart,
+    //Line,
     CartesianGrid,
     XAxis,
     YAxis,
     Tooltip,
-    Legend,
+    //Legend,
     AreaChart,
-    linearGradient,
+    //linearGradient,
     Area,
 } from 'recharts';
 
@@ -109,7 +109,7 @@ function Charts() {
     };
 
     return (
-        <div class="chart">
+        <div className="chart">
             <label>
                 Choose country: &nbsp;
                 <br />
