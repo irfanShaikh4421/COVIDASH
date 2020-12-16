@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Symptoms = (props) => {
-    const [symptomsWeight, setSymptomsWeight] = useState({
+    const symptomsWeight = {
         fever: 0.15,
         cough: 0.15,
         soreThroat: 0.1,
@@ -9,7 +9,7 @@ const Symptoms = (props) => {
         headache: 0.07,
         vomit: 0.05,
         diarrhea: 0.05,
-    });
+    };
     const [symptoms, setSymptoms] = useState({
         fever: false,
         cough: false,
@@ -250,7 +250,7 @@ const Symptoms = (props) => {
                             No{' '}
                         </label>
                     </div>
-
+                    <br />
                     <div>
                         <button onClick={() => handleSymptomCalc()}>
                             Should I be worried ?

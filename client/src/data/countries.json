@@ -1,5 +1,5 @@
 [
-    { "country": "Select Country", "_id": 0, "iso3": "" },
+    { "country": "Planet Earth", "_id": 0, "iso3": "" },
     { "country": "USA", "_id": 840, "iso3": "USA" },
     { "country": "India", "_id": 356, "iso3": "IND" },
     { "country": "Brazil", "_id": 76, "iso3": "BRA" },

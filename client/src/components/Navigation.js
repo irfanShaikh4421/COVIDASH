@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
-import SignOutButton from './SignOut';
+//import SignOutButton from './SignOut';
 import '../App.css';
 
 const Navigation = () => {
@@ -43,7 +43,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Outbreak Map
+                Outbreak&nbsp;Map
             </NavLink>{' '}
             <NavLink
                 exact
@@ -51,7 +51,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Self Checker
+                Self&nbsp;Checker
             </NavLink>{' '}
             <NavLink
                 exact
@@ -59,7 +59,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Testing Locations
+                Testing&nbsp;Locations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -67,7 +67,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Travel Regulations
+                Travel&nbsp;Regulations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -83,7 +83,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Hospital Capacity
+                Hospital&nbsp;Capacity
             </NavLink>{' '}
             <NavLink
                 exact
@@ -91,7 +91,7 @@ const NavigationAuth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Safety Guidelines
+                Safety&nbsp;Guidelines
             </NavLink>{' '}
             <NavLink
                 exact
@@ -101,7 +101,7 @@ const NavigationAuth = () => {
             >
                 Account
             </NavLink>{' '}
-            <SignOutButton />
+            {/**<SignOutButton /> */}
         </nav>
     );
 };
@@ -117,13 +117,6 @@ const NavigationUnauth = () => {
                 className="marvel"
             >
                 Home
-                {/* <img
-                    src={placeholder}
-                    height="100"
-                    width="100"
-                    alt="Covidash logo placeholder"
-                    title="From the statistics API website"
-                /> */}
             </NavLink>{' '}
             <NavLink
                 exact
@@ -139,7 +132,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Outbreak Map
+                Outbreak&nbsp;Map
             </NavLink>{' '}
             <NavLink
                 exact
@@ -147,7 +140,23 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Self Checker
+                Self&nbsp;Checker
+            </NavLink>{' '}
+            <NavLink
+                exact
+                to="/testing"
+                activeClassName="active"
+                className="marvel"
+            >
+                Testing&nbsp;Locations
+            </NavLink>{' '}
+            <NavLink
+                exact
+                to="/travel"
+                activeClassName="active"
+                className="marvel"
+            >
+                Travel&nbsp;Regulations
             </NavLink>{' '}
             <NavLink
                 exact
@@ -159,11 +168,19 @@ const NavigationUnauth = () => {
             </NavLink>{' '}
             <NavLink
                 exact
+                to="/bed-utilization"
+                activeClassName="active"
+                className="marvel"
+            >
+                Hospital&nbsp;Capacity
+            </NavLink>{' '}
+            <NavLink
+                exact
                 to="/guidelines"
                 activeClassName="active"
                 className="marvel"
             >
-                Safety Guidelines
+                Safety&nbsp;Guidelines
             </NavLink>{' '}
             <NavLink
                 exact
@@ -179,7 +196,7 @@ const NavigationUnauth = () => {
                 activeClassName="active"
                 className="marvel"
             >
-                Log In
+                Log&nbsp;In
             </NavLink>{' '}
         </nav>
     );

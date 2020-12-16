@@ -1,23 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import usStates from '../data/usStates.json';
 import { Link } from 'react-router-dom';
+import { LocationContext } from '../LocationContext';
 
 const TestingLocations = () => {
     let [locationsData, setData] = useState([]);
-    let [stateName, setState] = useState('alabama');
+
+    const [ location ] = useContext(LocationContext);
+    const stateIndex = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
+    let [stateName, setState] = useState(usStates[stateIndex.indexOf(location.state)].slug);
+
     let [noData, setNoData] = useState(false);
 
     useEffect(() => {
         async function getData() {
-            const baseUrl = 'https://covid-19-testing.github.io/locations/';
+           /*  const baseUrl = 'https://covid-19-testing.github.io/locations/';
             const jsonUrl = '/complete.json';
 
             const url = baseUrl + stateName + jsonUrl;
-            let getData;
+            let getData; */
             try {
                 setNoData(false);
-                getData = await axios.get(url);
+                //getData = await axios.get(url);
+                const getData = await axios.get(`/testing/${stateName}`);
                 setData(getData.data);
             } catch (e) {
                 setNoData(true);
@@ -38,7 +44,7 @@ const TestingLocations = () => {
         return (
             <div>
                 <label htmlFor="state">Select state</label>
-                <select id="state" onChange={getState}>
+                <select defaultValue={stateName} id="state" onChange={getState}>
                     {usStates.map((states, index) => (
                         <option key={index} value={states.slug}>
                             {states.name}
@@ -52,7 +58,7 @@ const TestingLocations = () => {
         return (
             <div>
                 <label htmlFor="state">Select state</label>
-                <select id="state" onChange={getState}>
+                <select defaultValue={stateName} id="state" onChange={getState}>
                     {usStates.map((states, index) => (
                         <option key={index} value={states.slug}>
                             {states.name}
@@ -66,7 +72,7 @@ const TestingLocations = () => {
                         to={`/testing/${stateName}/${item.id}`}
                     >
                         <p>
-                            {item.id} {item.name}
+                           {index+1}. {item.name}
                         </p>
                     </Link>
                 ))}

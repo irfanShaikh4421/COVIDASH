@@ -36,8 +36,11 @@
 	}
 }
 
+button.marvel {
+	cursor: pointer;
+}
+
 .marvel {
-	/*my attempt to get the links as close to the "MARVEL" logo look as I could*/
 	font-weight: bold;
 	background-color: #028090;
 	color: #fcfcfc;
@@ -49,8 +52,16 @@
 	transition: all 100ms ease-in-out;
 }
 
-.marvel:hover {
+nav.navigation {
+    line-height: 2.5;
+}
+
+.navigation .marvel:hover {
 	border: 2px solid #fcfcfc;
+}
+
+.marvel:hover {
+	border: 4px solid #0f4557;
 }
 
 .tota11yLink {
@@ -71,9 +82,9 @@ td {
 }
 
 .subtitle {
-	font-size: 15px;
-	margin-bottom: 16px;
-	color: grey;
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: #767676;
 }
 
 .titleOfSubtitle {
@@ -167,11 +178,6 @@ span.hoverCause:hover span.hoverResult {
 	color: #fcfcfc;
 	text-decoration: none;
 }
-
-/* .active {
-  font-weight: bold;
-  color: rgb(186, 189, 45) !important;
-} */
 
 .error {
 	font-weight: bold;

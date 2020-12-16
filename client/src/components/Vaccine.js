@@ -7,11 +7,10 @@ const Vaccine = () => {
 
     useEffect(() => {
         async function getData() {
-            const url = 'https://disease.sh/v3/covid-19/vaccine';
-
-            let response;
+            //const url = 'https://disease.sh/v3/covid-19/vaccine';
+            console.log("get Vaccine data useEffect launched");
             try {
-                response = await axios.get(url);
+                const response = await axios.get('/vaccine');
                 setVaccineData(response.data.data);
             } catch (e) {
                 console.log(e);
@@ -41,7 +40,7 @@ const Vaccine = () => {
                                         .replace(
                                             /&ndash;/g,
                                             '-'
-                                        ) /**at this point, all that're left are literally greek to me. */
+                                        ) /**at this point, all that're left are literally greek characters. */
                                 }
                             </span>
                             |
