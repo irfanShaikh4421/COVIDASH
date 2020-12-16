@@ -80,7 +80,6 @@ function App() {
                                     component={ChangePassword}
                                 />
                                 <Route path="/login" component={SignIn} />
-                                <Route path="/signup" component={SignUp} />
                                 <Route render={() => <h2>404: Invalid URL</h2>} />
                             </Switch>
                         </LocationProvider>

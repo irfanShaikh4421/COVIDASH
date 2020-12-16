@@ -86,7 +86,7 @@ function UserDetailsForm() {
 */
 	return (
 		<div>
-			<h2>Change location</h2>
+			<h1>Change location</h1>
 			<ChangeCountry />
 			<br /><br />
 		</div>

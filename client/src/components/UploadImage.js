@@ -80,7 +80,7 @@ function UploadImage() {
 
 	return (
 		<div>
-			<h2>Upload profile picture</h2>
+			<h1>Upload profile picture</h1>
 			{imageForm}
 			<br />
 		</div>

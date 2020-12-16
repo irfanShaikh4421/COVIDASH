@@ -17,7 +17,7 @@ const OutBreak = () => {
 
     return (
         <div>
-            <h2>OutBreak Map</h2>
+            <h1>OutBreak Map</h1>
             <br />
             {countries.length === 0 ? (
                 'Loading...'

@@ -60,7 +60,7 @@ function Account() {
 
 	return (
 		<div className="Account">
-			<h2>Account details</h2>
+			<h1>Account details</h1>
 			<img src={userData.imageUrl} alt="profile icon" width="200px" />
 			<p>Name: {currentUser.displayName}</p>
 			<p>Email: {currentUser.email}</p>

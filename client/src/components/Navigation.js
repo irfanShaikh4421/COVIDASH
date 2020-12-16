@@ -15,7 +15,7 @@ const NavigationAuth = () => {
             {' '}
             <NavLink
                 exact
-                to="/statistics"
+                to="/"
                 activeClassName="active"
                 className="marvel"
             >
@@ -112,7 +112,7 @@ const NavigationUnauth = () => {
             {' '}
             <NavLink
                 exact
-                to="/statistics"
+                to="/"
                 activeClassName="active"
                 className="marvel"
             >

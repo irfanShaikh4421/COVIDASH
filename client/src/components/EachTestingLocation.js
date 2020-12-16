@@ -103,7 +103,7 @@ const EachTestingLocation = (props) => {
 
 	return (
 		<div>
-			<h2>{hospitalData.name}</h2>
+			<h1>{hospitalData.name}</h1>
 			<hr />
 			<p>{hospitalData.description}</p>
 			<p>Transportation: {hospitalData.transportation}</p>
