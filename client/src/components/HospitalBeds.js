@@ -18,17 +18,20 @@ const HospitalBeds = () => {
 				setLoading(true);
 				//const url ='https://opendata.arcgis.com/datasets/1044bb19da8d4dbfb6a96eb1b4ebf629_0.geojson';
 			
-				const { data } = await axios.get('/hospitals');
+				const { data } = await axios.get(`/hospitals/${state}`);
 
-				setCurrentStateData([]);
-
-				for (let i = 0; i < data.features.length; i++) {
-					if (data.features[i].properties.STATE_NAME === state) {
-						setCurrentStateData((currentStateData) => [
-							...currentStateData,
-							data.features[i].properties,
-						]);
+				if(data && data.source) {
+					setCurrentStateData([]);
+					for (let i = 0; i < data.source.features.length; i++) {
+						if (data.source.features[i].properties.STATE_NAME === state) {
+							setCurrentStateData((currentStateData) => [
+								...currentStateData,
+								data.source.features[i].properties,
+							]);
+						}
 					}
+				} else{
+					setCurrentStateData(data);
 				}
 			}catch(e){
 				console.log(e);
@@ -51,6 +54,12 @@ const HospitalBeds = () => {
 						{state.name}
 					</option>
 				))}
+				<option key={50} value='District of Columbia'>
+					District of Columbia
+				</option>
+				<option key={51} value='Puerto Rico'>
+					Puerto Rico
+				</option>
 			</select>
 			<div>
 				{state}
