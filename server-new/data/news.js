@@ -19,7 +19,6 @@ let availableCountries = [
     'br',
     'ca',
     'ch',
-    'cn',
     'co',
     'cu',
     'cz',
@@ -84,9 +83,22 @@ async function getNews(country) {
     let data;
     let news = new Array();
 
-    if (availableCountries.includes(countryParam)) {
+    let validCountry = availableCountries.includes(countryParam);
+    let countryCacheExists;
+
+    if (validCountry){
+        countryCacheExists = await client.existsAsync(countryParam);
+        if (countryCacheExists) {
+            let newsIds = await client.smembersAsync(countryParam);
+            if(newsIds.length===1 && (newsIds[0]==="no data")) {
+                validCountry= false;
+            }
+        }
+    }
+
+    if (validCountry) {
         try {
-            let countryCacheExists = await client.existsAsync(countryParam);
+            //let countryCacheExists = await client.existsAsync(countryParam);
             if (countryCacheExists) {
                 console.log(`from ${countryParam} news cache`);
                 let showNews = new Array();
@@ -125,6 +137,14 @@ async function getNews(country) {
 
                 let showNews = new Array();
                 let newsIds = await client.smembersAsync(countryParam);
+
+                if (newsIds.length === 0 ) {
+                    console.log(`no ${countryParam} news data, defaulting to world news`);
+                    await client.saddAsync(countryParam, "no data");
+                    await client.expireAsync(countryParam, 86400);
+                    let newsObject = await getNews('aa');
+                    return newsObject;
+                }
 
                 for (let i = 0; i < newsIds.length; i++) {
                     let indiNewsObj = await client.hgetallAsync(newsIds[i]);
