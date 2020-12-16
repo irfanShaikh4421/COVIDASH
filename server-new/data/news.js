@@ -10,7 +10,7 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 let availableCountries = [
-    'ae',
+    'ae',//
     'ar',
     'at',
     'au',
@@ -18,45 +18,46 @@ let availableCountries = [
     'bg',
     'br',
     'ca',
-    'ch',
+    'ch',//
+    'cn',//
     'co',
     'cu',
     'cz',
-    'de',
-    'eg',
+    'de',//
+    'eg',//
     'fr',
     'gb',
     'gr',
-    'hk',
+    'hk',//
     'hu',
     'id',
     'ie',
-    'il',
+    'il',//
     'in',
     'it',
-    'jp',
-    'kr',
+    'jp',//
+    'kr',//
     'lt',
     'lv',
     'ma',
     'mx',
     'my',
     'ng',
-    'nl',
-    'no',
+    'nl',//
+    'no',//
     'nz',
     'ph',
     'pl',
     'pt',
     'ro',
-    'rs',
+    'rs',//
     'ru',
     'sa',
     'se',
     'sg',
     'si',
     'sk',
-    'th',
+    'th',//
     'tr',
     'tw',
     'ua',
@@ -75,7 +76,15 @@ async function getNews(country) {
         countryParam = country.toString().toLowerCase();
     }
 
-    const apiKey = 'apiKey=ec4091ce10534690baa4b9f4d5ba7af2';
+    let apiKey;
+    console.log(countryParam);
+    if(countryParam.match(/^([a-k].*)$/)){
+        console.log(1);
+        apiKey = 'apiKey=ec4091ce10534690baa4b9f4d5ba7af2';
+    }else {
+        console.log(2);
+        apiKey = 'apiKey=5de6e6f3a0a8454aaaba6702acd74d00';
+    }
 
     const url = baseUrl + '?' + q + '&country=' + countryParam + '&' + apiKey;
 
@@ -130,9 +139,9 @@ async function getNews(country) {
                     }
 
                     await client.hmsetAsync(news[i].url, news[i]);
-                    await client.expireAsync(news[i].url, 86400);
+                    await client.expireAsync(news[i].url, 43200);
                     await client.saddAsync(countryParam, news[i].url);
-                    await client.expireAsync(countryParam, 86400);
+                    await client.expireAsync(countryParam, 43200);
                 }
 
                 let showNews = new Array();
@@ -141,7 +150,7 @@ async function getNews(country) {
                 if (newsIds.length === 0 ) {
                     console.log(`no ${countryParam} news data, defaulting to world news`);
                     await client.saddAsync(countryParam, "no data");
-                    await client.expireAsync(countryParam, 86400);
+                    await client.expireAsync(countryParam, 43200);
                     let newsObject = await getNews('aa');
                     return newsObject;
                 }
@@ -195,9 +204,9 @@ async function getNews(country) {
                         if (news[i][member] == null) news[i][member] = '';
                     }
                     await client.hmsetAsync(news[i].url, news[i]);
-                    await client.expireAsync(news[i].url, 86400);
+                    await client.expireAsync(news[i].url, 3600);
                     await client.saddAsync('world', news[i].url);
-                    await client.expireAsync('world', 86400);
+                    await client.expireAsync('world', 3600);
                 }
 
                 let showNews = new Array();
