@@ -26,7 +26,7 @@ function Charts() {
     useEffect(() => {
         async function getData(countryNumber) {
             //const url = 'https://disease.sh/v3/covid-19/historical';
-            const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}`;
+            const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
             try{
                 const { data } = await axios.get(url);
                 console.log(data);
