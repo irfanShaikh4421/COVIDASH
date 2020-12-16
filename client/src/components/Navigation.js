@@ -23,14 +23,6 @@ const NavigationAuth = () => {
             </NavLink>{' '}
             <NavLink
                 exact
-                to="/charts"
-                activeClassName="active"
-                className="marvel"
-            >
-                Charts
-            </NavLink>{' '}
-            <NavLink
-                exact
                 to="/news"
                 activeClassName="active"
                 className="marvel"

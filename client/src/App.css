@@ -202,5 +202,6 @@ span.hoverCause:hover span.hoverResult {
 }
 
 .chartDiv {
-	margin-left: 15%;
+	margin: auto;
+	width: 50%;
 }

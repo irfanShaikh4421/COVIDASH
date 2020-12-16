@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Charts from './components/Charts';
 import Statistics from './components/CasesTracking';
 import News from './components/News';
 import OutBreak from './components/OutbreakMap';
@@ -39,7 +38,6 @@ function App() {
                             <Switch>
                                 <Route exact path="/" component={Statistics} />
                                 <Route exact path="/statistics" component={Statistics}/>
-                                <Route exact path="/charts" component={Charts} />
                                 <Route exact path="/news" component={News} />
                                 <Route exact path="/map" component={OutBreak} />
                                 <Route

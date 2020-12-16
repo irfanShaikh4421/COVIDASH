@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import { LocationContext } from '../LocationContext';
-import allCountries from '../data/countries.json';
+import React from 'react';
+//import axios from 'axios';
+//import { LocationContext } from '../LocationContext';
+//import allCountries from '../data/countries.json';
 import '../App.css';
 import {
     //LineChart,
@@ -16,14 +16,17 @@ import {
     Area,
 } from 'recharts';
 
-function Charts() {
-    const [ location ] = useContext(LocationContext);
-    const [chartArr, setChartArr] = useState([]);
-    //const [countriesData, setData] = useState([]);
-    const [countryIndex, setIndex] = useState(location.countryCode);
-    const [ dataFound, setDataFound ] = useState(true);
+function Charts(props) {
+    const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
+    const { chartArr, dataFound } = props;
 
-    useEffect(() => {
+    //const [ location ] = useContext(LocationContext);
+    //const [chartArr, setChartArr] = useState([]);
+    //const [countriesData, setData] = useState([]);
+    //const [countryIndex, setIndex] = useState(location.countryCode);
+    //const [ dataFound, setDataFound ] = useState(true);
+
+    /*useEffect(() => {
         async function getData(countryNumber) {
             //const url = 'https://disease.sh/v3/covid-19/historical';
             const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
@@ -72,13 +75,13 @@ function Charts() {
             }
         }
         
-        if(countryIndex) {
+        if(regionCode) {
             setDataFound(true);
-            getData(countryIndex);
+            getData(regionCode);
         } else {
             getData('all');
         }
-    }, [countryIndex]);
+    }, [regionCode]);*/
 
     const renderAreaChart = (
         <div className="chartDiv">
@@ -105,7 +108,9 @@ function Charts() {
                 <XAxis dataKey="date" />
                 <YAxis width={100} />
                 <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
+                <Tooltip formatter={(value) => {
+                    return value.toString().replace(regexCommaNumbers, ',');
+                }}/>
                 <Area
                     type="monotone"
                     dataKey="cases"
@@ -131,26 +136,27 @@ function Charts() {
         </div>
     );
 
-    const handleChange = (e) => {
+    /*const handleChange = (e) => {
         setIndex(parseInt(e.target.value));
-    };
-
+    };*/
+    console.log(dataFound);
     return (
         <div className="chart">
-            <label>
+            {/*<label>
                 Choose country: &nbsp;
                 <br />
-                <select defaultValue={countryIndex} onChange={handleChange}>
+                <select defaultValue={regionCode} onChange={handleChange}>
                     {allCountries.map((item, key) => (
                         <option key={key} value={item._id}>
                             {item.country}
                         </option>
                     ))}
                 </select>
-            </label>
-            {dataFound ? null : <div><br />No recent historical data found for this country. Displaying world data instead.<br /></div>}
-            <br /><br />
-            {renderAreaChart}
+            </label>*/}
+            {dataFound ? 
+                <div><br />{renderAreaChart}</div> : 
+                <div><br />No recent historical data found for the creation of this country's Chart.<br /></div>}
+            
         </div>
     );
 }

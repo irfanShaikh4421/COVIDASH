@@ -5,11 +5,12 @@ import flagUN from './../img/unitedNationsFlag.png';
 import allCountries from '../data/countries.json';
 import allStates from '../data/usStates.json';
 import { LocationContext } from '../LocationContext';
+import Charts from './Charts';
 
 const Statistics = () => {
     const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
 
-    const buildDisplay = (region, loading) => {
+    const buildDisplay = (region, loading, chartArr, chartDataFound) => {
         return (
             <div>
                 {loading ? (
@@ -83,16 +84,18 @@ const Statistics = () => {
                             </div>
                         ) : null}
 
-                        {region &&
+                        {(region &&
                             region.state &&
-                            (region.recovered ? (
+                            region.recovered) ? (
                                 <div>
                                     {region.recovered
                                         .toString()
                                         .replace(regexCommaNumbers, ',')}
                                     &nbsp;People have recovered from Covid.
                                 </div> /**States don't have critical field, nor the daily recoveries, but they do contain overall recoveries*/
-                            ) : null)}
+                            ) : chartDataFound ? null : <p>No Historical Chart data found for this country, displaying relevant data table instead.</p>}
+                        {chartArr && chartDataFound ? 
+                        <Charts chartArr={chartArr} dataFound={chartDataFound} /> :
                         <table>
                             <thead>
                                 <tr>
@@ -152,7 +155,7 @@ const Statistics = () => {
                                     <></>
                                 )}
                             </tbody>
-                        </table>
+                        </table>}
                         <br />
 
                         <hr />
@@ -238,7 +241,7 @@ const GetCountry = ({ buildCountry }) => {
     const [ location ] = useContext(LocationContext);
     const [loading, setLoading] = useState(true);
    
-    function findIso3(targetValue) {
+    /*function findIso3(targetValue) {
         if (targetValue > 0) {
             for(let i = 0; i<allCountries.length; i++) {
                 if(allCountries[i]._id === targetValue){
@@ -248,17 +251,17 @@ const GetCountry = ({ buildCountry }) => {
         }
         return "";
     }
-    const defaultCountry = findIso3(location.countryCode);
+    const defaultCountry = findIso3(location.countryCode);*/
 
-    const [country, setCountry] = useState(defaultCountry);
+    const [country, setCountry] = useState(location.countryCode);
     const [countryData, setCountryData] = useState(undefined);
+    const [ chartArr, setChartArr ] = useState([]);
+    const [ chartDataFound, setDataFound ] = useState(true);
     let display;
-
-    
 
     useEffect(
         () => {
-            async function fetchData() {
+            async function getStatsData() {
                 try {
                     setLoading(true);
                     //setShowWorldData(false);
@@ -285,26 +288,81 @@ const GetCountry = ({ buildCountry }) => {
                 }
             }
 
-            if (typeof country === "string") {
-                fetchData();
+            async function getChartData(countryNumber) {
+                const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
+                try{
+                    const { data } = await axios.get(url);
+                    console.log(data);
+                    if(data && data.message) throw EvalError("No recent historical data found for this country. Displaying world data instead.");
+                    
+                    let keys, casesValues, deathsValues, recoveredValues;
+                    if(countryNumber !== 'all'){
+                        keys = Object.keys(data.timeline.cases);
+                        casesValues = Object.values(
+                            data.timeline.cases
+                        );
+                        deathsValues = Object.values(
+                            data.timeline.deaths
+                        );
+                        recoveredValues = Object.values(
+                            data.timeline.recovered
+                        );
+                    }else{//world
+                        keys = Object.keys(data.cases);
+                        casesValues = Object.values(data.cases);
+                        deathsValues = Object.values(data.deaths);
+                        recoveredValues = Object.values(data.recovered);
+                    }
+                    
+                    const chartArr = [];
+    
+                    for (let i = 0; i < keys.length; i++) {
+                        const chartObj = {
+                            date: keys[i],
+                            cases: casesValues[i],
+                            deaths: deathsValues[i],
+                            recovered: recoveredValues[i],
+                        };
+                        chartArr.push(chartObj);
+                    }
+    
+                    setChartArr(chartArr);
+                }catch(e) {
+                    console.log(e);
+                    setDataFound(false);
+                    //getChartData('all');
+                }
             }
-        }, //fires every time the country iso3 changes
+
+            if (typeof country === "number") {
+                getStatsData();
+            }
+            console.log(country)
+            if(country) {
+                setDataFound(true);
+                getChartData(country);
+            } else {
+                setDataFound(true);
+                getChartData('all');
+            }
+        }, 
         [country]
     );
 
     const handleChange = (e) => {
-        setCountry(e.target.value);
+        const defaultValue = parseInt(e.target.value);
+        setCountry(defaultValue);
     };
 
     if(loading){
         return <p>Loading Country data...</p>
     }else {
-        display = countryData && buildCountry(countryData);
+        display = countryData && buildCountry(countryData, false, chartArr, chartDataFound);
     }
 
     //modified to match Travel.js' dropdown
     const countryDropDown = allCountries.map((entry) => (
-        <option key={entry._id} value={entry.iso3}>
+        <option key={entry._id} value={entry._id}>
             {entry.country}
         </option>
     ));
