@@ -23,7 +23,7 @@ const validIso2 = ['PT', 'PW', 'PY', 'QA', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', '
 const Travel = () => {
     const [ location ] = useContext(LocationContext);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(undefined);
     const [countryData, setCountryData] = useState(null);
     const options = countriesList.map((k, i) => (
         <option key={i} value={k.value}>
@@ -50,6 +50,7 @@ const Travel = () => {
 
     useEffect(() => {
         async function grabRegulation(arg) {
+            setError(undefined);
             console.log(`${arg} grabRegulation Fired`);
             try {
                 setLoading(true);
@@ -63,13 +64,13 @@ const Travel = () => {
                 setLoading(false);
                 setCountryData(data);
             } catch (e) {
-                setError(e.message);
+                setError(e);
             }
         }
         grabRegulation(country);
     }, [country]);
 
-    if (error) return <div>ERROR: {error}.</div>;
+    if (error) return <h1>{error.name}: {error.message}</h1>;
 
     return (
         <div>

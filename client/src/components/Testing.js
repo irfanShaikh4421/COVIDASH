@@ -26,7 +26,7 @@ const TestingLocations = () => {
                 const getData = await axios.get(`/testing/${stateName}`);
                 setData(getData.data);
             } catch (e) {
-                setNoData(true);
+                setNoData(e);
                 console.log(e);
             }
         }
@@ -51,7 +51,7 @@ const TestingLocations = () => {
                         </option>
                     ))}
                 </select>
-                <h2>No data for this selected...</h2>
+                <h1>{noData.name}: {noData.message}.</h1>
             </div>
         );
     } else {

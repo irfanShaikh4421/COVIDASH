@@ -4,20 +4,27 @@ import '../App.css';
 
 const Vaccine = () => {
     const [vaccineData, setVaccineData] = useState([]);
+    const [error, setError] = useState(undefined);
 
     useEffect(() => {
         async function getData() {
+            setError(undefined);
             //const url = 'https://disease.sh/v3/covid-19/vaccine';
             console.log("get Vaccine data useEffect launched");
             try {
                 const response = await axios.get('/vaccine');
                 setVaccineData(response.data.data);
             } catch (e) {
-                console.log(e);
+                console.log(e.toString());
+                setError(e);
             }
         }
         getData();
     }, []);
+
+    if(error){
+        return (<h1>{error.name}: {error.message}</h1>);
+    }
 
     return (
         <div>

@@ -77,12 +77,11 @@ async function getNews(country) {
     }
 
     let apiKey;
-    console.log(countryParam);
     if(countryParam.match(/^([a-k].*)$/)){
-        console.log(1);
+        console.log(`news key 1`);
         apiKey = 'apiKey=ec4091ce10534690baa4b9f4d5ba7af2';
     }else {
-        console.log(2);
+        console.log(`news key 2`);
         apiKey = 'apiKey=5de6e6f3a0a8454aaaba6702acd74d00';
     }
 

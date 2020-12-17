@@ -8,6 +8,7 @@ const HospitalBeds = () => {
 	const stateIndex = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
 	const [state, setState] = useState(usStates[stateIndex.indexOf(location.state)].name);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(undefined);
 
 	const [currentStateData, setCurrentStateData] = useState([]);
 
@@ -35,6 +36,7 @@ const HospitalBeds = () => {
 				}
 			}catch(e){
 				console.log(e);
+				setError(e);
 			}
 			setLoading(false);
 		}
@@ -63,7 +65,8 @@ const HospitalBeds = () => {
 			</select>
 			<div>
 				{state}
-				{(loading ? <div>Loading...</div> :
+				{error ? <h1>{error.name}: {error.message}</h1> :
+				(loading ? <div>Loading...</div> :
 					currentStateData.map((item, index) => (
 						<div key={index}>
 							<hr style={{width: '60%'}}/>
