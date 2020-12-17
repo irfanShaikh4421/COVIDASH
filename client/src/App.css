@@ -262,6 +262,11 @@ button:focus {
 	flex-direction: column;
 }
 
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
 .align-left {
 	align-items: flex-start;
 }
@@ -357,6 +362,21 @@ button:focus {
 	color: #001529 !important;
 }
 
+.sub-heading-row {
+	display: block;
+	justify-content: center;
+	color: #6f7689;
+	font-size: 0.8rem;
+}
+
+.sub-info-row {
+	display: block;
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin: 0 10px 0 5px;
+	color: #001529 !important;
+}
+
 .sub-info-small {
 	display: block;
 	font-size: 1rem;
@@ -396,6 +416,11 @@ button:focus {
 	margin-top: 20px;
 }
 
+.leaflet-popup-content {
+	width: auto !important;
+	margin: 20px !important;
+}
+
 /* COLORS */
 
 .color-green {
@@ -404,6 +429,14 @@ button:focus {
 
 .color-red {
 	color: #a93765 !important;
+}
+
+.color-orange {
+	color: #ff7f51 !important;
+}
+
+.color-yellow {
+	color: #ac9300 !important;
 }
 
 .color-primary {
