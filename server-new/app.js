@@ -1,12 +1,23 @@
 const express = require('express');
 const app = express();
 const static = express.static(__dirname + '/public');
-
 const configRoutes = require('./routes');
+const fs = require('fs')
+
+const firebase = require('./utils/firebase')
+global.__basedir = __dirname;
+
+// check imgs folder
+fs.exists('./imgs', (e) => {
+    if(!e)
+        fs.mkdirSync('./imgs')
+})
 
 app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
 
 const port = 5000;
 

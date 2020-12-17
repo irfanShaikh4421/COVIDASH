@@ -4,14 +4,18 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
 import { storage } from '../firebase/Firebase';
+import axios from 'axios'
+
 const db = app.firestore();
 
 function UploadImage() {
 	const { currentUser } = useContext(AuthContext);
 	let uid;
+	const [token, setToken] = useState(null)
 	const [userData, setUserData] = useState({});
 	const [file, setFile] = useState(null);
 	const [url, setURL] = useState('');
+	const [img, setImg] = useState(null)
 
 	useEffect(() => {
 		async function getUserData() {
@@ -37,6 +41,9 @@ function UploadImage() {
 
 	if (currentUser) {
 		uid = currentUser.uid;
+		currentUser.getIdToken().then( (t ) => { 
+			setToken(t)
+		 })
 	}
 
 	const updateUserImage = (uid, imgUrl) =>
@@ -51,9 +58,23 @@ function UploadImage() {
 		setFile(e.target.files[0]);
 	}
 
-	function handleUpload(e) {
+	async function handleUpload(e) {
 		e.preventDefault();
-		const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+		//alert(Object.keys(file))
+
+		let fdata = new FormData()
+		fdata.append('photo', file, file.name)
+
+		let { data } = await axios.post('/photo', fdata, { headers:   { authtoken: token,	 'Content-Type' :  `multipart/form-data; boundary=${fdata._boundary}` } })
+
+		setImg(data.img)
+
+		console.log(data)
+		setFile(data.img);
+		setURL(data.img);
+		await updateUserImage(uid, data.img);
+
+		/*const uploadTask = storage.ref(`/images/${file.name}`).put(data.img);
 		uploadTask.on('state_changed', console.log, console.error, () => {
 			storage
 				.ref('images')
@@ -64,7 +85,7 @@ function UploadImage() {
 					setURL(url);
 					await updateUserImage(uid, url);
 				});
-		});
+		});*/
 	}
 
 	const imageForm = (

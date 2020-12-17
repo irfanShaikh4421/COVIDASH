@@ -23,6 +23,7 @@ import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './firebase/Auth';
 
+
 function App() {
     return (
         <AuthProvider>
