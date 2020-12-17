@@ -432,7 +432,7 @@ button:focus {
 }
 
 .social-signup-btn {
-    width: 220px !important;
+    width: 240px !important;
     height: 40px !important;
     margin-right: 20px;
     margin-top: 20px;
@@ -445,6 +445,15 @@ button:focus {
 .forgot-pass {
     padding: 0px !important;
     margin-top: 20px;
+}
+
+.profile-img {
+    border-radius: 100px;
+}
+
+.btn-right-margin {
+    margin-top: 10px;
+    margin-right: 20px;
 }
 
 /* COLORS */
