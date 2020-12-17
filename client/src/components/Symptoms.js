@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { Typography } from 'antd';
+import { Checkbox, Button } from 'antd';
 
-const Symptoms = (props) => {
+const Symptoms = () => {
+	const { Title, Text } = Typography;
+
 	const symptomsWeight = {
 		fever: 0.15,
 		cough: 0.15,
@@ -41,207 +45,99 @@ const Symptoms = (props) => {
 		else if (0.2 <= res) tmp = 'moderate';
 		else if (res < 0.2) tmp = 'low';
 
-		setStr(`You have ${tmp} chance of having Covid-19`);
+		setStr(`You have ${tmp} chances of having COVID-19`);
 	}
 
 	return (
-		<div className="centeredFlex">
-			<div className="travelContainer">
-				<h1 style={{ fontWeight: 350 }}> Symptoms Checklist</h1>
-				<br /> <br />
+		<div className="flex-center">
+			<div className="align-left">
+				<Title>Self checker</Title>
+				<Text>
+					Select the symptoms you have and click the button to check if you are
+					infected
+				</Text>
+				<br />
 				<form onSubmit={(e) => e.preventDefault()}>
 					<div className="label">
-						Fever :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="fever"
-								onChange={() => setSymptoms({ ...symptoms, fever: true })}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="fever"
-								onChange={() => setSymptoms({ ...symptoms, fever: false })}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, fever: !symptoms.fever })
+							}
+						>
+							Fever
+						</Checkbox>
 					</div>
 					<div className="label">
-						Cough :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="cough"
-								onChange={() => setSymptoms({ ...symptoms, cough: true })}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="cough"
-								onChange={() => setSymptoms({ ...symptoms, cough: false })}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, cough: !symptoms.cough })
+							}
+						>
+							Cough
+						</Checkbox>
 					</div>
 					<div className="label">
-						Sore Throat :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="soreThroat"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										soreThroat: true,
-									})
-								}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="soreThroat"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										soreThroat: false,
-									})
-								}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, soreThroat: !symptoms.soreThroat })
+							}
+						>
+							Sore throat
+						</Checkbox>
 					</div>
 					<div className="label">
-						Loss Of Smell :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="lossOfSmell"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										lossOfSmell: true,
-									})
-								}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="lossOfSmell"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										lossOfSmell: false,
-									})
-								}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, lossOfSmell: !symptoms.lossOfSmell })
+							}
+						>
+							Loss of smell
+						</Checkbox>
 					</div>
 					<div className="label">
-						Headache :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="headache"
-								onChange={() => setSymptoms({ ...symptoms, headache: true })}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="headache"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										headache: false,
-									})
-								}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, headache: !symptoms.headache })
+							}
+						>
+							Headache
+						</Checkbox>
 					</div>
 					<div className="label">
-						Vomit :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="vomit"
-								onChange={() => setSymptoms({ ...symptoms, vomit: true })}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="vomit"
-								onChange={() => setSymptoms({ ...symptoms, vomit: false })}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, vomit: !symptoms.vomit })
+							}
+						>
+							Vomitting
+						</Checkbox>
 					</div>
 					<div className="label">
-						Diarrhea :{' '}
-						<label>
-							<input
-								type="radio"
-								value={true}
-								name="diarrhea"
-								onChange={() => setSymptoms({ ...symptoms, diarrhea: true })}
-							/>{' '}
-							Yes{' '}
-						</label>{' '}
-						:{' '}
-						<label>
-							{' '}
-							<input
-								type="radio"
-								name="diarrhea"
-								onChange={() =>
-									setSymptoms({
-										...symptoms,
-										diarrhea: false,
-									})
-								}
-							/>{' '}
-							No{' '}
-						</label>
+						<Checkbox
+							onChange={() =>
+								setSymptoms({ ...symptoms, diarrhea: !symptoms.diarrhea })
+							}
+						>
+							Diarrhea
+						</Checkbox>
 					</div>
 					<br />
 					<div>
-						<button onClick={() => handleSymptomCalc()}>
-							Should I be worried ?
-						</button>
+						<Button type="primary" onClick={() => handleSymptomCalc()}>
+							Am I infected?
+						</Button>
 					</div>
 					<br />
-					{result > 0 ? <p className="label">{str}</p> : null}
+					{result > 0 ? (
+						<Title level={2}>{str}</Title>
+					) : result === null ? null : (
+						<div>
+							<Title level={2}>Congrats! You are safe.</Title>
+							<Text>
+								Please wear a mask to keep yourself and others around you safe.
+							</Text>
+						</div>
+					)}
 				</form>
 			</div>
 		</div>
