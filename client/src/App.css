@@ -128,31 +128,34 @@ span.hoverCause:hover span.hoverResult {
     flex: shrink;
 }
 
-.centeredFlex {
-    display: flex;
-    justify-content: center;
-}
-
-.chip {
-    padding: 2px 8px;
-    border-radius: 1rem;
-    background-color: #016fb9;
-    color: #fcfcfc;
-}
-
 .label {
     line-height: 100%;
     font-weight: 400;
-    font-size: 1.6rem !important;
+    font-size: 1.2rem !important;
+    margin: 8px 0 !important;
 }
 
-.chipsContainer > *:nth-child(odd) {
-    flex: 1 0 25%;
+.symptom-btn {
+    margin: 20px 0 !important;
+    width: 160px;
+    border: 2px solid transparent !important;
 }
 
-.chipsContainer > *:nth-child(even) {
-    flex: 1 0 65%;
-    width: 35%;
+button {
+    font-weight: 600 !important;
+    border: 2px solid transparent;
+}
+
+button:hover {
+    background-color: transparent !important;
+    border: 2px solid #001529 !important;
+    color: #001529 !important;
+}
+
+button:focus {
+    background-color: transparent !important;
+    border: 2px solid #001529 !important;
+    color: #001529 !important;
 }
 
 .para {
@@ -210,11 +213,14 @@ span.hoverCause:hover span.hoverResult {
     background: #fff;
 }
 
+.logo > a {
+    color: white !important;
+}
+
 .logo {
-    color: white;
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 10px 25px;
+    margin: 15px 25px;
 }
 
 .logo > p {
@@ -267,7 +273,7 @@ span.hoverCause:hover span.hoverResult {
 }
 
 .news-card {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
@@ -320,14 +326,11 @@ span.hoverCause:hover span.hoverResult {
     font-weight: 500;
 }
 
-button {
-    font-weight: 600 !important;
-}
-
 .testing-btn {
     display: block;
     width: 230px;
     margin: 15px 0;
+    border: 1px solid #6f7689 !important;
 }
 
 .testing-list {
@@ -374,6 +377,16 @@ button {
     margin-top: 40px;
 }
 
+.ant-menu-item-selected {
+    background-color: transparent !important;
+    font-weight: 700;
+    transition: all 50ms ease-in-out;
+}
+
+.ant-drawer-body {
+    padding: 0 !important;
+}
+
 /* COLORS */
 
 .color-green {
@@ -396,9 +409,31 @@ button {
     color: #6f7689 !important;
 }
 
+.mobile-header {
+    display: none;
+}
+
+/* Media for mobile */
+
 @media only screen and (max-width: 768px) {
     .hide-mobile {
         display: none;
+    }
+
+    .mobile-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        height: 60px;
+        width: 100vw;
+        background-color: #001529;
+        color: #fcfcfc;
+        font-size: 1.3rem;
+        font-weight: 800;
+        letter-spacing: 0.4rem;
+        z-index: 1;
     }
 
     .main-content {
@@ -420,5 +455,30 @@ button {
 
     .App-body {
         padding: 15px;
+        margin-top: 60px;
+    }
+
+    .label {
+        font-size: 1.1rem !important;
+        margin: 12px 0 !important;
+    }
+
+    .symptom-btn {
+        width: 180px !important;
+    }
+
+    .view-map-btn {
+        width: auto !important;
+        padding: 8px 20px !important;
+        font-size: 1rem !important;
+        font-weight: 600;
+        height: auto !important;
+        margin-top: 5px !important;
+    }
+
+    button {
+        width: auto !important;
+        height: 45px !important;
+        font-size: 1rem !important;
     }
 }
