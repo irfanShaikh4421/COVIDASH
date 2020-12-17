@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .App {
 	text-align: center;
 }
@@ -5,12 +7,6 @@
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
 }
 
 .App-header {
@@ -23,17 +19,14 @@
 	padding: 50px 20px;
 }
 
-.App-link {
-	color: #61dafb;
+.App-body {
+	display: flex;
+	margin: 10px 40px;
+	background-color: #fcfcfc;
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.App-link {
+	color: #61dafb;
 }
 
 button.marvel {
@@ -53,7 +46,7 @@ button.marvel {
 }
 
 nav.navigation {
-    line-height: 2.5;
+	line-height: 2.5;
 }
 
 .navigation .marvel:hover {
@@ -82,9 +75,9 @@ td {
 }
 
 .subtitle {
-    font-size: 15px;
-    margin-bottom: 16px;
-    color: #767676;
+	font-size: 15px;
+	margin-bottom: 16px;
+	color: #767676;
 }
 
 .titleOfSubtitle {
@@ -199,4 +192,81 @@ span.hoverCause:hover span.hoverResult {
 
 .chart {
 	justify-content: center;
+}
+
+#components-layout-demo-side .logo {
+	height: 32px;
+	margin: 16px;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+	background: #fff;
+}
+
+.logo {
+	color: white;
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin: 10px 25px;
+}
+
+.logo > p {
+	margin-bottom: 0;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.ant-layout {
+	background-color: #fcfcfc !important;
+}
+
+.main-content {
+	margin-left: 200px;
+	max-width: 100vw;
+	height: 100vh;
+}
+
+.mobile-nav {
+	display: none;
+}
+
+.loader {
+	font-size: 42px;
+	margin-top: 20%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.flex-center {
+	display: flex;
+	flex-direction: column;
+}
+
+.align-left {
+	align-items: flex-start;
+}
+
+@media only screen and (max-width: 768px) {
+	.hide-mobile {
+		display: none;
+	}
+
+	.main-content {
+		margin: 10px;
+	}
+
+	.mobile-nav {
+		display: flex;
+		position: relative;
+	}
+
+	.floating-menu {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		margin: 20px;
+	}
 }
