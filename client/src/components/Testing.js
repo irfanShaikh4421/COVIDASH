@@ -119,12 +119,13 @@ const TestingLocations = () => {
 								dataSource={locationsData}
 								renderItem={(item, index) => (
 									<List.Item>
+										{index + 1}.&nbsp;
 										<Link
 											key={index}
 											to={`/testing/${stateName}/${item.id}`}
 											className="color-link"
 										>
-											{index + 1}. {item.name}
+											{item.name}
 										</Link>
 									</List.Item>
 								)}

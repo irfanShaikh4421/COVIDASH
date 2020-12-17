@@ -26,6 +26,7 @@ const Symptoms = () => {
 	});
 	const [result, setResult] = useState(null);
 	const [str, setStr] = useState('');
+	const [temp, setTemp] = useState('');
 
 	function handleSymptomCalc() {
 		let tmp = Object.keys(symptoms);
@@ -41,13 +42,32 @@ const Symptoms = () => {
 	}
 
 	function generatePrediction(res) {
-		let tmp = '';
-		if (res > 0.5) tmp = 'high';
-		else if (0.2 <= res) tmp = 'moderate';
-		else if (res < 0.2) tmp = 'low';
-
-		setStr(`You have ${tmp} chances of having COVID-19`);
+		if (res > 0.5) setTemp('high');
+		else if (0.2 <= res) setTemp('moderate');
+		else if (res < 0.2) setTemp('low');
 	}
+
+	const titleColor = () => {
+		if (temp === 'high') {
+			return (
+				<Title level={2} className="color-red">
+					{`You have ${temp} chances of having COVID-19`}
+				</Title>
+			);
+		} else if (temp === 'moderate') {
+			return (
+				<Title level={2} className="color-orange">
+					{`You have ${temp} chances of having COVID-19`}
+				</Title>
+			);
+		} else {
+			return (
+				<Title level={2} className="color-yellow">
+					{`You have ${temp} chances of having COVID-19`}
+				</Title>
+			);
+		}
+	};
 
 	return (
 		<div className="align-left flex-column">
@@ -116,9 +136,7 @@ const Symptoms = () => {
 				</Button>
 				{result > 0 ? (
 					<Card className="flex-column">
-						<Title level={2} className="color-red">
-							{str}
-						</Title>
+						{titleColor()}
 						<Text>
 							If symptoms increase, please quarantine yourself and get tested to
 							know if you have COVID-19.
