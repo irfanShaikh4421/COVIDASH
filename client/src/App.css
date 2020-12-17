@@ -1,7 +1,9 @@
 @import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.App {
-	text-align: center;
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
 }
 
 .App-logo {
@@ -133,11 +135,10 @@ span.hoverCause:hover span.hoverResult {
 	color: #fcfcfc;
 }
 
-.label,
-.chipsContainer > p {
+.label {
 	line-height: 100%;
-	font-weight: 300;
-	font-size: 1.5rem !important;
+	font-weight: 400;
+	font-size: 1.6rem !important;
 }
 
 .chipsContainer > *:nth-child(odd) {
@@ -247,6 +248,12 @@ span.hoverCause:hover span.hoverResult {
 
 .align-left {
 	align-items: flex-start;
+}
+
+.ant-btn-primary {
+	color: #fff;
+	background: #001529;
+	border-color: #001529;
 }
 
 @media only screen and (max-width: 768px) {
