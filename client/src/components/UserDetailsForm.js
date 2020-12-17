@@ -1,4 +1,4 @@
-import React/*, { useState, useContext }*/ from 'react';
+import React /*, { useState, useContext }*/ from 'react';
 import '../App.css';
 /* import countries from '../data/countries-iso2.json';
 import usStates from '../data/usStates.json';
@@ -9,7 +9,7 @@ const db = app.firestore();*/
 import ChangeCountry from './ChangeUserCountry';
 
 function UserDetailsForm() {
-/*	const [country, setCountry] = useState('');
+	/*	const [country, setCountry] = useState('');
 	// const [usersData, setUsersData] = useState([]);
 	let [state, setState] = useState('');
 	const { currentUser } = useContext(AuthContext);
@@ -88,7 +88,8 @@ function UserDetailsForm() {
 		<div>
 			<h2>Change location</h2>
 			<ChangeCountry />
-			<br /><br />
+			<br />
+			<br />
 		</div>
 	);
 }

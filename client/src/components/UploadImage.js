@@ -14,7 +14,7 @@ function UploadImage() {
 
 	useEffect(() => {
 		async function getUserData() {
-			var docRef = db.collection('users').doc(currentUser.uid);//this is a private route, the user must be signed in to get here in the first place
+			var docRef = db.collection('users').doc(currentUser.uid); //this is a private route, the user must be signed in to get here in the first place
 
 			docRef
 				.get()

@@ -1,23 +1,80 @@
 import React, { useState, useEffect, useContext } from 'react';
 import usStates from '../data/usStates';
 import { LocationContext } from '../LocationContext';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Select } from 'antd';
+
 const axios = require('axios');
 
 const HospitalBeds = () => {
-	const [ location ] = useContext(LocationContext);
-	const stateIndex = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'];
-	const [state, setState] = useState(usStates[stateIndex.indexOf(location.state)].name);
+	const [location] = useContext(LocationContext);
+	const stateIndex = [
+		'AL',
+		'AK',
+		'AZ',
+		'AR',
+		'CA',
+		'CO',
+		'CT',
+		'DE',
+		'FL',
+		'GA',
+		'HI',
+		'ID',
+		'IL',
+		'IN',
+		'IA',
+		'KS',
+		'KY',
+		'LA',
+		'ME',
+		'MD',
+		'MA',
+		'MI',
+		'MN',
+		'MS',
+		'MO',
+		'MT',
+		'NE',
+		'NV',
+		'NH',
+		'NJ',
+		'NM',
+		'NY',
+		'NC',
+		'ND',
+		'OH',
+		'OK',
+		'OR',
+		'PA',
+		'RI',
+		'SC',
+		'SD',
+		'TN',
+		'TX',
+		'UT',
+		'VT',
+		'VA',
+		'WA',
+		'WV',
+		'WI',
+		'WY',
+	];
+	const [state, setState] = useState(
+		usStates[stateIndex.indexOf(location.state)].name
+	);
 	const [loading, setLoading] = useState(true);
+	const { Option } = Select;
 
 	const [currentStateData, setCurrentStateData] = useState([]);
 
 	useEffect(() => {
 		async function getData() {
-            console.log("get Hospital Beds data useEffect launched");
-			try{ 
+			console.log('get Hospital Beds data useEffect launched');
+			try {
 				setLoading(true);
 				//const url ='https://opendata.arcgis.com/datasets/1044bb19da8d4dbfb6a96eb1b4ebf629_0.geojson';
-			
+
 				const { data } = await axios.get('/hospitals');
 
 				setCurrentStateData([]);
@@ -30,7 +87,7 @@ const HospitalBeds = () => {
 						]);
 					}
 				}
-			}catch(e){
+			} catch (e) {
 				console.log(e);
 			}
 			setLoading(false);
@@ -38,26 +95,38 @@ const HospitalBeds = () => {
 		getData();
 	}, [state]);
 
-	const handleChange = (e) => {
-		if (e.target.value) setState(e.target.value);
+	const handleChange = (value) => {
+		if (value) setState(value);
 	};
 
 	return (
 		<div>
 			<label htmlFor="state">Select state:&nbsp;</label>
-			<select defaultValue={state} onChange={handleChange}>
+			<Select
+				showSearch
+				style={{ width: 200 }}
+				placeholder={state ? state : 'select state'}
+				optionFilterProp="children"
+				onChange={handleChange}
+				value={state}
+				filterOption={(input, option) =>
+					option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+				}
+			>
 				{usStates.map((state, index) => (
-					<option key={index} value={state.name}>
+					<Option key={index} value={state.name}>
 						{state.name}
-					</option>
+					</Option>
 				))}
-			</select>
+			</Select>
 			<div>
-				{state}
-				{(loading ? <div>Loading...</div> :
+				<br />
+				{loading ? (
+					<LoadingOutlined className="loader" />
+				) : (
 					currentStateData.map((item, index) => (
 						<div key={index}>
-							<hr style={{width: '60%'}}/>
+							<hr style={{ width: '60%' }} />
 							{index + 1}. {item.HOSPITAL_NAME}
 							<br />
 							Address: {item.HQ_ADDRESS}
@@ -67,7 +136,11 @@ const HospitalBeds = () => {
 							<br />
 							<a
 								href={`http://maps.google.com/?q=${
-									item.HOSPITAL_NAME + ' ' + item.HQ_ADDRESS + ' ' + item.HQ_CITY
+									item.HOSPITAL_NAME +
+									' ' +
+									item.HQ_ADDRESS +
+									' ' +
+									item.HQ_CITY
 								}`}
 								target="blank"
 							>
