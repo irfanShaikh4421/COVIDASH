@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Typography, Card, Button, Divider } from 'antd';
 
 const EachTestingLocation = (props) => {
 	const [hospitalData, setHospitalData] = useState({});
+
+	const { Title } = Typography;
 
 	useEffect(() => {
 		async function getData() {
@@ -15,7 +18,7 @@ const EachTestingLocation = (props) => {
 			try {
 				//getData = await axios.get(url);
 				console.log(state);
-				const {data: getData} = await axios.get(`/testing/${state}/${ID}`);
+				const { data: getData } = await axios.get(`/testing/${state}/${ID}`);
 				console.log(getData);
 				setHospitalData(getData);
 				/*getData.data.forEach((item) => {
@@ -34,13 +37,15 @@ const EachTestingLocation = (props) => {
 		if (hospitalData.physical_address) {
 			return (
 				<div>
-					<p>
-						Address: {hospitalData.physical_address[0].address_1}{' '}
+					<span className="sub-heading">Address:</span>
+
+					<span className="sub-info">
+						{hospitalData.physical_address[0].address_1}{' '}
 						{hospitalData.physical_address[0].city}{' '}
 						{hospitalData.physical_address[0].state_province}{' '}
 						{hospitalData.physical_address[0].postal_code}
-					</p>
-					<a
+					</span>
+					<Button
 						href={`http://maps.google.com/?q=${
 							hospitalData.name +
 							' ' +
@@ -51,9 +56,11 @@ const EachTestingLocation = (props) => {
 							hospitalData.physical_address[0].state_province
 						}`}
 						target="blank"
+						size={'small'}
+						style={{ margin: '-5px 0 10px 0' }}
 					>
 						View on map
-					</a>
+					</Button>
 				</div>
 			);
 		}
@@ -62,10 +69,12 @@ const EachTestingLocation = (props) => {
 	const getPhone = () => {
 		if (hospitalData.phones) {
 			return (
-				<p>
-					Contact: {hospitalData.phones[0].number} (
-					{hospitalData.phones[0].type})
-				</p>
+				<>
+					<span className="sub-heading">Contact:</span>
+					<span className="sub-info">
+						{hospitalData.phones[0].number} ({hospitalData.phones[0].type})
+					</span>
+				</>
 			);
 		}
 	};
@@ -88,12 +97,12 @@ const EachTestingLocation = (props) => {
 			} else {
 				return (
 					<div>
-						<p>Regular schedule: </p>
+						<span className="sub-heading">Regular schedule:</span>
 						{schedule.map((item, key) => (
-							<p key={key}>
+							<span key={key} className="schedule">
 								{weekdays[item.weekday - 1]}: {item.opens_at} to{' '}
 								{item.closes_at}
-							</p>
+							</span>
 						))}
 					</div>
 				);
@@ -102,14 +111,17 @@ const EachTestingLocation = (props) => {
 	};
 
 	return (
-		<div>
-			<h2>{hospitalData.name}</h2>
-			<hr />
-			<p>{hospitalData.description}</p>
-			<p>Transportation: {hospitalData.transportation}</p>
-			{getAddress()}
-			{getPhone()}
-			{getSchedule()}
+		<div className="full-width-card">
+			<Card className="flex-column">
+				<Title>{hospitalData.name}</Title>
+				<span className="card-date">{hospitalData.description}</span>
+				<Divider />
+				<span className="sub-heading">Available transportation modes:</span>
+				<span className="sub-info">{hospitalData.transportation}</span>
+				{getAddress()}
+				{getPhone()}
+				{getSchedule()}
+			</Card>
 		</div>
 	);
 };
