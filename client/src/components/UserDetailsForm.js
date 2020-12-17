@@ -7,9 +7,16 @@ import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
 const db = app.firestore();*/
 import ChangeCountry from './ChangeUserCountry';
+import { Typography, Modal } from 'antd';
 
 function UserDetailsForm() {
-	/*	const [country, setCountry] = useState('');
+    return (
+        <div>
+            <ChangeCountry />
+        </div>
+    );
+
+    /*	const [country, setCountry] = useState('');
 	// const [usersData, setUsersData] = useState([]);
 	let [state, setState] = useState('');
 	const { currentUser } = useContext(AuthContext);
@@ -84,14 +91,6 @@ function UserDetailsForm() {
 		</form>
 	);
 */
-	return (
-		<div>
-			<h2>Change location</h2>
-			<ChangeCountry />
-			<br />
-			<br />
-		</div>
-	);
 }
 
 export default UserDetailsForm;

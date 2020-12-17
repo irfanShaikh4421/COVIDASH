@@ -154,7 +154,7 @@ button:hover {
 
 button:focus {
     background-color: transparent !important;
-    border: 2px solid #001529 !important;
+    border: 1px solid #001529 !important;
     color: #001529 !important;
 }
 
@@ -265,6 +265,13 @@ button:focus {
 .flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .align-left {
@@ -454,6 +461,14 @@ button:focus {
 .btn-right-margin {
     margin-top: 10px;
     margin-right: 20px;
+}
+
+.image-input {
+    margin: 20px 0;
+}
+
+.upload-btn {
+    margin: 10px 0;
 }
 
 /* COLORS */

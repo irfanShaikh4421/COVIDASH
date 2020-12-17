@@ -6,9 +6,11 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
 import { LocationContext } from '../LocationContext';
+import ChangeCountry from './ChangeUserCountry';
+import UploadImage from './UploadImage';
 import countries from '../data/countries.json';
 import states from '../data/usStates.json';
-import { Typography, Button, Image } from 'antd';
+import { Typography, Button, Image, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const db = app.firestore();
@@ -291,6 +293,32 @@ function Account() {
     const { currentUser } = useContext(AuthContext);
     const [location] = useContext(LocationContext);
     const uid = currentUser.uid;
+    const [isLocationModalVisible, setLocationModal] = useState(false);
+    const [isImageModalVisible, setImageModal] = useState(false);
+
+    const showModalLocation = () => {
+        setLocationModal(true);
+    };
+
+    const handleOkLocation = () => {
+        setLocationModal(false);
+    };
+
+    const handleCancelLocation = () => {
+        setLocationModal(false);
+    };
+
+    const showModalImage = () => {
+        setImageModal(true);
+    };
+
+    const handleOkImage = () => {
+        setImageModal(false);
+    };
+
+    const handleCancelImage = () => {
+        setImageModal(false);
+    };
 
     const { Title } = Typography;
 
@@ -360,15 +388,11 @@ function Account() {
             <span className="sub-info">{currentUser.email}</span>
             {userInfo()}
 
-            <Button className="btn-right-margin">
-                <NavLink exact to="/user-details" activeClassName="active">
-                    Change location
-                </NavLink>
+            <Button className="btn-right-margin" onClick={showModalLocation}>
+                Change location
             </Button>
-            <Button className="btn-right-margin">
-                <NavLink exact to="/upload-image" activeClassName="active">
-                    Change profile picture
-                </NavLink>
+            <Button className="btn-right-margin" onClick={showModalImage}>
+                Change profile picture
             </Button>
             <Button className="btn-right-margin">
                 <NavLink exact to="/change-password" activeClassName="active">
@@ -376,6 +400,22 @@ function Account() {
                 </NavLink>
             </Button>
             <SignOutButton />
+            <Modal
+                title="Change location"
+                visible={isLocationModalVisible}
+                onOk={handleOkLocation}
+                onCancel={handleCancelLocation}
+            >
+                <ChangeCountry />
+            </Modal>
+            <Modal
+                title="Upload profile picture"
+                visible={isImageModalVisible}
+                onOk={handleOkImage}
+                onCancel={handleCancelImage}
+            >
+                <UploadImage />
+            </Modal>
         </div>
     );
 }
