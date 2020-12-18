@@ -3,7 +3,7 @@ import countriesList from '../data/geoData.json';
 import countryIndexer from '../data/countries-iso2.json';
 import { LocationContext } from '../LocationContext';
 import axios from 'axios';
-import { Select } from 'antd';
+import { Select, Tag, Row, Col} from 'antd';
 
 //const headers = { Authorization: `Bearer stevens85452525` };
 const iso2Indexer = [ 4, 248, 8, 12, 16, 20, 24, 660, 10, 28, 32, 51, 533, 36, 40, 31, 44, 48, 50, 52, 112, 56, 84, 204, 60, 64, 68, 535, 70, 72, 74, 76, 86, 96, 100, 854, 108, 132, 116, 120, 124, 136, 140, 148, 152, 156, 162, 166, 170, 174, 178, 180, 184, 188, 384, 191, 192, 531, 196, 203, 208, 262, 212, 214, 218, 818, 222, 226, 232, 233, 748, 231, 238, 234, 242, 246, 250, 254, 258, 260, 266, 270, 268, 276, 288, 292, 300, 304, 308, 312, 316, 320, 831, 324, 624, 328, 332, 334, 336, 340, 344, 348, 352, 356, 360, 364, 368, 372, 833, 376, 380, 388, 392, 832, 400, 398, 404, 296, 408, 410, 414, 417, 418, 428, 422, 426, 430, 434, 438, 440, 442, 446, 450, 454, 458, 462, 466, 470, 584, 474, 478, 480, 175, 484, 583, 498, 492, 496, 499, 500, 504, 508, 104, 516, 520, 524, 528, 540, 554, 558, 562, 566, 570, 574, 807, 580, 578, 512, 586, 585, 275, 591, 598, 600, 604, 608, 612, 616, 620, 630, 634, 638, 642, 643, 646, 652, 654, 659, 662, 663, 666, 670, 882, 674, 678, 682, 686, 688, 690, 694, 702, 534, 703, 705, 90, 706, 710, 239, 728, 724, 144, 729, 740, 744, 752, 756, 760, 158, 762, 834, 764, 626, 768, 772, 776, 780, 788, 792, 795, 796, 798, 800, 804, 784, 826, 840, 581, 858, 860, 548, 862, 704, 92, 850, 876, 732, 887, 894, 716 ];
@@ -125,41 +125,24 @@ const Travel = () => {
        <div style={{ flex: '1 0 65%', textAlign: 'left' }}>
         <h1 style={{ fontWeight: 350 }}>{countryData.name}</h1>{' '}
         <br></br>
-        <div
-         className="chipsContainer"
-         style={{
-          display: 'flex',
-          justifyContent: 'start',
-          flexWrap: 'wrap',
-          alignItems: 'start',
-         }}
-        >
-         <p>Lockdown status: </p>{' '}
-         <div>
-          <span className="chip">
-           {countryData.lockdownInfo.lockdown}
-          </span>
-         </div>
-         <p>Tourists status: </p>{' '}
-         <div>
-          <span className="chip">
-           {' '}
-           {countryData.lockdownInfo.touristEntry}{' '}
-          </span>{' '}
-         </div>
-         <p>Event Info: </p>{' '}
-         <div>
-          <span className="chip">
-           {countryData.lockdownInfo.events}
-          </span>{' '}
-         </div>
-         <p>Tourist Attractions: </p>{' '}
-         <div>
-          <span className="chip">
-           {countryData.lockdownInfo.touristAttractions}
-          </span>{' '}
-         </div>
-        </div>
+        <Row gutter={16}>
+        <Col span={16}>
+            <p>Lockdown status: <Tag color="#55acee"> {countryData.lockdownInfo.lockdown} </Tag>{' '} </p> 
+         </Col>
+         <Col span={16}>
+            <p>Tourists status: <Tag color="#55acee">{countryData.lockdownInfo.touristEntry}{' '}</Tag> </p>
+         </Col>
+         <Col span={16}>
+            <p>Event Info:  <Tag color="#55acee"> {countryData.lockdownInfo.events} </Tag> </p>
+         </Col>
+
+         <Col span={16}>
+            <p>Tourist Attractions: <Tag className="chip" color="#55acee"> {countryData.lockdownInfo.touristAttractions}</Tag> 
+            </p>
+         </Col>
+         
+         
+        </Row>
         <p className="label">Details: </p>{' '}
         <div className="para">{countryData.lockdownInfo.details}</div>{' '}
         <br />
