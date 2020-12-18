@@ -35,48 +35,52 @@ const EachTestingLocation = (props) => {
 
 	const getAddress = () => {
 		if (hospitalData.physical_address) {
-			return (
-				<div>
-					<span className="sub-heading">Address:</span>
+			if (hospitalData.physical_address.length > 0) {
+				return (
+					<div>
+						<span className="sub-heading">Address:</span>
 
-					<span className="sub-info">
-						{hospitalData.physical_address[0].address_1}{' '}
-						{hospitalData.physical_address[0].city}{' '}
-						{hospitalData.physical_address[0].state_province}{' '}
-						{hospitalData.physical_address[0].postal_code}
-					</span>
-					<Button
-						href={`http://maps.google.com/?q=${
-							hospitalData.name +
-							' ' +
-							hospitalData.physical_address[0].address_1 +
-							' ' +
-							hospitalData.physical_address[0].city +
-							' ' +
-							hospitalData.physical_address[0].state_province
-						}`}
-						target="blank"
-						size={'small'}
-						style={{ margin: '-5px 0 10px 0' }}
-						className="view-map-btn"
-					>
-						View on map
-					</Button>
-				</div>
-			);
+						<span className="sub-info">
+							{hospitalData.physical_address[0].address_1}{' '}
+							{hospitalData.physical_address[0].city}{' '}
+							{hospitalData.physical_address[0].state_province}{' '}
+							{hospitalData.physical_address[0].postal_code}
+						</span>
+						<Button
+							href={`http://maps.google.com/?q=${
+								hospitalData.name +
+								' ' +
+								hospitalData.physical_address[0].address_1 +
+								' ' +
+								hospitalData.physical_address[0].city +
+								' ' +
+								hospitalData.physical_address[0].state_province
+							}`}
+							target="blank"
+							size={'small'}
+							style={{ margin: '-5px 0 10px 0' }}
+							className="view-map-btn"
+						>
+							View on map
+						</Button>
+					</div>
+				);
+			}
 		}
 	};
 
 	const getPhone = () => {
 		if (hospitalData.phones) {
-			return (
-				<>
-					<span className="sub-heading">Contact:</span>
-					<span className="sub-info">
-						{hospitalData.phones[0].number} ({hospitalData.phones[0].type})
-					</span>
-				</>
-			);
+			if (hospitalData.phones.length > 0) {
+				return (
+					<>
+						<span className="sub-heading">Contact:</span>
+						<span className="sub-info">
+							{hospitalData.phones[0].number} ({hospitalData.phones[0].type})
+						</span>
+					</>
+				);
+			}
 		}
 	};
 
@@ -93,9 +97,7 @@ const EachTestingLocation = (props) => {
 
 		if (hospitalData.regular_schedule) {
 			const schedule = hospitalData.regular_schedule;
-			if (hospitalData.regular_schedule.length === 0) {
-				return;
-			} else {
+			if (hospitalData.regular_schedule.length > 0) {
 				return (
 					<div>
 						<span className="sub-heading">Regular schedule:</span>

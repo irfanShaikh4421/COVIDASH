@@ -2,11 +2,8 @@ import React from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../CovidMap.css';
-import { Typography } from 'antd';
 
 const CovidMap = ({ countries }) => {
-	const { Title } = Typography;
-
 	const mapStyle = {
 		fillColor: 'white',
 		weight: 1,

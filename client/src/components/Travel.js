@@ -3,7 +3,8 @@ import countriesList from '../data/geoData.json';
 import countryIndexer from '../data/countries-iso2.json';
 import { LocationContext } from '../LocationContext';
 import axios from 'axios';
-import { Select, Tag, Row, Col } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Select, Typography, Card } from 'antd';
 
 //const headers = { Authorization: `Bearer stevens85452525` };
 const iso2Indexer = [
@@ -515,6 +516,7 @@ const Travel = () => {
 	const [error, setError] = useState(false);
 	const [countryData, setCountryData] = useState(null);
 	const { Option } = Select;
+	const { Title } = Typography;
 
 	const options = countriesList.map((k, i) => (
 		<Option key={i} value={k.value}>
@@ -560,15 +562,11 @@ const Travel = () => {
 		grabRegulation(country);
 	}, [country]);
 
-	if (error)
-		return (
-			<h1>
-				{error.name}: {error.message}
-			</h1>
-		);
+	if (error) return <span className="error-text">ERROR: {error}.</span>;
 
 	return (
 		<div>
+			<Title>Travel regulations</Title>
 			<label>
 				Select country&nbsp;
 				<Select
@@ -587,88 +585,44 @@ const Travel = () => {
 			</label>
 			{country === 'US' &&
 			locationsNotInGeoData.indexOf(location.countryCode) !== -1 ? (
-				<div>
-					<br />
+				<span className="symptom-header color-gray">
 					Travel Regulations for User's Preferred Country were not found,
 					defaulted to United States.
-					<br />
-				</div>
-			) : (
-				<br />
-			)}
-			<hr></hr>
-			<div className="centeredFlex">
-				<div className="travelContainer">
-					{loading ? <p>Loading</p> : null}
-					{!loading && countryData ? (
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'center',
-							}}
-						>
-							<div style={{ flex: '1 0 35%' }}>
-								<img
-									src={`https://flagcdn.com/h240/${country.toLowerCase()}.png`}
-									height="auto"
-									width="75%"
-									alt={`${countryData.name}'s Flag`}
-								/>
-							</div>
-							<div style={{ flex: '1 0 65%', textAlign: 'left' }}>
-								<h1 style={{ fontWeight: 350 }}>{countryData.name}</h1>{' '}
-								<br></br>
-								<Row gutter={16}>
-									<Col span={16}>
-										<p>
-											Lockdown status:{' '}
-											<Tag color="#55acee">
-												{' '}
-												{countryData.lockdownInfo.lockdown}{' '}
-											</Tag>{' '}
-										</p>
-									</Col>
-									<Col span={16}>
-										<p>
-											Tourists status:{' '}
-											<Tag color="#55acee">
-												{countryData.lockdownInfo.touristEntry}{' '}
-											</Tag>{' '}
-										</p>
-									</Col>
-									<Col span={16}>
-										<p>
-											Event Info:{' '}
-											<Tag color="#55acee">
-												{' '}
-												{countryData.lockdownInfo.events}{' '}
-											</Tag>{' '}
-										</p>
-									</Col>
-
-									<Col span={16}>
-										<p>
-											Tourist Attractions:{' '}
-											<Tag className="chip" color="#55acee">
-												{' '}
-												{countryData.lockdownInfo.touristAttractions}
-											</Tag>
-										</p>
-									</Col>
-								</Row>
-								<p className="label">Details: </p>{' '}
-								<div className="para">{countryData.lockdownInfo.details}</div>{' '}
-								<br />
-								<p className="label">Tourist Info: </p>{' '}
-								<div className="para">
-									{countryData.lockdownInfo.touristInfo}
-								</div>
-							</div>
-						</div>
-					) : null}
-				</div>
-			</div>
-			<br /> <br />
+				</span>
+			) : null}
+			{loading ? <LoadingOutlined className="loader block" /> : null}
+			{!loading && countryData ? (
+				<Card className="travel-card flex-column-center">
+					<span className="heading block">{countryData.name}</span>
+					<img
+						src={`https://flagcdn.com/h240/${country.toLowerCase()}.png`}
+						alt={`${countryData.name}'s Flag`}
+						className="country-flag"
+					/>
+					<span className="sub-heading">Lockdown status:</span>
+					<span className="sub-info-small">
+						{countryData.lockdownInfo.lockdown}
+					</span>
+					<span className="sub-heading">Tourists status:</span>
+					<span className="sub-info-small">
+						{countryData.lockdownInfo.touristEntry}
+					</span>
+					<span className="sub-heading">Event Info:</span>
+					<span className="sub-info-small">
+						{countryData.lockdownInfo.events}
+					</span>
+					<span className="sub-heading">Tourist Attractions:</span>
+					<span className="sub-info-small">
+						{countryData.lockdownInfo.touristAttractions}
+					</span>
+					<span className="sub-heading">Details:</span>
+					<span className="card-body">{countryData.lockdownInfo.details}</span>
+					<span className="sub-heading">Tourist Info:</span>
+					<span className="card-body">
+						{countryData.lockdownInfo.touristInfo}
+					</span>
+				</Card>
+			) : null}
 		</div>
 	);
 };
