@@ -1,14 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React /*, { useState, useContext }*/ from 'react';
 import '../App.css';
-import countries from '../data/countries-iso2.json';
+/* import countries from '../data/countries-iso2.json';
 import usStates from '../data/usStates.json';
 import app from 'firebase/app';
 import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
-const db = app.firestore();
+const db = app.firestore();*/
+import ChangeCountry from './ChangeUserCountry';
+import { Typography, Modal } from 'antd';
 
 function UserDetailsForm() {
-	const [country, setCountry] = useState('');
+    return (
+        <div>
+            <ChangeCountry />
+        </div>
+    );
+
+    /*	const [country, setCountry] = useState('');
 	// const [usersData, setUsersData] = useState([]);
 	let [state, setState] = useState('');
 	const { currentUser } = useContext(AuthContext);
@@ -82,14 +90,7 @@ function UserDetailsForm() {
 			</button>
 		</form>
 	);
-
-	return (
-		<div>
-			<h2>Account details</h2>
-			{form}
-			<br />
-		</div>
-	);
+*/
 }
 
 export default UserDetailsForm;

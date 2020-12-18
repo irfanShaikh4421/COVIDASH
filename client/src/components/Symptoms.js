@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Typography, Checkbox, Button, Card } from 'antd';
+import { EnvironmentOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
-const Symptoms = (props) => {
-    const [symptomsWeight, setSymptomsWeight] = useState({
+const Symptoms = () => {
+    const { Title, Text } = Typography;
+
+    const symptomsWeight = {
         fever: 0.15,
         cough: 0.15,
         soreThroat: 0.1,
@@ -9,7 +14,7 @@ const Symptoms = (props) => {
         headache: 0.07,
         vomit: 0.05,
         diarrhea: 0.05,
-    });
+    };
     const [symptoms, setSymptoms] = useState({
         fever: false,
         cough: false,
@@ -20,7 +25,7 @@ const Symptoms = (props) => {
         diarrhea: false,
     });
     const [result, setResult] = useState(null);
-    const [str, setStr] = useState('');
+    const [temp, setTemp] = useState('');
 
     function handleSymptomCalc() {
         let tmp = Object.keys(symptoms);
@@ -36,230 +41,144 @@ const Symptoms = (props) => {
     }
 
     function generatePrediction(res) {
-        let tmp = '';
-        if (res > 0.5) tmp = 'high';
-        else if (0.2 <= res) tmp = 'moderate';
-        else if (res < 0.2) tmp = 'low';
-
-        setStr(`You have ${tmp} chance of having Covid-19`);
+        if (res > 0.5) setTemp('high');
+        else if (0.2 <= res) setTemp('moderate');
+        else if (res < 0.2) setTemp('low');
     }
 
-    return (
-        <div className="centeredFlex">
-            <div className="travelContainer">
-                <h1 style={{ fontWeight: 350 }}> Symptoms Checklist</h1>
-                <br /> <br />
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="label">
-                        Fever :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="fever"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, fever: true })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="fever"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, fever: false })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Cough :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="cough"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, cough: true })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="cough"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, cough: false })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Sore Throat :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="soreThroat"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        soreThroat: true,
-                                    })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="soreThroat"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        soreThroat: false,
-                                    })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Loss Of Smell :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="lossOfSmell"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        lossOfSmell: true,
-                                    })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="lossOfSmell"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        lossOfSmell: false,
-                                    })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Headache :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="headache"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, headache: true })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="headache"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        headache: false,
-                                    })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Vomit :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="vomit"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, vomit: true })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="vomit"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, vomit: false })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
-                    <div className="label">
-                        Diarrhea :{' '}
-                        <label>
-                            <input
-                                type="radio"
-                                value={true}
-                                name="diarrhea"
-                                onChange={() =>
-                                    setSymptoms({ ...symptoms, diarrhea: true })
-                                }
-                            />{' '}
-                            Yes{' '}
-                        </label>{' '}
-                        :{' '}
-                        <label>
-                            {' '}
-                            <input
-                                type="radio"
-                                name="diarrhea"
-                                onChange={() =>
-                                    setSymptoms({
-                                        ...symptoms,
-                                        diarrhea: false,
-                                    })
-                                }
-                            />{' '}
-                            No{' '}
-                        </label>
-                    </div>
+    const titleColor = () => {
+        if (temp === 'high') {
+            return (
+                <Title level={2} className="color-red">
+                    {`You have ${temp} chances of having COVID-19`}
+                </Title>
+            );
+        } else if (temp === 'moderate') {
+            return (
+                <Title level={2} className="color-orange">
+                    {`You have ${temp} chances of having COVID-19`}
+                </Title>
+            );
+        } else {
+            return (
+                <Title level={2} className="color-yellow">
+                    {`You have ${temp} chances of having COVID-19`}
+                </Title>
+            );
+        }
+    };
 
-                    <div>
-                        <button onClick={() => handleSymptomCalc()}>
-                            Should I be worried ?
-                        </button>
-                    </div>
-                    <br />
-                    {result > 0 ? <p className="label">{str}</p> : null}
-                </form>
-            </div>
+    return (
+        <div className="align-left flex-column">
+            <Title>Self checker</Title>
+            <Text className="symptom-header color-gray">
+                Select the symptoms you have and click the button to check if
+                you are infected
+            </Text>
+            <form onSubmit={(e) => e.preventDefault()} className="flex-column">
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({ ...symptoms, fever: !symptoms.fever })
+                    }
+                    className="label"
+                >
+                    Fever
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({ ...symptoms, cough: !symptoms.cough })
+                    }
+                    className="label"
+                >
+                    Cough
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({
+                            ...symptoms,
+                            soreThroat: !symptoms.soreThroat,
+                        })
+                    }
+                    className="label"
+                >
+                    Sore throat
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({
+                            ...symptoms,
+                            lossOfSmell: !symptoms.lossOfSmell,
+                        })
+                    }
+                    className="label"
+                >
+                    Loss of smell
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({
+                            ...symptoms,
+                            headache: !symptoms.headache,
+                        })
+                    }
+                    className="label"
+                >
+                    Headache
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({ ...symptoms, vomit: !symptoms.vomit })
+                    }
+                    className="label"
+                >
+                    Vomitting
+                </Checkbox>
+                <Checkbox
+                    onChange={() =>
+                        setSymptoms({
+                            ...symptoms,
+                            diarrhea: !symptoms.diarrhea,
+                        })
+                    }
+                    className="label"
+                >
+                    Diarrhea
+                </Checkbox>
+                <Button
+                    type="primary"
+                    className="symptom-btn"
+                    onClick={() => handleSymptomCalc()}
+                >
+                    Am I infected?
+                </Button>
+                {result > 0 ? (
+                    <Card className="flex-column">
+                        {titleColor()}
+                        <Text>
+                            If symptoms increase, please quarantine yourself and
+                            get tested to know if you have COVID-19.
+                        </Text>
+                        <Link to="/testing" style={{ display: 'block' }}>
+                            <Button
+                                className="testing-btn"
+                                icon={<EnvironmentOutlined />}
+                            >
+                                Check testing locations
+                            </Button>
+                        </Link>
+                    </Card>
+                ) : result === null ? null : (
+                    <Card>
+                        <Title level={2} className="color-green">
+                            Congratulations! You are safe.
+                        </Title>
+                        <Text>
+                            Please wear a mask to keep yourself and others
+                            around you safe.
+                        </Text>
+                    </Card>
+                )}
+            </form>
         </div>
     );
 };

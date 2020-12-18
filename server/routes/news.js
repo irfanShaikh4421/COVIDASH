@@ -3,7 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const newsData = data.news;
 
-router.get('/news/:country', async (req, res) => {
+router.get('/:country', async (req, res) => {
     const country = req.params.country;
     let news;
     try {
