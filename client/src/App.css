@@ -136,6 +136,8 @@ button:focus {
 
 .chart {
 	justify-content: center;
+	width: 100%;
+	height: 280px;
 }
 
 #components-layout-demo-side .logo {
@@ -145,11 +147,11 @@ button:focus {
 }
 
 .site-layout .site-layout-background {
-	background: #fff;
+	background: #fcfcfc;
 }
 
 .logo > a {
-	color: white !important;
+	color: #fcfcfc !important;
 }
 
 .logo {
@@ -214,7 +216,7 @@ button:focus {
 }
 
 .ant-btn-primary {
-	color: #fff;
+	color: #fcfcfc;
 	background: #001529;
 	border-color: #001529;
 }
@@ -269,6 +271,14 @@ button:focus {
 
 .full-width {
 	width: 100%;
+}
+
+.responsive-chart {
+	box-sizing: border-box;
+	padding: 20px;
+	width: 100%;
+	height: 350px;
+	background-color: #fcfcfc;
 }
 
 .not-available {
@@ -343,10 +353,6 @@ button:focus {
 	font-weight: 600;
 	margin-bottom: 5px;
 	color: #001529 !important;
-}
-
-.top-margin {
-	margin-top: 40px;
 }
 
 .ant-menu-item-selected {
@@ -429,6 +435,10 @@ button:focus {
 
 .margin-top {
 	margin-top: 30px;
+}
+
+.big-margin-top {
+	margin-top: 60px;
 }
 
 .error-text {
