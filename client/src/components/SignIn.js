@@ -7,9 +7,12 @@ import {
 	doPasswordReset,
 } from '../firebase/FirebaseFunctions';
 import '../App.css';
+import { Typography, Form, Input, Button } from 'antd';
 
 function SignIn() {
 	const { currentUser } = useContext(AuthContext);
+
+	const { Title } = Typography;
 
 	const handleLogin = async (event) => {
 		event.preventDefault();
@@ -32,7 +35,7 @@ function SignIn() {
 			alert('Password reset email was sent.');
 		} else {
 			alert(
-				'Please enter an email address below before you click the forgot password link!'
+				'Please enter an email address in the form before you click the forgot password link.'
 			);
 		}
 	};
@@ -41,43 +44,40 @@ function SignIn() {
 		return <Redirect to="/" />;
 	}
 
+	const layout = {
+		labelCol: { span: 4 },
+		wrapperCol: { span: 24 },
+	};
+
 	return (
 		<div>
-			<h1>Log in</h1>
-			<form onSubmit={handleLogin}>
-				<div className="form-group">
-					<label>
-						Email:
-						<input
-							className="form-control"
-							name="email"
-							id="email"
-							type="email"
-							placeholder="Email"
-							required
-						/>
-					</label>
-				</div>
-				<div className="form-group">
-					<label>
-						Password:
-						<input
-							className="form-control"
-							name="password"
-							type="password"
-							placeholder="Password"
-							required
-						/>
-					</label>
-				</div>
-				<button type="submit">Log in</button>
-
-				<button className="forgotPassword" onClick={passwordReset}>
+			<Title>Log in</Title>
+			<Form {...layout} name="login" onFinish={handleLogin} layout={'vertical'}>
+				<Form.Item
+					label="Email"
+					name="email"
+					rules={[{ required: true, message: 'Please input your email.' }]}
+					placeholder="john@doe.com"
+				>
+					<Input id="email" className="form-label" />
+				</Form.Item>
+				<Form.Item
+					label="Password"
+					name="password"
+					id="password"
+					rules={[{ required: true, message: 'Please input your password.' }]}
+				>
+					<Input.Password />
+				</Form.Item>
+				<Button href="" className="forgot-pass" onClick={passwordReset}>
 					Forgot Password
-				</button>
-			</form>
-
-			<br />
+				</Button>
+				<Form.Item>
+					<Button type="primary" htmlType="submit" className="signup-btn">
+						Log in
+					</Button>
+				</Form.Item>
+			</Form>
 			<SocialSignIn />
 		</div>
 	);

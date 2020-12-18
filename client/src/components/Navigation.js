@@ -17,8 +17,8 @@ import {
 	HomeOutlined,
 	CheckCircleOutlined,
 	LoginOutlined,
-	LogoutOutlined,
 	PlusCircleOutlined,
+	EnvironmentOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -37,10 +37,10 @@ const Navigation = () => {
 						left: 0,
 					}}
 				>
-					<div className="logo">
-						<p>COVIDASH</p>
-					</div>{' '}
 					<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+						<Menu.Item key="1" className="logo">
+							<Link to="/">COVIDASH</Link>
+						</Menu.Item>
 						<Menu.Item key="1" icon={<HomeOutlined />}>
 							<Link to="/">Home</Link>
 						</Menu.Item>
@@ -56,7 +56,7 @@ const Navigation = () => {
 						<Menu.Item key="5" icon={<CheckCircleOutlined />}>
 							<Link to="/symptoms">Self checker</Link>
 						</Menu.Item>
-						<Menu.Item key="6" icon={<MedicineBoxOutlined />}>
+						<Menu.Item key="6" icon={<EnvironmentOutlined />}>
 							<Link to="/testing">Testing locations</Link>
 						</Menu.Item>
 						<Menu.Item key="7" icon={<BugOutlined />}>
@@ -94,10 +94,10 @@ const Navigation = () => {
 						left: 0,
 					}}
 				>
-					<div className="logo">
-						<p>COVIDASH</p>
-					</div>{' '}
 					<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+						<Menu.Item key="1" className="logo">
+							<Link to="/">COVIDASH</Link>
+						</Menu.Item>
 						<Menu.Item key="1" icon={<HomeOutlined />}>
 							<Link to="/">Home</Link>
 						</Menu.Item>
@@ -113,7 +113,7 @@ const Navigation = () => {
 						<Menu.Item key="5" icon={<CheckCircleOutlined />}>
 							<Link to="/symptoms">Self checker</Link>
 						</Menu.Item>
-						<Menu.Item key="6" icon={<MedicineBoxOutlined />}>
+						<Menu.Item key="6" icon={<EnvironmentOutlined />}>
 							<Link to="/testing">Testing locations</Link>
 						</Menu.Item>
 						<Menu.Item key="7" icon={<BugOutlined />}>
@@ -128,10 +128,10 @@ const Navigation = () => {
 						<Menu.Item key="10" icon={<AlertOutlined />}>
 							<Link to="/bed-utilization">Hospital capacity</Link>
 						</Menu.Item>
-						<Menu.Item key="11" icon={<PlusCircleOutlined />}>
+						<Menu.Item key="12" icon={<PlusCircleOutlined />}>
 							<Link to="/signup">Register</Link>
 						</Menu.Item>
-						<Menu.Item key="12" icon={<LoginOutlined />}>
+						<Menu.Item key="11" icon={<LoginOutlined />}>
 							<Link to="/login">Login</Link>
 						</Menu.Item>
 					</Menu>
