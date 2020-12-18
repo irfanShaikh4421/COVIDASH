@@ -1,47 +1,29 @@
-const express = require('express')
-const app = express()
-const { redisClient } = require('./utilities/redis')
-const cors = require('cors')
-const admin = require('firebase-admin')
-const { authenticate } = require('./config/firebase')
+const express = require('express');
+const app = express();
+const static = express.static(__dirname + '/public');
+const configRoutes = require('./routes');
+const fs = require('fs')
 
-// environment configs if any
-require('dotenv').config()
+const firebase = require('./utils/firebase')
+global.__basedir = __dirname;
 
-//default configs
-const config = require("./config/index")
-
-app.use(cors())
-app.use(express.json({ limit: "50kb" }))
-app.use(express.urlencoded({ extended : true }))
-app.use(express.static('./public'))
-
-
-// routes
-const test = require('./routes/test')
-const authRoute = require('./routes/authRoute')
-
-app.use("/test", test)
-app.use("/authRoute", authenticate ,authRoute)
-
-// auth thingy
-
-// global error handler
-
-app.use((err,req,res,next) => {
-
-    if( err.response && err.response.data.status)
-        err.status = err.response.data.status
-
-    if(!err.status)
-    {
-        err.status = 500
-        err.message = "INTERNAL SERVER ERROR"
-    }
-    console.error(err)
-    res.status(err.status).json(err.message)
-} )
-
-app.listen(config.port, () => {
-    console.log(`[BACKEND] Your server is running on ${config.port}`)
+// check imgs folder
+fs.exists('./imgs', (e) => {
+    if(!e)
+        fs.mkdirSync('./imgs')
 })
+
+app.use('/public', static);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
+const port = 5000;
+
+configRoutes(app);
+
+app.listen(port, () => {
+    console.log("We've now got a server!");
+    console.log(`Your routes will be running on http://localhost:${port}`);
+});
