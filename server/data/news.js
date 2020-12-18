@@ -203,7 +203,7 @@ async function getNews(country) {
                         if (news[i][member] == null) news[i][member] = '';
                     }
                     await client.hmsetAsync(news[i].url, news[i]);
-                    await client.expireAsync(news[i].url, 3600);
+                    await client.expireAsync(news[i].url, 43200);
                     await client.saddAsync('world', news[i].url);
                     await client.expireAsync('world', 3600);
                 }
