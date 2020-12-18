@@ -3,84 +3,84 @@ import SocialSignIn from './SocialSignIn';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
 import {
-    doSignInWithEmailAndPassword,
-    doPasswordReset,
+	doSignInWithEmailAndPassword,
+	doPasswordReset,
 } from '../firebase/FirebaseFunctions';
 import '../App.css';
+import { Typography, Form, Input, Button } from 'antd';
 
 function SignIn() {
-    const { currentUser } = useContext(AuthContext);
+	const { currentUser } = useContext(AuthContext);
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
+	const { Title } = Typography;
 
-        let { email, password } = event.target.elements;
+	const handleLogin = async (event) => {
+		event.preventDefault();
 
-        try {
-            await doSignInWithEmailAndPassword(email.value, password.value);
-        } catch (error) {
-            alert(error);
-        }
-    };
+		let { email, password } = event.target.elements;
 
-    const passwordReset = (event) => {
-        event.preventDefault();
+		try {
+			await doSignInWithEmailAndPassword(email.value, password.value);
+		} catch (error) {
+			alert(error);
+		}
+	};
 
-        let email = document.getElementById('email').value;
-        if (email) {
-            doPasswordReset(email);
-            alert('Password reset email was sent.');
-        } else {
-            alert(
-                'Please enter an email address below before you click the forgot password link!'
-            );
-        }
-    };
+	const passwordReset = (event) => {
+		event.preventDefault();
 
-    if (currentUser) {
-        return <Redirect to="/" />;
-    }
+		let email = document.getElementById('email').value;
+		if (email) {
+			doPasswordReset(email);
+			alert('Password reset email was sent.');
+		} else {
+			alert(
+				'Please enter an email address in the form before you click the forgot password link.'
+			);
+		}
+	};
 
-    return (
-        <div>
-            <h1>Log in</h1>
-            <form onSubmit={handleLogin}>
-                <div className="form-group">
-                    <label>
-                        Email:
-                        <input
-                            className="form-control"
-                            name="email"
-                            id="email"
-                            type="email"
-                            placeholder="Email"
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>
-                        Password:
-                        <input
-                            className="form-control"
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            required
-                        />
-                    </label>
-                </div>
-                <button type="submit">Log in</button>
+	if (currentUser) {
+		return <Redirect to="/" />;
+	}
 
-                <button className="forgotPassword" onClick={passwordReset}>
-                    Forgot Password
-                </button>
-            </form>
+	const layout = {
+		labelCol: { span: 4 },
+		wrapperCol: { span: 24 },
+	};
 
-            <br />
-            <SocialSignIn />
-        </div>
-    );
+	return (
+		<div>
+			<Title>Log in</Title>
+			<Form {...layout} name="login" onFinish={handleLogin} layout={'vertical'}>
+				<Form.Item
+					label="Email"
+					name="email"
+					rules={[{ required: true, message: 'Please input your email.' }]}
+					placeholder="john@doe.com"
+				>
+					<Input id="email" className="form-label" />
+				</Form.Item>
+				<Form.Item
+					label="Password"
+					name="password"
+					id="password"
+					rules={[{ required: true, message: 'Please input your password.' }]}
+				>
+					<Input.Password />
+				</Form.Item>
+				<Button href="" className="forgot-pass" onClick={passwordReset}>
+					Forgot Password
+				</Button>
+				<Form.Item>
+					<Button type="primary" htmlType="submit" className="signup-btn">
+						Log in
+					</Button>
+				</Form.Item>
+			</Form>
+			<SocialSignIn />
+		</div>
+	);
 }
 
 export default SignIn;
