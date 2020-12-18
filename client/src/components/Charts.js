@@ -416,17 +416,17 @@ function Charts() {
 			
 			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh"> TRACKING API</a></Text> <br/><br/>
 			<span className="sub-info">Top 5 countries (#cases)</span>
-			<label>
+			{/*<label>
 				Choose country:&nbsp;
 				<br />
-				<select defaultValue={countryIndex} onChange={handleChange}>
+				<Select defaultValue={countryIndex} onChange={handleChange}>
 					{allCountries.map((item, key) => (
-						<option key={key} value={item._id}>
+						<Option key={key} value={item._id}>
 							{item.country}
-						</option>
+						</Option>
 					))}
-				</select>
-			</label>
+				</Select>
+			</label>*/}
 			<br />
 			{renderBarChart}
 			<div className="big-margin-top">
