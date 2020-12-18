@@ -127,13 +127,13 @@ function Charts() {
 					</linearGradient>
 
 					<linearGradient id="recovered" x1="0" y1="0" x2="0" y2="1">
-						<stop offset="5%" stopColor="#0088FE" stopOpacity={0.8} />
-						<stop offset="95%" stopColor="#0088FE" stopOpacity={0} />
+						<stop offset="5%" stopColor="#00C49F" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="#00C49F" stopOpacity={0} />
 					</linearGradient>
 
 					<linearGradient id="active" x1="0" y1="0" x2="0" y2="1">
-						<stop offset="5%" stopColor="#00C49F" stopOpacity={0.8} />
-						<stop offset="95%" stopColor="#00C49F" stopOpacity={0} />
+						<stop offset="5%" stopColor="#0088FE" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="#0088FE" stopOpacity={0} />
 					</linearGradient>
 
 					<linearGradient id="deaths" x1="0" y1="0" x2="0" y2="1">
@@ -166,7 +166,7 @@ function Charts() {
 				<Area
 					type="monotone"
 					dataKey="recovered"
-					stroke="#0088FE"
+					stroke="#00C49F"
 					fillOpacity={1}
 					fill="url(#recovered)"
 				/>
@@ -174,7 +174,7 @@ function Charts() {
 				<Area
 					type="monotone"
 					dataKey="active"
-					stroke="#00C49F"
+					stroke="#0088FE"
 					fillOpacity={1}
 					fill="url(#active)"
 				/>
