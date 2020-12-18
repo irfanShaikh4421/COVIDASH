@@ -5,6 +5,8 @@ const configRoutes = require('./routes');
 
 const fs = require('fs');
 
+require('./utils/chat')
+
 const firebase = require('./utils/firebase');
 global.__basedir = __dirname;
 

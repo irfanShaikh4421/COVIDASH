@@ -19,6 +19,7 @@ import ChangePassword from './components/ChangePassword';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
+import Chat from './components/Chat'
 import MobileNavigation from './components/MobileNavigation';
 import { AuthProvider } from './firebase/Auth';
 import { LocationProvider } from './LocationContext';
@@ -76,6 +77,7 @@ function App() {
 											component={ChangePassword}
 										/>
 										<Route path="/login" component={SignIn} />
+										<Route exact path="/chat" component={Chat} />
 										<Route render={() => <h2>404: Invalid URL</h2>} />
 									</Switch>
 								</LocationProvider>
