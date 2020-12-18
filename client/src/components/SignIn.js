@@ -14,21 +14,17 @@ function SignIn() {
 
 	const { Title } = Typography;
 
-	const handleLogin = async (event) => {
-		event.preventDefault();
-
-		let { email, password } = event.target.elements;
+	const handleLogin = async (values) => {
+		let { email, password } = values;
 
 		try {
-			await doSignInWithEmailAndPassword(email.value, password.value);
+			await doSignInWithEmailAndPassword(email, password);
 		} catch (error) {
-			alert(error);
+			alert('The email and/or password do not match. Please try again.');
 		}
 	};
 
-	const passwordReset = (event) => {
-		event.preventDefault();
-
+	const passwordReset = (value) => {
 		let email = document.getElementById('email').value;
 		if (email) {
 			doPasswordReset(email);

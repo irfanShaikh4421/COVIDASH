@@ -31,9 +31,16 @@ const Vaccine = () => {
 		getData();
 	}, []);
 
-	if(error){
-        return (<h1>{error.name}: {error.message}</h1>);
-    }
+	if (error) {
+		return (
+			<>
+				<Title>Vaccines for COVID-19</Title>
+				<span className="sub-info">
+					{error.name}: {error.message}
+				</span>
+			</>
+		);
+	}
 
 	if (loading) {
 		return <LoadingOutlined className="loader" />;

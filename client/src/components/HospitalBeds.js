@@ -8,7 +8,58 @@ const axios = require('axios');
 
 const HospitalBeds = () => {
 	const [location] = useContext(LocationContext);
-	const stateIndex = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+	const stateIndex = [
+		'AL',
+		'AK',
+		'AZ',
+		'AR',
+		'CA',
+		'CO',
+		'CT',
+		'DE',
+		'FL',
+		'GA',
+		'HI',
+		'ID',
+		'IL',
+		'IN',
+		'IA',
+		'KS',
+		'KY',
+		'LA',
+		'ME',
+		'MD',
+		'MA',
+		'MI',
+		'MN',
+		'MS',
+		'MO',
+		'MT',
+		'NE',
+		'NV',
+		'NH',
+		'NJ',
+		'NM',
+		'NY',
+		'NC',
+		'ND',
+		'OH',
+		'OK',
+		'OR',
+		'PA',
+		'RI',
+		'SC',
+		'SD',
+		'TN',
+		'TX',
+		'UT',
+		'VT',
+		'VA',
+		'WA',
+		'WV',
+		'WI',
+		'WY',
+	];
 	const [state, setState] = useState(
 		usStates[stateIndex.indexOf(location.state)].name
 	);
@@ -25,10 +76,10 @@ const HospitalBeds = () => {
 			try {
 				setLoading(true);
 				//const url ='https://opendata.arcgis.com/datasets/1044bb19da8d4dbfb6a96eb1b4ebf629_0.geojson';
-			
+
 				const { data } = await axios.get(`/hospitals/${state}`);
 
-				if(data && data.source) {
+				if (data && data.source) {
 					setCurrentStateData([]);
 					for (let i = 0; i < data.source.features.length; i++) {
 						if (data.source.features[i].properties.STATE_NAME === state) {
@@ -38,7 +89,7 @@ const HospitalBeds = () => {
 							]);
 						}
 					}
-				} else{
+				} else {
 					setCurrentStateData(data);
 				}
 			} catch (e) {
@@ -66,7 +117,7 @@ const HospitalBeds = () => {
 							lg={8}
 							key={index}
 						>
-							<Card className="flex-column">
+							<Card hoverable className="flex-column news-card">
 								<span className="sub-info">{item.HOSPITAL_NAME}</span>
 								<span className="sub-heading">Bed utilization rate:</span>
 								<span className="sub-info">
@@ -118,17 +169,24 @@ const HospitalBeds = () => {
 							{state.name}
 						</Option>
 					))}
-					<Option key={50} value='District of Columbia'>
+					<Option key={50} value="District of Columbia">
 						District of Columbia
 					</Option>
-					<Option key={51} value='Puerto Rico'>
+					<Option key={51} value="Puerto Rico">
 						Puerto Rico
 					</Option>
 				</Select>
 			</label>
 			<div>
-				{error ? <h1>{error.name}: {error.message}</h1> :
-				loading ? <LoadingOutlined className="loader" /> : displayData()}
+				{error ? (
+					<span className="sub-info">
+						{error.name}: {error.message}
+					</span>
+				) : loading ? (
+					<LoadingOutlined className="loader" />
+				) : (
+					displayData()
+				)}
 			</div>
 		</div>
 	);

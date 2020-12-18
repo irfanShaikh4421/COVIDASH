@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
-//import SignOutButton from './SignOut';
 import '../App.css';
 
 import { Layout, Menu } from 'antd';

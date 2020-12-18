@@ -16,16 +16,6 @@ function SignUp() {
 		wrapperCol: { span: 24 },
 	};
 
-        /*try {
-            await doCreateUserWithEmailAndPassword(
-                email.value,
-                passwordOne.value,
-                displayName.value
-            );
-        } catch (error) {
-            alert(error);
-        }
-	};*/
 	const handleSignUp = async (values) => {
 		// console.log(values);
 		const { displayName, email, passwordOne, passwordTwo } = values;

@@ -2,31 +2,27 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../firebase/Auth';
 import { doChangePassword } from '../firebase/FirebaseFunctions';
 import '../App.css';
+import { Typography, Form, Input, Button } from 'antd';
 
 function ChangePassword() {
 	const { currentUser } = useContext(AuthContext);
 	const [pwMatch, setPwMatch] = useState('');
-	console.log(currentUser);
 
-	const submitForm = async (event) => {
-		event.preventDefault();
+	const { Title } = Typography;
 
-		const {
-			currentPassword,
-			newPasswordOne,
-			newPasswordTwo,
-		} = event.target.elements;
+	const submitForm = async (values) => {
+		const { currentPassword, newPasswordOne, newPasswordTwo } = values;
 
-		if (newPasswordOne.value !== newPasswordTwo.value) {
-			setPwMatch('New Passwords do not match, please try again');
+		if (newPasswordOne !== newPasswordTwo) {
+			setPwMatch('New passwords do not match, please try again');
 			return false;
 		}
 
 		try {
 			await doChangePassword(
 				currentUser.email,
-				currentPassword.value,
-				newPasswordOne.value
+				currentPassword,
+				newPasswordOne
 			);
 			alert('Password has been changed, you will now be logged out');
 		} catch (error) {
@@ -34,65 +30,62 @@ function ChangePassword() {
 		}
 	};
 
-    if (currentUser.providerData[0].providerId === 'password') {
-        return (
-            <div>
-                {pwMatch && <h4 className="error">{pwMatch}</h4>}
-                <h1>Change Password</h1>
-                <form onSubmit={submitForm}>
-                    <div className="form-group">
-                        <label>
-                            Current Password:
-                            <input
-                                className="form-control"
-                                name="currentPassword"
-                                id="currentPassword"
-                                type="password"
-                                placeholder="Current Password"
-                                required
-                            />
-                        </label>
-                    </div>
+	if (currentUser.providerData[0].providerId === 'password') {
+		return (
+			<div>
+				{pwMatch && <h4 className="error">{pwMatch}</h4>}
+				<Title>Change password</Title>
+				<Form name="login" onFinish={submitForm} layout={'vertical'}>
+					<Form.Item
+						label="Current password"
+						name="currentPassword"
+						id="currentPassword"
+						rules={[
+							{
+								required: true,
+								message: 'Please input your current password.',
+							},
+						]}
+					>
+						<Input.Password />
+					</Form.Item>
+					<Form.Item
+						label="New password"
+						name="newPasswordOne"
+						id="newPasswordOne"
+						rules={[
+							{ required: true, message: 'Please input your new password.' },
+						]}
+					>
+						<Input.Password />
+					</Form.Item>
+					<Form.Item
+						label="Confirm password"
+						name="newPasswordTwo"
+						id="newPasswordTwo"
+						rules={[
+							{ required: true, message: 'Please confirm your new password.' },
+						]}
+					>
+						<Input.Password />
+					</Form.Item>
 
-					<div className="form-group">
-						<label>
-							New Password:
-							<input
-								className="form-control"
-								name="newPasswordOne"
-								id="newPasswordOne"
-								type="password"
-								placeholder="Password"
-								required
-							/>
-						</label>
-					</div>
-					<div className="form-group">
-						<label>
-							Confirm New Password:
-							<input
-								className="form-control"
-								name="newPasswordTwo"
-								id="newPasswordTwo"
-								type="password"
-								placeholder="Confirm Password"
-								required
-							/>
-						</label>
-					</div>
-
-					<button type="submit">Change Password</button>
-				</form>
-				<br />
+					<Form.Item>
+						<Button type="primary" htmlType="submit">
+							Change password
+						</Button>
+					</Form.Item>
+				</Form>
 			</div>
 		);
 	} else {
 		return (
 			<div>
-				<h2>
-					You are signed in using a Social Media Provider, You cannot change
-					your password
-				</h2>
+				<Title>Change password</Title>
+				<span className="sub-info">
+					You are signed in using a Social Media Provider, you cannot change
+					your password.
+				</span>
 			</div>
 		);
 	}

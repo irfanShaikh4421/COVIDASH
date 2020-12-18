@@ -73,7 +73,6 @@ function UploadImage() {
 
 		setImg(data.img);
 
-		console.log(data);
 		setFile(data.img);
 		setURL(data.img);
 		await updateUserImage(uid, data.img);
@@ -94,27 +93,30 @@ function UploadImage() {
 
 	const imageForm = (
 		<div>
-			<form onSubmit={handleUpload}>
-				<img src={userData.imageUrl} alt="" width="200px" />
-				<br />
+			<form onSubmit={handleUpload} className="flex-column-center">
+				<img
+					src={
+						userData.imageUrl
+							? userData.imageUrl
+							: 'https://via.placeholder.com/400.jpg?text=Profile+Image'
+					}
+					alt="profile-picture"
+					className="profile-img"
+				/>
 				<input
 					type="file"
 					onChange={handleChange}
 					accept="image/jpeg, image/png, .jpeg, .jpg, .png"
+					className="image-input"
 				/>
-				<br />
-				<button disabled={!file}>Upload</button>
+				<button disabled={!file} className="upload-btn" type="submit">
+					Upload
+				</button>
 			</form>
 		</div>
 	);
 
-	return (
-		<div>
-			<h1>Upload profile picture</h1>
-			{imageForm}
-			<br />
-		</div>
-	);
+	return <div>{imageForm}</div>;
 }
 
 export default UploadImage;
