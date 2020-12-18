@@ -4,8 +4,8 @@ import { LocationContext } from '../LocationContext';
 import allCountries from '../data/countries.json';
 import '../App.css';
 import {
-    BarChart,
-    Bar,
+    //BarChart,
+    //Bar,
     PieChart,
     Pie,
     CartesianGrid,
@@ -16,14 +16,14 @@ import {
     Area,
     Sector,
     Cell,
-    Legend,
+    //Legend,
 } from 'recharts';
 
 function Charts() {
     //const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
     const [ location ] = useContext(LocationContext);
     const [chartArr, setChartArr] = useState([]);
-    const [countriesData, setData] = useState([]);
+    //const [countriesData, setData] = useState([]);
     //const [countryIndex, setIndex] = useState('0');
     const [state, setState] = useState({ activeIndex: 0 });
     //const [countriesData, setData] = useState([]);
@@ -183,12 +183,12 @@ function Charts() {
             {
                 name: 'Active',
                 value:
-                    chartArr[29].cases -
-                    chartArr[29].recovered -
-                    chartArr[29].deaths,
+                    chartArr[chartArr.length-1].cases -
+                    chartArr[chartArr.length-1].recovered -
+                    chartArr[chartArr.length-1].deaths,
             },
-            { name: 'Recovered', value: chartArr[29].recovered },
-            { name: 'Deaths', value: chartArr[29].deaths },
+            { name: 'Recovered', value: chartArr[chartArr.length-1].recovered },
+            { name: 'Deaths', value: chartArr[chartArr.length-1].deaths },
         ];
 
         const RADIAN = Math.PI / 180;
@@ -312,7 +312,7 @@ function Charts() {
             </PieChart>
         );
     }
-
+/*
     let renderBarChart;
     let countryObj = [];
 
@@ -394,14 +394,14 @@ function Charts() {
                 <Bar dataKey="deaths" stackId="a" fill="#E3242B" />
             </BarChart>
         );
-    }
+    }*/
 
     const handleChange = (e) => {
         setIndex(parseInt(e.target.value));
     };
 
     return (
-        <div className="chart chartDiv">
+        <div className="chart">
             <label>
                 Choose country:&nbsp;
                 <br />
@@ -414,10 +414,9 @@ function Charts() {
                 </select>
             </label>
             <br />
-            {renderBarChart}
+            {/*renderBarChart*/}
             <br />
-            {dataFound ? null : <div><br />No recent historical data found for this country. Displaying world data instead.<br /></div>}
-            <br /><br />
+            {dataFound ? null : <div><br />No recent historical data found for this country. Displaying world data instead.<br /><br /><br /></div>}
             {renderPieChart}
             <br />
             {renderAreaChart}
