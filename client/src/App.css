@@ -32,37 +32,12 @@ body {
 	color: #61dafb;
 }
 
-button.marvel {
-	cursor: pointer;
-}
-
-.marvel {
-	font-weight: bold;
-	background-color: #028090;
-	color: #fcfcfc;
-	font-size: 1rem;
-	padding: 0.4rem 0.8rem;
-	text-decoration: none !important;
-	margin: 20px 5px;
-	border: 2px solid transparent;
-	transition: all 100ms ease-in-out;
-}
-
 nav.navigation {
 	line-height: 2.5;
 }
 
 .navigation .marvel:hover {
 	border: 2px solid #fcfcfc;
-}
-
-.marvel:hover {
-	border: 4px solid #0f4557;
-}
-
-.tota11yLink {
-	/*used to make a link tota11y compliant*/
-	color: #0072ee !important;
 }
 
 table {
@@ -77,16 +52,6 @@ td {
 	border: 1px solid black;
 }
 
-.subtitle {
-	font-size: 15px;
-	margin-bottom: 16px;
-	color: #767676;
-}
-
-.titleOfSubtitle {
-	margin-bottom: 2px;
-}
-
 footer.casesTracking {
 	margin-bottom: 2%;
 	column-count: 2;
@@ -96,32 +61,6 @@ footer.casesTracking {
 	list-style-type: none;
 	text-align: left;
 	margin-left: 15%;
-}
-
-/** cool hover effect for Vaccine page */
-span.hoverCause span.hoverResult {
-	/** Soruce: w3 schools */
-	color: #fcfcfc;
-	background-color: #0f4557;
-	border-radius: 10px;
-
-	padding: 10px;
-	visibility: hidden;
-
-	position: absolute;
-}
-
-span.hoverCause:hover span.hoverResult {
-	visibility: visible;
-}
-
-.travelContainer {
-	background: #eaeaea;
-	border-radius: 1rem;
-	padding: 2rem 1rem;
-	width: 65vw;
-	text-align: center;
-	flex: shrink;
 }
 
 .label {
@@ -281,8 +220,13 @@ button:focus {
 }
 
 .news-card {
-	/* margin-bottom: 30px; */
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.travel-card {
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	margin-top: 20px;
+	padding: 10px;
 }
 
 .card-link {
@@ -355,6 +299,11 @@ button:focus {
 	color: #6f7689;
 	font-size: 0.8rem;
 	margin: 15px 0 2px 0;
+}
+
+.heading {
+	font-weight: 700;
+	font-size: 1.5rem;
 }
 
 .sub-info {
@@ -478,6 +427,26 @@ button:focus {
 	margin-bottom: 30px;
 }
 
+.margin-top {
+	margin-top: 30px;
+}
+
+.error-text {
+	font-size: 0.9rem;
+	margin: 20px 0;
+	color: #ba1b1d !important;
+}
+
+.country-flag {
+	max-width: 30%;
+	align-self: center;
+	margin: 20px 0;
+}
+
+.block {
+	display: block;
+}
+
 /* COLORS */
 
 .color-green {
@@ -485,11 +454,11 @@ button:focus {
 }
 
 .color-red {
-	color: #a93765 !important;
+	color: #ba1b1d !important;
 }
 
 .color-orange {
-	color: #ff7f51 !important;
+	color: #f76819 !important;
 }
 
 .color-yellow {
@@ -505,7 +474,7 @@ button:focus {
 }
 
 .color-gray {
-	color: #6f7689 !important;
+	color: #6d7488 !important;
 }
 
 /* Media for mobile */
