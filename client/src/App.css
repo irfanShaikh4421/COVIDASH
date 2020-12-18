@@ -469,6 +469,15 @@ button:focus {
 	margin: 10px 0;
 }
 
+.card-body > ol > li {
+	font-size: 0.9rem;
+	margin: 10px 0;
+}
+
+.margin-bottom {
+	margin-bottom: 30px;
+}
+
 /* COLORS */
 
 .color-green {
