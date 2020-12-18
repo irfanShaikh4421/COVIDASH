@@ -7,10 +7,6 @@ body {
 	color: #001529;
 }
 
-/* .App {
-	text-align: center;
-} */
-
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;
@@ -184,6 +180,19 @@ button:focus {
 .error {
 	font-weight: bold;
 	color: red !important;
+}
+
+.forgotPassword {
+	background: none !important;
+	border: none !important;
+	text-decoration: underline;
+	margin-left: 5px;
+	color: #069;
+}
+
+.forgotPassword:hover {
+	text-decoration: none;
+	color: red;
 }
 
 .chart {
@@ -437,11 +446,13 @@ button:focus {
 }
 
 .forgot-pass {
-	margin-bottom: 20px;
+	padding: 0px !important;
+	margin-top: 20px;
 }
 
 .profile-img {
 	border-radius: 100px;
+	width: 100px;
 }
 
 .btn-right-margin {
@@ -451,6 +462,7 @@ button:focus {
 
 .image-input {
 	margin: 20px 0;
+	padding-left: 15%;
 }
 
 .upload-btn {
