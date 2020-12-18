@@ -200,3 +200,7 @@ span.hoverCause:hover span.hoverResult {
 .chart {
 	justify-content: center;
 }
+
+.chartDiv {
+	margin-left: 15%;
+}

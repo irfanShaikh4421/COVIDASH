@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { LocationContext } from '../LocationContext';
+import allCountries from '../data/countries.json';
 import '../App.css';
 import {
     BarChart,
@@ -18,49 +20,72 @@ import {
 } from 'recharts';
 
 function Charts() {
+    //const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
+    const [ location ] = useContext(LocationContext);
     const [chartArr, setChartArr] = useState([]);
     const [countriesData, setData] = useState([]);
-    const [countryIndex, setIndex] = useState('0');
+    //const [countryIndex, setIndex] = useState('0');
     const [state, setState] = useState({ activeIndex: 0 });
+    //const [countriesData, setData] = useState([]);
+    const [countryIndex, setIndex] = useState(location.countryCode);
+    const [ dataFound, setDataFound ] = useState(true);
 
     useEffect(() => {
-        async function getData() {
-            const url = 'https://disease.sh/v3/covid-19/historical';
+        async function getData(countryNumber) {
+            //const url = 'https://disease.sh/v3/covid-19/historical';
+            const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
+            try{
+                const { data } = await axios.get(url);
+                console.log(data);
+                //setData(data);
+                if(data && data.message) throw EvalError("No recent historical data found for this country. Displaying world data instead.");
+                
+                let keys, casesValues, deathsValues, recoveredValues;
+                if(countryNumber !== 'all'){
+                    keys = Object.keys(data.timeline.cases);
+                    casesValues = Object.values(
+                        data.timeline.cases
+                    );
+                    deathsValues = Object.values(
+                        data.timeline.deaths
+                    );
+                    recoveredValues = Object.values(
+                        data.timeline.recovered
+                    );
+                }else{//world
+                    keys = Object.keys(data.cases);
+                    casesValues = Object.values(data.cases);
+                    deathsValues = Object.values(data.deaths);
+                    recoveredValues = Object.values(data.recovered);
+                }
+                
+                const chartArr = [];
 
-            const { data } = await axios.get(url);
+                for (let i = 0; i < keys.length; i++) {
+                    const chartObj = {
+                        date: keys[i],
+                        cases: casesValues[i],
+                        deaths: deathsValues[i],
+                        recovered: recoveredValues[i],
+                        active: casesValues[i] - recoveredValues[i] - deathsValues[i],
+                    };
+                    chartArr.push(chartObj);
+                }
 
-            setData(data);
-
-            const keys = Object.keys(data[countryIndex].timeline.cases);
-            const casesValues = Object.values(
-                data[countryIndex].timeline.cases
-            );
-            const deathsValues = Object.values(
-                data[countryIndex].timeline.deaths
-            );
-            const recoveredValues = Object.values(
-                data[countryIndex].timeline.recovered
-            );
-
-            const chartDataArr = [];
-
-            for (let i = 0; i < keys.length; i++) {
-                const chartObj = {
-                    date: keys[i],
-                    cases: casesValues[i],
-                    deaths: deathsValues[i],
-                    recovered: recoveredValues[i],
-                    active:
-                        casesValues[i] - recoveredValues[i] - deathsValues[i],
-                };
-
-                chartDataArr.push(chartObj);
+                setChartArr(chartArr);
+            }catch(e) {
+                console.log(e);
+                setDataFound(false);
+                getData('all');
             }
-
-            setChartArr(chartDataArr);
         }
-
-        getData();
+        
+        if(countryIndex) {
+            setDataFound(true);
+            getData(countryIndex);
+        } else {
+            getData('all');
+        }
     }, [countryIndex]);
 
     const DataFormater = (number) => {
@@ -105,11 +130,14 @@ function Charts() {
             </defs>
 
             <XAxis dataKey="date" />
-            <YAxis tickFormatter={DataFormater} />
+            <YAxis tickFormatter={DataFormater/*width={100}*/} />
             <CartesianGrid strokeDasharray="3 3" />
 
             <Tooltip
-                formatter={(value) => new Intl.NumberFormat('en').format(value)}
+                formatter={(value) => new Intl.NumberFormat('en').format(value)
+                /*(value) => {
+                    return value.toString().replace(regexCommaNumbers, ',');
+                }*/}
             />
 
             <Area
@@ -369,18 +397,18 @@ function Charts() {
     }
 
     const handleChange = (e) => {
-        if (e.target.value) setIndex(e.target.value);
+        setIndex(parseInt(e.target.value));
     };
 
     return (
-        <div className="chart">
+        <div className="chart chartDiv">
             <label>
                 Choose country:&nbsp;
                 <br />
-                <select onChange={handleChange}>
-                    {countriesData.map((item, key) => (
-                        <option key={key} value={key}>
-                            {item.country} {item.province}
+                <select defaultValue={countryIndex} onChange={handleChange}>
+                    {allCountries.map((item, key) => (
+                        <option key={key} value={item._id}>
+                            {item.country}
                         </option>
                     ))}
                 </select>
@@ -388,6 +416,8 @@ function Charts() {
             <br />
             {renderBarChart}
             <br />
+            {dataFound ? null : <div><br />No recent historical data found for this country. Displaying world data instead.<br /></div>}
+            <br /><br />
             {renderPieChart}
             <br />
             {renderAreaChart}
