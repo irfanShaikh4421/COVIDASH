@@ -27,128 +27,66 @@ import { Layout } from 'antd';
 const { Content } = Layout;
 
 function App() {
-    return (
-        <AuthProvider>
-            <Router>
-                <div className="App">
-                    <header>
-                        <Navigation />
-                        <div className="mobile-nav">
-                            <MobileNavigation />
-                        </div>
-                    </header>
-                    <Layout className="site-layout">
-                        <Content className="main-content">
-                            <div className="App-body">
-                                <LocationProvider>
-                                    <Switch>
-                                        <Route
-                                            exact
-                                            path="/"
-                                            component={Statistics}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/statistics"
-                                            component={Statistics}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/charts"
-                                            component={Charts}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/news"
-                                            component={News}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/map"
-                                            component={OutBreak}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/symptoms"
-                                            component={Symptoms}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/testing"
-                                            component={TestingLocations}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/testing/:state/:orgID"
-                                            component={EachTestingLocation}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/travel"
-                                            component={Travel}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/vaccine"
-                                            component={Vaccine}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/bed-utilization"
-                                            component={BedUtilization}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/guidelines"
-                                            component={Guidelines}
-                                        />
-                                        <PrivateRoute
-                                            exact
-                                            path="/upload-image"
-                                            component={UploadImage}
-                                        />
-                                        <PrivateRoute
-                                            exact
-                                            path="/account"
-                                            component={Account}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/signin"
-                                            component={SignIn}
-                                        />
-                                        <Route
-                                            exact
-                                            path="/signup"
-                                            component={SignUp}
-                                        />
-                                        <PrivateRoute
-                                            exact
-                                            path="/change-password"
-                                            component={ChangePassword}
-                                        />
-                                        <Route
-                                            path="/login"
-                                            component={SignIn}
-                                        />
-                                        <Route
-                                            path="/signup"
-                                            component={SignUp}
-                                        />
-                                        <Route
-                                            render={() => (
-                                                <h2>404: Invalid URL</h2>
-                                            )}
-                                        />
-                                    </Switch>
-                                </LocationProvider>
-                            </div>
-                        </Content>
-                    </Layout>
-                </div>
-            </Router>
-        </AuthProvider>
-    );
+	return (
+		<AuthProvider>
+			<Router>
+				<div className="App">
+					<header>
+						<Navigation />
+						<div className="mobile-nav">
+							<MobileNavigation />
+						</div>
+					</header>
+					<Layout className="site-layout">
+						<Content className="main-content">
+							<div className="App-body">
+								<LocationProvider>
+									<Switch>
+										<Route exact path="/" component={Statistics} />
+										<Route exact path="/statistics" component={Statistics} />
+										<Route exact path="/charts" component={Charts} />
+										<Route exact path="/news" component={News} />
+										<Route exact path="/map" component={OutBreak} />
+										<Route exact path="/symptoms" component={Symptoms} />
+										<Route exact path="/testing" component={TestingLocations} />
+										<Route
+											exact
+											path="/testing/:state/:orgID"
+											component={EachTestingLocation}
+										/>
+										<Route exact path="/travel" component={Travel} />
+										<Route exact path="/vaccine" component={Vaccine} />
+										<Route
+											exact
+											path="/bed-utilization"
+											component={BedUtilization}
+										/>
+										<Route exact path="/guidelines" component={Guidelines} />
+										<PrivateRoute
+											exact
+											path="/upload-image"
+											component={UploadImage}
+										/>
+										<PrivateRoute exact path="/account" component={Account} />
+										<Route exact path="/signin" component={SignIn} />
+										<Route exact path="/signup" component={SignUp} />
+										<PrivateRoute
+											exact
+											path="/change-password"
+											component={ChangePassword}
+										/>
+										<Route path="/login" component={SignIn} />
+										<Route path="/signup" component={SignUp} />
+										<Route render={() => <h2>404: Invalid URL</h2>} />
+									</Switch>
+								</LocationProvider>
+							</div>
+						</Content>
+					</Layout>
+				</div>
+			</Router>
+		</AuthProvider>
+	);
 }
 
 export default App;
