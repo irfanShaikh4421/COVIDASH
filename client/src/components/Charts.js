@@ -21,8 +21,6 @@ import {
 } from 'recharts';
 import { Select, Typography } from 'antd';
 
-import { Typography } from 'antd'
-
 const { Text } = Typography
 
 function Charts() {
@@ -414,9 +412,10 @@ function Charts() {
 
 	return (
 		<div className="chart">
-<<<<<<< HEAD
+			<Title>Charts</Title>
+			
 			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh"> TRACKING API</a></Text> <br/><br/>
-
+			<span className="sub-info">Top 5 countries (#cases)</span>
 			<label>
 				Choose country:&nbsp;
 				<br />
@@ -429,10 +428,6 @@ function Charts() {
 				</select>
 			</label>
 			<br />
-=======
-			<Title>Charts</Title>
-			<span className="sub-info">Top 5 countries (#cases)</span>
->>>>>>> cb24bad77dcc2a28aed0d84d08f26a42eae74ff8
 			{renderBarChart}
 			<div className="big-margin-top">
 				<label>
