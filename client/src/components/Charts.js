@@ -4,8 +4,8 @@ import { LocationContext } from '../LocationContext';
 import allCountries from '../data/countries.json';
 import '../App.css';
 import {
-    //BarChart,
-    //Bar,
+    BarChart,
+    Bar,
     PieChart,
     Pie,
     CartesianGrid,
@@ -16,27 +16,34 @@ import {
     Area,
     Sector,
     Cell,
-    //Legend,
+    Legend,
 } from 'recharts';
 
 function Charts() {
-    //const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
     const [ location ] = useContext(LocationContext);
     const [chartArr, setChartArr] = useState([]);
-    //const [countriesData, setData] = useState([]);
-    //const [countryIndex, setIndex] = useState('0');
+    const [countriesData, setData] = useState([]);//for bar chart
     const [state, setState] = useState({ activeIndex: 0 });
-    //const [countriesData, setData] = useState([]);
     const [countryIndex, setIndex] = useState(location.countryCode);
     const [ dataFound, setDataFound ] = useState(true);
 
     useEffect(() => {
+        async function getBarData() {
+            console.log("Bar chart useEffect fired");
+            const barUrl = 'https://disease.sh/v3/covid-19/historical?lastdays=1';
+            const { data: allCountries } = await axios.get(barUrl);
+            setData(allCountries);
+        }
+        getBarData();
+    }, []);//bar data chart (only fires on initial load, to reduce query time)
+
+    useEffect(() => {
         async function getData(countryNumber) {
-            //const url = 'https://disease.sh/v3/covid-19/historical';
-            const url = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
+            const otherUrl = `https://disease.sh/v3/covid-19/historical/${countryNumber}?lastdays=all`;
+
             try{
-                const { data } = await axios.get(url);
-                console.log(data);
+                console.log(`Pie and Area Charts useEffect fired for country #${countryNumber}.`);
+                const { data } = await axios.get(otherUrl);
                 //setData(data);
                 if(data && data.message) throw EvalError("No recent historical data found for this country. Displaying world data instead.");
                 
@@ -312,7 +319,7 @@ function Charts() {
             </PieChart>
         );
     }
-/*
+
     let renderBarChart;
     let countryObj = [];
 
@@ -326,9 +333,9 @@ function Charts() {
             let country = countriesData[i].country;
 
             countryObj = {
-                cases: cases[29],
-                recovered: recovered[29],
-                deaths: deaths[29],
+                cases: cases[0],
+                recovered: recovered[0],
+                deaths: deaths[0],
                 country: country,
             };
 
@@ -394,7 +401,7 @@ function Charts() {
                 <Bar dataKey="deaths" stackId="a" fill="#E3242B" />
             </BarChart>
         );
-    }*/
+    }
 
     const handleChange = (e) => {
         setIndex(parseInt(e.target.value));
@@ -414,7 +421,7 @@ function Charts() {
                 </select>
             </label>
             <br />
-            {/*renderBarChart*/}
+            {renderBarChart}
             <br />
             {dataFound ? null : <div><br />No recent historical data found for this country. Displaying world data instead.<br /><br /><br /></div>}
             {renderPieChart}
