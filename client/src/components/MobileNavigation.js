@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
 import '../App.css';
-import { doSignOut } from '../firebase/FirebaseFunctions';
 
 import { Drawer, Button, Menu } from 'antd';
 
@@ -18,7 +17,6 @@ import {
 	HomeOutlined,
 	CheckCircleOutlined,
 	LoginOutlined,
-	LogoutOutlined,
 	PlusCircleOutlined,
 	MenuOutlined,
 	EnvironmentOutlined,
@@ -34,11 +32,6 @@ const MobileNavigation = () => {
 	};
 
 	const onClose = () => {
-		setVisible(false);
-	};
-
-	const signOutCloseDrawer = () => {
-		doSignOut();
 		setVisible(false);
 	};
 
@@ -99,9 +92,6 @@ const MobileNavigation = () => {
 					<Link to="/account" onClick={onClose}>
 						Account
 					</Link>
-				</Menu.Item>
-				<Menu.Item key="12" icon={<LogoutOutlined />}>
-					<span onClick={signOutCloseDrawer}>Sign out</span>
 				</Menu.Item>
 			</Menu>
 		);
