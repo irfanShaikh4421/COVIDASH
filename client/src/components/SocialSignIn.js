@@ -1,6 +1,8 @@
 import React from 'react';
 import { doSocialSignIn } from '../firebase/FirebaseFunctions';
 import '../App.css';
+import { Button } from 'antd';
+import { GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
 
 const SocialSignIn = () => {
     const socialSignOn = async (provider) => {
@@ -13,16 +15,22 @@ const SocialSignIn = () => {
 
     return (
         <div>
-            <img
+            <Button
                 onClick={() => socialSignOn('google')}
                 alt="google sign in"
-                src="/imgs/btn_google_signin.png"
-            />
-            <img
+                icon={<GoogleOutlined />}
+                className="social-signup-btn"
+            >
+                Sign up with Google
+            </Button>
+            <Button
                 onClick={() => socialSignOn('facebook')}
                 alt="facebook sign in"
-                src="/imgs/facebook_signin.png"
-            />
+                icon={<FacebookOutlined />}
+                className="social-signup-btn"
+            >
+                Sign up with Facebook
+            </Button>
         </div>
     );
 };

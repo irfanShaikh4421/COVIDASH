@@ -1,13 +1,14 @@
 import React from 'react';
 import { doSignOut } from '../firebase/FirebaseFunctions';
 import '../App.css';
+import { Button } from 'antd';
 
 const SignOutButton = () => {
-	return (
-		<button onClick={doSignOut} className="marvel">
-			Sign out
-		</button>
-	);
+    return (
+        <Button onClick={doSignOut} className="btn-right-margin">
+            Sign out
+        </Button>
+    );
 };
 
 export default SignOutButton;
