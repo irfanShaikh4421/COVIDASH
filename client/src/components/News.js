@@ -6,6 +6,7 @@ import '../App.css';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Select, Card, Row, Col, Typography, Image, Empty } from 'antd';
 
+
 const iso2Indexer = [
 	4,
 	248,
@@ -267,7 +268,7 @@ const News = () => {
 	const [error, setError] = useState(undefined);
 
 	const { Option } = Select;
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 
 	function findCountry(countryId) {
 		//countryID should be passed as location context.countryCode
@@ -328,6 +329,7 @@ const News = () => {
 	return (
 		<div>
 			<Title>News</Title>
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://newsapi.org/"> NEWS API</a></Text> <br/><br/>
 			<label>
 				Select country: &nbsp;&nbsp;
 				<Select

@@ -67,7 +67,7 @@ const TestingLocations = () => {
 	);
 
 	const { Option } = Select;
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 
 	const [noData, setNoData] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -150,6 +150,9 @@ const TestingLocations = () => {
 		return (
 			<div className="full-width">
 				<Title>Testing locations</Title>
+				<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://documenter.getpostman.com/view/8854915/SzS7PR3t?version=latest"> TESTING API</a></Text> <br/><br/>
+			
+				
 				<label>
 					Select state:&nbsp;
 					<Select

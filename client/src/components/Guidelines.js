@@ -2,11 +2,12 @@ import React from 'react';
 import { Typography, Card } from 'antd';
 
 const Guidelines = () => {
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 
 	return (
 		<div>
 			<Title>Things to know about the COVID-19</Title>
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/need-to-know.html"> GUIDELINES</a></Text> <br/><br/>
 			<Card className="news-card margin-bottom">
 				<div className="card-content">
 					<span className="card-title">
@@ -180,13 +181,7 @@ const Guidelines = () => {
 					</span>
 				</div>
 			</Card>
-			<a
-				href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/need-to-know.html"
-				target="blank"
-				rel="noopener noreferrer"
-			>
-				Visit source
-			</a>
+			
 		</div>
 	);
 };

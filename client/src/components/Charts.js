@@ -19,6 +19,10 @@ import {
 	Legend,
 } from 'recharts';
 
+import { Typography } from 'antd'
+
+const { Text } = Typography
+
 function Charts() {
 	const [location] = useContext(LocationContext);
 	const [chartArr, setChartArr] = useState([]);
@@ -403,6 +407,8 @@ function Charts() {
 
 	return (
 		<div className="chart">
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh"> TRACKING API</a></Text> <br/><br/>
+
 			<label>
 				Choose country:&nbsp;
 				<br />

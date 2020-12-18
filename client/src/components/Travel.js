@@ -516,7 +516,7 @@ const Travel = () => {
 	const [error, setError] = useState(false);
 	const [countryData, setCountryData] = useState(null);
 	const { Option } = Select;
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 
 	const options = countriesList.map((k, i) => (
 		<Option key={i} value={k.value}>
@@ -567,6 +567,8 @@ const Travel = () => {
 	return (
 		<div>
 			<Title>Travel regulations</Title>
+            <Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://www.notion.so/Covid-19-travel-restrictions-and-lockdown-measures-API-fc88674524014137aaae96a11ece0040"> TRAVEL REGULATION API</a></Text> <br/><br/>
+
 			<label>
 				Select country&nbsp;
 				<Select

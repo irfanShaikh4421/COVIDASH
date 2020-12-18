@@ -22,6 +22,9 @@ const OutBreak = () => {
 	return (
 		<div className="full-width flex-column">
 			<Title>Outbreak map</Title>
+			
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://corona.lmao.ninja/v2/countries"> API</a></Text> <br/><br/>
+
 			<Text className="symptom-header">
 				Click on each country to see the statistics
 			</Text>

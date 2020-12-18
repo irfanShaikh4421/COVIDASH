@@ -9,7 +9,7 @@ const Vaccine = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(undefined);
 
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 	const { Panel } = Collapse;
 
 	useEffect(() => {
@@ -49,6 +49,8 @@ const Vaccine = () => {
 	return (
 		<div>
 			<Title>Vaccines for COVID-19</Title>
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh/docs/#/COVID-19%3A%20Vaccine"> VACCINE TYPE</a></Text> <br/><br/>
+			
 			<Row gutter={[40, 30]}>
 				{vaccineData.map((item, index) => (
 					<Col

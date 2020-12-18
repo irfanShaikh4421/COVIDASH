@@ -66,7 +66,7 @@ const HospitalBeds = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
 	const { Option } = Select;
-	const { Title } = Typography;
+	const { Title, Text } = Typography;
 
 	const [currentStateData, setCurrentStateData] = useState([]);
 
@@ -151,6 +151,8 @@ const HospitalBeds = () => {
 	return (
 		<div className="flex-column full-width">
 			<Title>Hospital's bed utilization</Title>
+			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://opendata.arcgis.com"> HOSPITAL BED API</a></Text> <br/><br/>
+
 			<label>
 				Select state:&nbsp;
 				<Select
