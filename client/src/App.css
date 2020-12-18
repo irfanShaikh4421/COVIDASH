@@ -186,19 +186,6 @@ button:focus {
 	color: red !important;
 }
 
-.forgotPassword {
-	background: none !important;
-	border: none !important;
-	text-decoration: underline;
-	margin-left: 5px;
-	color: #069;
-}
-
-.forgotPassword:hover {
-	text-decoration: none;
-	color: red;
-}
-
 .chart {
 	justify-content: center;
 }
@@ -450,8 +437,7 @@ button:focus {
 }
 
 .forgot-pass {
-	padding: 0px !important;
-	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .profile-img {
