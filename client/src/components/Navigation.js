@@ -44,7 +44,7 @@ const Navigation = () => {
 							<Link to="/">Home</Link>
 						</Menu.Item>
 						<Menu.Item key="2" icon={<PieChartOutlined />}>
-							<Link to="/charts">Chart</Link>
+							<Link to="/charts">Charts</Link>
 						</Menu.Item>
 						<Menu.Item key="3" icon={<MedicineBoxOutlined />}>
 							<Link to="/news">News</Link>
@@ -101,7 +101,7 @@ const Navigation = () => {
 							<Link to="/">Home</Link>
 						</Menu.Item>
 						<Menu.Item key="2" icon={<PieChartOutlined />}>
-							<Link to="/charts">Chart</Link>
+							<Link to="/charts">Charts</Link>
 						</Menu.Item>
 						<Menu.Item key="3" icon={<MedicineBoxOutlined />}>
 							<Link to="/news">News</Link>

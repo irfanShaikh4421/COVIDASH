@@ -17,7 +17,9 @@ import {
 	Sector,
 	Cell,
 	Legend,
+	ResponsiveContainer,
 } from 'recharts';
+import { Select, Typography } from 'antd';
 
 function Charts() {
 	const [location] = useContext(LocationContext);
@@ -26,6 +28,9 @@ function Charts() {
 	const [state, setState] = useState({ activeIndex: 0 });
 	const [countryIndex, setIndex] = useState(location.countryCode);
 	const [dataFound, setDataFound] = useState(true);
+
+	const { Option } = Select;
+	const { Title } = Typography;
 
 	useEffect(() => {
 		async function getBarData() {
@@ -108,79 +113,79 @@ function Charts() {
 	};
 
 	const renderAreaChart = (
-		<AreaChart
-			width={800}
-			height={280}
-			data={chartArr}
-			margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-		>
-			<defs>
-				<linearGradient id="cases" x1="0" y1="0" x2="0" y2="1">
-					<stop offset="5%" stopColor="orange" stopOpacity={0.8} />
-					<stop offset="95%" stopColor="orange" stopOpacity={0} />
-				</linearGradient>
+		<ResponsiveContainer className="responsive-chart">
+			<AreaChart
+				data={chartArr}
+				margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+			>
+				<defs>
+					<linearGradient id="cases" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="5%" stopColor="orange" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="orange" stopOpacity={0} />
+					</linearGradient>
 
-				<linearGradient id="recovered" x1="0" y1="0" x2="0" y2="1">
-					<stop offset="5%" stopColor="#0088FE" stopOpacity={0.8} />
-					<stop offset="95%" stopColor="#0088FE" stopOpacity={0} />
-				</linearGradient>
+					<linearGradient id="recovered" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="5%" stopColor="#0088FE" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="#0088FE" stopOpacity={0} />
+					</linearGradient>
 
-				<linearGradient id="active" x1="0" y1="0" x2="0" y2="1">
-					<stop offset="5%" stopColor="#00C49F" stopOpacity={0.8} />
-					<stop offset="95%" stopColor="#00C49F" stopOpacity={0} />
-				</linearGradient>
+					<linearGradient id="active" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="5%" stopColor="#00C49F" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="#00C49F" stopOpacity={0} />
+					</linearGradient>
 
-				<linearGradient id="deaths" x1="0" y1="0" x2="0" y2="1">
-					<stop offset="5%" stopColor="#E3242B" stopOpacity={0.8} />
-					<stop offset="95%" stopColor="#E3242B" stopOpacity={0} />
-				</linearGradient>
-			</defs>
+					<linearGradient id="deaths" x1="0" y1="0" x2="0" y2="1">
+						<stop offset="5%" stopColor="#E3242B" stopOpacity={0.8} />
+						<stop offset="95%" stopColor="#E3242B" stopOpacity={0} />
+					</linearGradient>
+				</defs>
 
-			<XAxis dataKey="date" />
-			<YAxis tickFormatter={DataFormater /*width={100}*/} />
-			<CartesianGrid strokeDasharray="3 3" />
+				<XAxis dataKey="date" />
+				<YAxis tickFormatter={DataFormater /*width={100}*/} />
+				<CartesianGrid strokeDasharray="3 3" />
 
-			<Tooltip
-				formatter={
-					(value) => new Intl.NumberFormat('en').format(value)
-					/*(value) => {
+				<Tooltip
+					formatter={
+						(value) => new Intl.NumberFormat('en').format(value)
+						/*(value) => {
                     return value.toString().replace(regexCommaNumbers, ',');
                 }*/
-				}
-			/>
+					}
+				/>
 
-			<Area
-				type="monotone"
-				dataKey="cases"
-				stroke="orange"
-				fillOpacity={1}
-				fill="url(#cases)"
-			/>
+				<Area
+					type="monotone"
+					dataKey="cases"
+					stroke="orange"
+					fillOpacity={1}
+					fill="url(#cases)"
+				/>
 
-			<Area
-				type="monotone"
-				dataKey="recovered"
-				stroke="#0088FE"
-				fillOpacity={1}
-				fill="url(#recovered)"
-			/>
+				<Area
+					type="monotone"
+					dataKey="recovered"
+					stroke="#0088FE"
+					fillOpacity={1}
+					fill="url(#recovered)"
+				/>
 
-			<Area
-				type="monotone"
-				dataKey="active"
-				stroke="#00C49F"
-				fillOpacity={1}
-				fill="url(#active)"
-			/>
+				<Area
+					type="monotone"
+					dataKey="active"
+					stroke="#00C49F"
+					fillOpacity={1}
+					fill="url(#active)"
+				/>
 
-			<Area
-				type="monotone"
-				dataKey="deaths"
-				stroke="#E3242B"
-				fillOpacity={1}
-				fill="url(#deaths)"
-			/>
-		</AreaChart>
+				<Area
+					type="monotone"
+					dataKey="deaths"
+					stroke="#E3242B"
+					fillOpacity={1}
+					fill="url(#deaths)"
+				/>
+			</AreaChart>
+		</ResponsiveContainer>
 	);
 
 	let renderPieChart;
@@ -298,24 +303,26 @@ function Charts() {
 		};
 
 		renderPieChart = (
-			<PieChart width={800} height={400}>
-				<Pie
-					activeIndex={state.activeIndex}
-					activeShape={renderActiveShape}
-					data={data}
-					dataKey="value"
-					cx={300}
-					cy={200}
-					innerRadius={60}
-					outerRadius={100}
-					fill="#8884d8"
-					onMouseEnter={onPieEnter}
-				>
-					{data.map((entry, index) => (
-						<Cell key={index} fill={COLORS[index % COLORS.length]} />
-					))}
-				</Pie>
-			</PieChart>
+			<ResponsiveContainer className="responsive-chart">
+				<PieChart>
+					<Pie
+						activeIndex={state.activeIndex}
+						activeShape={renderActiveShape}
+						data={data}
+						dataKey="value"
+						cx={'45%'}
+						cy={'50%'}
+						innerRadius={60}
+						outerRadius={100}
+						fill="#8884d8"
+						onMouseEnter={onPieEnter}
+					>
+						{data.map((entry, index) => (
+							<Cell key={index} fill={COLORS[index % COLORS.length]} />
+						))}
+					</Pie>
+				</PieChart>
+			</ResponsiveContainer>
 		);
 	}
 
@@ -375,61 +382,70 @@ function Charts() {
 		}
 
 		renderBarChart = (
-			<BarChart
-				width={600}
-				height={300}
-				data={data}
-				margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-			>
-				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey="name" />
-				<YAxis tickFormatter={DataFormater} />
+			<ResponsiveContainer className="responsive-chart">
+				<BarChart
+					data={data}
+					margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+				>
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis dataKey="name" />
+					<YAxis tickFormatter={DataFormater} />
 
-				<Tooltip
-					formatter={(value) => new Intl.NumberFormat('en').format(value)}
-				/>
-				<Legend />
+					<Tooltip
+						formatter={(value) => new Intl.NumberFormat('en').format(value)}
+					/>
+					<Legend />
 
-				<Bar dataKey="active" stackId="a" fill="#0088FE" />
-				<Bar dataKey="recovered" stackId="a" fill="#00C49F" />
-				<Bar dataKey="deaths" stackId="a" fill="#E3242B" />
-			</BarChart>
+					<Bar dataKey="active" stackId="a" fill="#0088FE" />
+					<Bar dataKey="recovered" stackId="a" fill="#00C49F" />
+					<Bar dataKey="deaths" stackId="a" fill="#E3242B" />
+				</BarChart>
+			</ResponsiveContainer>
 		);
 	}
 
-	const handleChange = (e) => {
-		setIndex(parseInt(e.target.value));
+	const handleChange = (value) => {
+		setIndex(parseInt(value));
 	};
 
 	return (
 		<div className="chart">
-			<label>
-				Choose country:&nbsp;
-				<br />
-				<select defaultValue={countryIndex} onChange={handleChange}>
-					{allCountries.map((item, key) => (
-						<option key={key} value={item._id}>
-							{item.country}
-						</option>
-					))}
-				</select>
-			</label>
-			<br />
+			<Title>Charts</Title>
+			<span className="sub-info">Top 5 countries (#cases)</span>
 			{renderBarChart}
-			<br />
+			<div className="big-margin-top">
+				<label>
+					Choose country:&nbsp;
+					<Select
+						showSearch
+						style={{ width: 300 }}
+						placeholder={countryIndex}
+						optionFilterProp="children"
+						onChange={handleChange}
+						value={countryIndex}
+						filterOption={(input, option) =>
+							option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+						}
+					>
+						{allCountries.map((item, key) => (
+							<Option key={key} value={item._id}>
+								{item.country}
+							</Option>
+						))}
+					</Select>
+				</label>
+			</div>
 			{dataFound ? null : (
-				<div>
-					<br />
+				<span className="error-text">
 					No recent historical data found for this country. Displaying world
 					data instead.
-					<br />
-					<br />
-					<br />
-				</div>
+				</span>
 			)}
+			<span className="sub-info margin-top">Total cases overview</span>
 			{renderPieChart}
-			<br />
+			<span className="sub-info margin-top">Historical data</span>
 			{renderAreaChart}
+			<br />
 			<br />
 		</div>
 	);
