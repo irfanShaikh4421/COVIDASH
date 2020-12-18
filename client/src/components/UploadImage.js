@@ -3,91 +3,118 @@ import '../App.css';
 import app from 'firebase/app';
 import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
-import { storage } from '../firebase/Firebase';
-import { Button } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 const db = app.firestore();
 
 function UploadImage() {
-    const { currentUser } = useContext(AuthContext);
-    let uid;
-    const [userData, setUserData] = useState({});
-    const [file, setFile] = useState(null);
-    const [url, setURL] = useState('');
+	const { currentUser } = useContext(AuthContext);
+	let uid;
+	const [token, setToken] = useState(null);
+	const [userData, setUserData] = useState({});
+	const [file, setFile] = useState(null);
+	const [url, setURL] = useState('');
+	const [img, setImg] = useState(null);
 
-    useEffect(() => {
-        async function getUserData() {
-            var docRef = db.collection('users').doc(uid);
+	useEffect(() => {
+		async function getUserData() {
+			var docRef = db.collection('users').doc(uid);
 
-            docRef
-                .get()
-                .then(function (doc) {
-                    if (doc.exists) {
-                        console.log('Document data:', doc.data());
-                        setUserData(doc.data());
-                    } else {
-                        // doc.data() will be undefined in this case
-                        console.log('No such document!');
-                    }
-                })
-                .catch(function (error) {
-                    console.log('Error getting document:', error);
-                });
-        }
-        getUserData();
-    }, [url]);
+			docRef
+				.get()
+				.then(function (doc) {
+					if (doc.exists) {
+						console.log('Document data:', doc.data());
+						setUserData(doc.data());
+					} else {
+						// doc.data() will be undefined in this case
+						console.log('No such document!');
+					}
+				})
+				.catch(function (error) {
+					console.log('Error getting document:', error);
+				});
+		}
+		getUserData();
+	}, [url]);
 
-    if (currentUser) {
-        uid = currentUser.uid;
-    }
+	if (currentUser) {
+		uid = currentUser.uid;
+		currentUser.getIdToken().then((t) => {
+			setToken(t);
+		});
+	}
 
-    const updateUserImage = (uid, imgUrl) =>
-        db.collection('users').doc(uid).set(
-            {
-                imageUrl: imgUrl,
-            },
-            { merge: true }
-        );
+	const updateUserImage = (uid, imgUrl) =>
+		db.collection('users').doc(uid).set(
+			{
+				imageUrl: imgUrl,
+			},
+			{ merge: true }
+		);
 
-    function handleChange(e) {
-        setFile(e.target.files[0]);
-    }
+	function handleChange(e) {
+		setFile(e.target.files[0]);
+	}
 
-    function handleUpload(e) {
-        e.preventDefault();
-        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-        uploadTask.on('state_changed', console.log, console.error, () => {
-            storage
-                .ref('images')
-                .child(file.name)
-                .getDownloadURL()
-                .then(async (url) => {
-                    setFile(null);
-                    setURL(url);
-                    await updateUserImage(uid, url);
-                });
-        });
-    }
+	async function handleUpload(e) {
+		e.preventDefault();
+		//alert(Object.keys(file))
 
-    const imageForm = (
-        <div>
-            <form onSubmit={handleUpload} className="flex-column-center">
-                <img src={userData.imageUrl} alt="" width="200px" />
-                <input
-                    type="file"
-                    onChange={handleChange}
-                    accept="image/jpeg, image/png, .jpeg, .jpg, .png"
-                    className="image-input"
-                />
-                <button disabled={!file} className="upload-btn">
-                    Upload
-                </button>
-            </form>
-        </div>
-    );
+		let fdata = new FormData();
+		fdata.append('photo', file, file.name);
 
-    return <div>{imageForm}</div>;
+		let { data } = await axios.post('/photo', fdata, {
+			headers: {
+				authtoken: token,
+				'Content-Type': `multipart/form-data; boundary=${fdata._boundary}`,
+			},
+		});
+
+		setImg(data.img);
+
+		console.log(data);
+		setFile(data.img);
+		setURL(data.img);
+		await updateUserImage(uid, data.img);
+
+		/*const uploadTask = storage.ref(`/images/${file.name}`).put(data.img);
+		uploadTask.on('state_changed', console.log, console.error, () => {
+			storage
+				.ref('images')
+				.child(file.name)
+				.getDownloadURL()
+				.then(async (url) => {
+					setFile(null);
+					setURL(url);
+					await updateUserImage(uid, url);
+				});
+		});*/
+	}
+
+	const imageForm = (
+		<div>
+			<form onSubmit={handleUpload}>
+				<img src={userData.imageUrl} alt="" width="200px" />
+				<br />
+				<input
+					type="file"
+					onChange={handleChange}
+					accept="image/jpeg, image/png, .jpeg, .jpg, .png"
+				/>
+				<br />
+				<button disabled={!file}>Upload</button>
+			</form>
+		</div>
+	);
+
+	return (
+		<div>
+			<h2>Upload profile picture</h2>
+			{imageForm}
+			<br />
+		</div>
+	);
 }
 
 export default UploadImage;
