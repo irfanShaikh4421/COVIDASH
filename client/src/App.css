@@ -204,6 +204,11 @@ button:focus {
 	flex-direction: row;
 }
 
+.flex-responsive {
+	display: flex;
+	flex-direction: row;
+}
+
 .flex-column-center {
 	display: flex;
 	flex-direction: column;
@@ -306,7 +311,7 @@ button:focus {
 
 .sub-heading {
 	display: block;
-	color: #6f7689;
+	color: #6d7488;
 	font-size: 0.8rem;
 	margin: 15px 0 2px 0;
 }
@@ -437,6 +442,10 @@ button:focus {
 	margin-top: 30px;
 }
 
+.margin-small-bottom {
+	margin-bottom: 10px !important;
+}
+
 .big-margin-top {
 	margin-top: 60px;
 }
@@ -453,8 +462,44 @@ button:focus {
 	margin: 20px 0;
 }
 
+.country-flag-2 {
+	max-width: 30%;
+	align-self: center;
+	margin: 30px;
+}
+
+.inline-block {
+	display: inline-block !important;
+}
+
+.inline {
+	display: inline;
+}
+
 .block {
 	display: block;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.margin-tb {
+	margin: 20px 0 !important;
+}
+
+.small-text {
+	display: inline;
+	font-size: 1rem;
+	margin: 15px 5px 2px 10px;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
+.ant-statistic-title {
+	color: #6d7488 !important;
 }
 
 /* COLORS */
@@ -469,6 +514,10 @@ button:focus {
 
 .color-orange {
 	color: #f76819 !important;
+}
+
+.color-blue {
+	color: #255f85 !important;
 }
 
 .color-yellow {
@@ -554,5 +603,10 @@ button:focus {
 		width: auto !important;
 		height: 45px !important;
 		font-size: 1rem !important;
+	}
+
+	.flex-responsive {
+		display: flex;
+		flex-direction: column;
 	}
 }
