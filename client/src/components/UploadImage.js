@@ -4,6 +4,7 @@ import app from 'firebase/app';
 import 'firebase/firestore';
 import { AuthContext } from '../firebase/Auth';
 import axios from 'axios';
+import { Spin } from 'antd'
 
 const db = app.firestore();
 
@@ -12,6 +13,7 @@ function UploadImage() {
 	let uid;
 	const [token, setToken] = useState(null);
 	const [userData, setUserData] = useState({});
+	const [loading, setLoading] = useState(false)
 	const [file, setFile] = useState(null);
 	const [url, setURL] = useState('');
 	const [img, setImg] = useState(null);
@@ -59,6 +61,7 @@ function UploadImage() {
 
 	async function handleUpload(e) {
 		e.preventDefault();
+		setLoading(true)
 		//alert(Object.keys(file))
 
 		let fdata = new FormData();
@@ -76,6 +79,8 @@ function UploadImage() {
 		setFile(data.img);
 		setURL(data.img);
 		await updateUserImage(uid, data.img);
+
+		setLoading(false)
 
 		/*const uploadTask = storage.ref(`/images/${file.name}`).put(data.img);
 		uploadTask.on('state_changed', console.log, console.error, () => {
@@ -109,6 +114,7 @@ function UploadImage() {
 					accept="image/jpeg, image/png, .jpeg, .jpg, .png"
 					className="image-input"
 				/>
+				{ loading ? (<Spin/>) : null }
 				<button disabled={!file} className="upload-btn" type="submit">
 					Upload
 				</button>

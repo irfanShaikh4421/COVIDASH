@@ -422,6 +422,7 @@ function Account() {
 				visible={isImageModalVisible}
 				onOk={handleOkImage}
 				onCancel={handleCancelImage}
+				style={{minWidth: '40vw'}}
 			>
 				<UploadImage />
 			</Modal>
