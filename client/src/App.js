@@ -19,7 +19,7 @@ import ChangePassword from './components/ChangePassword';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import PrivateRoute from './components/PrivateRoute';
-import Chat from './components/Chat'
+import Chat from './components/chat/Chat'
 import MobileNavigation from './components/MobileNavigation';
 import { AuthProvider } from './firebase/Auth';
 import { LocationProvider } from './LocationContext';
