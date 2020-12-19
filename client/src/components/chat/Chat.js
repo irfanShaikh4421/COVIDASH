@@ -1,60 +1,60 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import io from 'socket.io-client'
 import {List, Avatar, Row, Col, Typography, Input} from 'antd'
 import EVENTS from './event'
-
-function insertMessage(msg){
-    // name, id, image, message
-
-    return (
-        <div>
-            
-        </div>
-    )
-
-}
-
-let socket;
+import { AuthContext } from '../../firebase/Auth';
+import defaultPhoto from '../../img/no-user.png'
 
 const { Title, Text } = Typography
+let socket
 
 function Chat() {
-
-
+    const { currentUser } = useContext(AuthContext);
     const [userId, setUserId] = useState(null)
+    const [error, setError] = useState(null)
     const [msg, setMsg] = useState('')
     const [chats, setChats] = useState([ { name:'Test', image: null, message: 'Lorem Ipsum' } ])
     
     
     useEffect(  () => {
         console.log('called')
-        socket = io('ws://localhost:3001')
 
-        socket.on('connect', () => {
-            console.log(`connected`)
-            socket.send('hello')
-            setUserId(socket.id)
-        })
+        async function _init(){
+            const token = await currentUser.getIdToken()
+            socket = io('ws://localhost:3001',{ auth : { token }})
 
-        socket.emit(EVENTS.CONNECT, { name: "Irfan", "image": "http:/sadjas" })
-
-        socket.on(EVENTS.CONNECTED, data => {
-            console.log(` userConencted -> ${JSON.stringify(data)} `)
-        })
-
-        socket.on(EVENTS.MESSAGE, (data) => {
-           // alert(` New message ${JSON.stringify(data)} `)
-
-            setChats((d) =>  {
-                let x = d.concat(data)
-              //alert(x)
-
-                return x
-            } )
-        })
+            socket.on('connect', () => {
+                console.log(`connected`)
+                setUserId(socket.id)
+    
+                if(error)
+                    setError(null)
+            })
+    
+            socket.on('connect_error', (r) => {
+                setError('Connection failed')
+            })
+    
+            socket.emit(EVENTS.CONNECT, { name: "Irfan", "image": "http:/sadjas" })
+    
+            socket.on(EVENTS.CONNECTED, data => {
+                console.log(` userConencted -> ${JSON.stringify(data)} `)
+            })
+    
+            socket.on(EVENTS.MESSAGE, (data) => {
+                setChats((d) =>  {
+                    let x = d.concat(data)
+                    return x
+                } )
+            })
+        }
+        
+        _init()
+       
 
         return function cleanup(){
-            socket.close()
+            if(socket)
+                socket.close()
         }
 
         
@@ -62,8 +62,8 @@ function Chat() {
 
     function sendMessage(){
         let tmp = {
-            name: 'Irfan Shaikh',
-            image: null,
+            name: currentUser.displayName,
+            image: currentUser.photoURL ? currentUser.photoURL : defaultPhoto,
             message: msg
         }
 
@@ -86,7 +86,8 @@ function Chat() {
             </Col>
             
 
-            {!userId ? (<h1>CONNECTING</h1>) : null }
+            {!userId && !error ? (<h1>CONNECTING</h1>) : null }
+            {!userId && error ? (<h1>Failed connecting</h1>) : null}
             {userId ? (
             <Col span={24}>
                 <List
@@ -97,7 +98,7 @@ function Chat() {
                     renderItem={item => (
                     <List.Item>
                         <List.Item.Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                        avatar={<Avatar src={item.image} />}
                         title={item.name}
                         description={item.message}
                         />

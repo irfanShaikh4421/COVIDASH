@@ -2,9 +2,33 @@ const io = require('socket.io')(3001, { cors: { origin: '*' }, wsEngine: 'ws' })
 const users = {}
 const messages = [ { id: 123124, name: 'Test', image: "test" }]
 
+const { verifyToken } = require('../utils/firebase')
+
+
+io.use(async (socket, next) => {
+    const authToken = socket.handshake.auth.token
+    //console.log(socket.handshake.auth)
+    if(authToken)
+    {
+        try{
+            let r =  await verifyToken(authToken)
+            if(r)
+                next(null,true)
+            else
+                next(new Error('Not authenticated'))
+        }
+        catch(e){
+            next(new Error('Not authenticated'))
+        }
+        
+    }
+    else
+        next( new Error('Not authenticated'))
+
+}) 
+
 io.on('connection', socket => {
     console.log('connected')
-
 
     socket.on('connectUser', data => {
 

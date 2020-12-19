@@ -47,10 +47,14 @@ const getUserId = async (token) => {
 	}
 };
 
+const verifyToken = (token) => {
+	return admin.auth().verifyIdToken(token);
+}
+
 const authenticate = async (req, res, next) => {
 	if (req.headers.authtoken) {
 		try {
-			let r = await admin.auth().verifyIdToken(req.headers.authtoken);
+			let r = await verifyToken(req.headers.authtoken)
 			console.log(r);
 			if (r) next();
 		} catch (e) {
@@ -65,4 +69,5 @@ module.exports = {
 	authenticate,
 	getUserId,
 	uploadImage,
+	verifyToken
 };

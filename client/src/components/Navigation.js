@@ -18,6 +18,7 @@ import {
 	LoginOutlined,
 	PlusCircleOutlined,
 	EnvironmentOutlined,
+	MessageOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -36,8 +37,8 @@ const Navigation = () => {
 						left: 0,
 					}}
 				>
-					<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-						<Menu.Item key="1" className="logo">
+					<Menu theme="dark" defaultSelectedKeys={['0']} mode="inline">
+						<Menu.Item key="0" className="logo">
 							<Link to="/">COVIDASH</Link>
 						</Menu.Item>
 						<Menu.Item key="1" icon={<HomeOutlined />}>
@@ -70,9 +71,13 @@ const Navigation = () => {
 						<Menu.Item key="10" icon={<AlertOutlined />}>
 							<Link to="/bed-utilization">Hospital capacity</Link>
 						</Menu.Item>
-						<Menu.Item key="11" icon={<UserOutlined />}>
+						<Menu.Item key="11" icon={<MessageOutlined />}>
+							<Link to="/chat">Chat</Link>
+						</Menu.Item>
+						<Menu.Item key="12" icon={<UserOutlined />}>
 							<Link to="/account">Account</Link>
 						</Menu.Item>
+						
 						{/* <Menu.Item key="12" icon={<LogoutOutlined />}>
 							<span onClick={doSignOut}>Sign out</span>
 						</Menu.Item> */}

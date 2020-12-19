@@ -77,7 +77,7 @@ function App() {
 											component={ChangePassword}
 										/>
 										<Route path="/login" component={SignIn} />
-										<Route exact path="/chat" component={Chat} />
+										<PrivateRoute exact path="/chat" component={Chat} />
 										<Route render={() => <h2>404: Invalid URL</h2>} />
 									</Switch>
 								</LocationProvider>
