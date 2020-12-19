@@ -6,12 +6,12 @@ import allCountries from '../data/countries.json';
 import allStates from '../data/usStates.json';
 import { LocationContext } from '../LocationContext';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Select, Typography } from 'antd';
+import { Select, Typography, Card, Statistic, Row, Col } from 'antd';
 
 const Statistics = () => {
 	const regexCommaNumbers = /\B(?=(\d{3})+(?!\d))/g; //from stackoverflow
 
-	const { Option } = Select;
+	const { Title } = Typography;
 
 	const buildDisplay = (region, loading) => {
 		return (
@@ -20,130 +20,151 @@ const Statistics = () => {
 					<LoadingOutlined className="loader" />
 				) : (
 					<div>
-						<h1 className={region && region.continent && 'titleOfSubtitle'}>
-							{(region && region.country) ||
-								(region && region.state) ||
-								'World'}
-						</h1>
-						{region && region.continent ? (
-							<h2 className="subtitle">{region.continent}</h2>
-						) : null}
-						{region && region.population ? (
-							<p>
-								Population:{' '}
-								{region.population.toString().replace(regexCommaNumbers, ',')}.
-							</p>
-						) : null}
-						{region && region.active ? (
-							<p>
-								{region.active.toString().replace(regexCommaNumbers, ',')}{' '}
-								currently infected. &nbsp;
-								{region && (region.critical || region.critical === 0) ? (
-									`${region.critical
-										.toString()
-										.replace(regexCommaNumbers, ',')} in critical condition.`
-								) : (
-									<></>
-								)}
-							</p>
-						) : null}
-						{region && region.countryInfo && region.countryInfo.flag ? (
-							<img
-								src={region.countryInfo.flag}
-								alt="No Country Flag Found"
-								title="Sourced from disease.sh, maybe do something with imagemagick"
-							/>
-						) : (
-							!(region && region.state) && (
-								<img
-									src={flagUN}
-									alt="No flag found"
-									title="United Nations Flag"
-								/>
-							)
-						)}
-						{region && !region.state ? <hr /> : null}
-						{region && region.tests ? (
-							<div>
-								{region.tests.toString().replace(regexCommaNumbers, ',')}
-								&nbsp;People have been tested for Covid.
+						<div className="flex-row align-center">
+							<div className="inline-block">
+								<Title level={2} className="inline-block margin-tb">
+									{(region && region.country) ||
+										(region && region.state) ||
+										'World'}
+								</Title>
+								{region && region.continent ? (
+									<span className="small-text color-gray">
+										{region.continent}
+									</span>
+								) : null}
 							</div>
-						) : null}
-
-						{region &&
-							region.state &&
-							(region.recovered ? (
-								<div>
-									{region.recovered.toString().replace(regexCommaNumbers, ',')}
-									&nbsp;People have recovered from Covid.
-								</div> /**States don't have critical field, nor the daily recoveries, but they do contain overall recoveries*/
-							) : null)}
-						<table>
-							<thead>
-								<tr>
-									<th />
-									<th>Today</th>
-									<th>Overall</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>Deaths</th>
-									<td>
-										{region.todayDeaths
-											.toString()
-											.replace(regexCommaNumbers, ',')}
-									</td>
-									<td>
-										{region.deaths.toString().replace(regexCommaNumbers, ',')}
-									</td>
-								</tr>
-								<tr>
-									<th>Cases Contracted</th>
-									<td>
-										{region.todayCases
-											.toString()
-											.replace(regexCommaNumbers, ',')}
-									</td>
-									<td>
-										{region.cases.toString().replace(regexCommaNumbers, ',')}
-									</td>
-								</tr>
-								{!(region && region.state) ? (
-									<tr>
-										<th>Recoveries</th>
-										<td>
-											{region.todayRecovered
-												.toString()
-												.replace(regexCommaNumbers, ',')}
-										</td>
-										<td>
-											{region.recovered
-												.toString()
-												.replace(regexCommaNumbers, ',')}
-										</td>
-									</tr>
+							<div className="inline">
+								{region && region.countryInfo && region.countryInfo.flag ? (
+									<img
+										src={region.countryInfo.flag}
+										alt="No country flag found"
+										title="Sourced from disease.sh"
+										className="country-flag-2"
+									/>
 								) : (
-									<></>
+									!(region && region.state) && (
+										<img
+											src={flagUN}
+											alt="No flag found"
+											title="United Nations Flag"
+											className="country-flag-2"
+										/>
+									)
 								)}
-							</tbody>
-						</table>
-						<br />
-
-						<hr />
-						<footer className="casesTracking">
-							{region && region.updated && (
-								<div>
-									Data last updated: &nbsp;
-									{new Date(region.updated).toLocaleString('en-US')}
-									.
-									<br /> <br />
-								</div>
-							)}
-							<a className="tota11yLink" href="https://disease.sh/">
-								disease.sh
-							</a>
-						</footer>
+							</div>
+						</div>
+						<Row gutter={[40, 30]}>
+							<Col className="gutter-row full-width" sm={24} md={10} lg={10}>
+								<Card className="flex-column" title="Today">
+									<div className="flex-row space-between">
+										<Statistic
+											title="Cases"
+											value={region.todayCases
+												.toString()
+												.replace(regexCommaNumbers, ',')}
+											valueStyle={{ color: '#255F85' }}
+										/>
+										{!(region && region.state) ? (
+											<Statistic
+												title="Recovered"
+												value={region.todayRecovered
+													.toString()
+													.replace(regexCommaNumbers, ',')}
+												valueStyle={{ color: '#3e673c' }}
+											/>
+										) : null}
+										<Statistic
+											title="Deaths"
+											value={region.todayDeaths
+												.toString()
+												.replace(regexCommaNumbers, ',')}
+											valueStyle={{ color: '#ba1b1d' }}
+										/>
+									</div>
+								</Card>
+							</Col>
+							<Col className="gutter-row full-width" sm={24} md={14} lg={14}>
+								<Card className="flex-column" title="Overall">
+									<div className="flex-responsive space-between">
+										<Statistic
+											title="Cases"
+											value={region.cases
+												.toString()
+												.replace(regexCommaNumbers, ',')}
+											valueStyle={{ color: '#255F85' }}
+										/>
+										{!(region && region.state) ? (
+											<Statistic
+												title="Recovered"
+												value={region.recovered
+													.toString()
+													.replace(regexCommaNumbers, ',')}
+												valueStyle={{ color: '#3e673c' }}
+											/>
+										) : null}
+										<Statistic
+											title="Deaths"
+											value={region.deaths
+												.toString()
+												.replace(regexCommaNumbers, ',')}
+											valueStyle={{ color: '#ba1b1d' }}
+										/>
+									</div>
+								</Card>
+							</Col>
+						</Row>
+						<Row gutter={[40, 30]}>
+							<Col className="gutter-row full-width" sm={24}>
+								<Card className="flex-column" title="Interesting numbers">
+									<div className="flex-responsive space-between">
+										{region && region.population ? (
+											<Statistic
+												title="Population"
+												value={region.population
+													.toString()
+													.replace(regexCommaNumbers, ',')}
+												valueStyle={{ color: '#255F85' }}
+											/>
+										) : null}
+										{region && region.tests ? (
+											<Statistic
+												title="Total tested"
+												value={region.tests
+													.toString()
+													.replace(regexCommaNumbers, ',')}
+												valueStyle={{ color: '#3E673C' }}
+											/>
+										) : null}
+										{region && region.active ? (
+											<>
+												<Statistic
+													title="Active cases"
+													value={region.active
+														.toString()
+														.replace(regexCommaNumbers, ',')}
+													valueStyle={{ color: '#F76819' }}
+												/>
+												{region &&
+												(region.critical || region.critical === 0) ? (
+													<Statistic
+														title="Critical cases"
+														value={region.critical
+															.toString()
+															.replace(regexCommaNumbers, ',')}
+														valueStyle={{ color: '#BA1B1D' }}
+													/>
+												) : null}
+											</>
+										) : null}
+									</div>
+								</Card>
+							</Col>
+						</Row>
+						{region && region.updated && (
+							<span className="sub-heading">
+								Updated at: {new Date(region.updated).toLocaleString('en-US')}
+							</span>
+						)}
 					</div>
 				)}
 			</div>
@@ -151,7 +172,7 @@ const Statistics = () => {
 	};
 
 	return (
-		<div>
+		<div className="full-width">
 			<GetCountry buildCountry={buildDisplay} />
 		</div>
 	);
@@ -159,6 +180,8 @@ const Statistics = () => {
 
 const GetState = ({ buildState }) => {
 	const [location] = useContext(LocationContext);
+	const { Option } = Select;
+
 	const stateIndex = [
 		'AL',
 		'AK',
@@ -218,9 +241,9 @@ const GetState = ({ buildState }) => {
 	const [loading, setLoading] = useState(true);
 
 	const stateDropDown = allStates.map((entry, index) => (
-		<option key={index} value={entry.name}>
+		<Option key={index} value={entry.name}>
 			{entry.name}
-		</option>
+		</Option>
 	));
 
 	useEffect(() => {
@@ -242,18 +265,27 @@ const GetState = ({ buildState }) => {
 		}
 	}, [state]);
 
-	function handleSelect(e) {
-		setState(e.target.value);
-		console.log(`State selected: ${e.target.value} `);
+	function handleSelect(value) {
+		setState(value);
+		console.log(`State selected: ${value} `);
 	}
 
 	return (
 		<div>
-			{' '}
-			<br /> <hr />
-			<select defaultValue={state} onChange={handleSelect}>
+			Select state: &nbsp;
+			<Select
+				showSearch
+				style={{ width: 200 }}
+				placeholder={state}
+				optionFilterProp="children"
+				onChange={handleSelect}
+				value={state}
+				filterOption={(input, option) =>
+					option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+				}
+			>
 				{stateDropDown}
-			</select>
+			</Select>
 			{!loading && buildState(stateData, loading)}
 		</div>
 	);
@@ -262,6 +294,7 @@ const GetState = ({ buildState }) => {
 const GetCountry = ({ buildCountry }) => {
 	const [location] = useContext(LocationContext);
 	const [loading, setLoading] = useState(true);
+	const { Option } = Select;
 
 	function findIso3(targetValue) {
 		if (targetValue > 0) {
@@ -337,6 +370,12 @@ const GetCountry = ({ buildCountry }) => {
 	return (
 		<div>
 			<Title>Statistics</Title>
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a target="blank" href="https://disease.sh" className="color-blue">
+					Disease.sh
+				</a>
+			</span>
 			<form
 				method="POST"
 				name="searchFrom"
@@ -345,10 +384,10 @@ const GetCountry = ({ buildCountry }) => {
 				}}
 			>
 				<label>
-					Get Location Specific Data: &nbsp;
+					Get location specific data: &nbsp;
 					<Select
 						showSearch
-						style={{ width: 200 }}
+						style={{ width: 250 }}
 						placeholder={country ? country : 'Planet Earth'}
 						optionFilterProp="children"
 						onChange={handleChange}
