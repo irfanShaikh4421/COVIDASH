@@ -32,37 +32,6 @@ body {
 	color: #61dafb;
 }
 
-nav.navigation {
-	line-height: 2.5;
-}
-
-.navigation .marvel:hover {
-	border: 2px solid #fcfcfc;
-}
-
-table {
-	margin-left: auto;
-	margin-right: auto;
-	border: 2px solid black;
-}
-
-th,
-td {
-	min-width: 100px;
-	border: 1px solid black;
-}
-
-footer.casesTracking {
-	margin-bottom: 2%;
-	column-count: 2;
-}
-
-#dataSources li {
-	list-style-type: none;
-	text-align: left;
-	margin-left: 15%;
-}
-
 .label {
 	line-height: 100%;
 	font-weight: 400;
@@ -93,45 +62,9 @@ button:focus {
 	color: #001529 !important;
 }
 
-.para {
-	font-size: 1.1rem;
-	font-weight: 400;
-	text-align: justify;
-	text-justify: newspaper;
-}
-
-.navigation {
-	background: #0f4557;
-}
-
-.navigation ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-.navigation a:link,
-.navigation a:visited {
-	color: #fcfcfc;
-	text-decoration: none;
-}
-
 .error {
 	font-weight: bold;
 	color: red !important;
-}
-
-.forgotPassword {
-	background: none !important;
-	border: none !important;
-	text-decoration: underline;
-	margin-left: 5px;
-	color: #069;
-}
-
-.forgotPassword:hover {
-	text-decoration: none;
-	color: red;
 }
 
 .chart {
@@ -406,8 +339,18 @@ button:focus {
 }
 
 .forgot-pass {
-	padding: 0px !important;
-	margin-top: 20px;
+	padding: 5px 10px;
+	margin-bottom: 20px;
+}
+
+.forgot-pass:hover {
+	border: 1px solid #001529;
+	color: #001529;
+}
+
+.forgot-pass:focus {
+	border: 1px solid #001529;
+	color: #001529;
 }
 
 .profile-img {
