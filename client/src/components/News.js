@@ -6,7 +6,6 @@ import '../App.css';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Select, Card, Row, Col, Typography, Image, Empty } from 'antd';
 
-
 const iso2Indexer = [
 	4,
 	248,
@@ -329,7 +328,12 @@ const News = () => {
 	return (
 		<div>
 			<Title>News</Title>
-			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://newsapi.org/"> NEWS API</a></Text> <br/><br/>
+			<span className="sub-heading">
+				Source:&nbsp;
+				<a target="blank" href="https://newsapi.org" className="color-blue">
+					NewsAPI
+				</a>
+			</span>
 			<label>
 				Select country: &nbsp;&nbsp;
 				<Select

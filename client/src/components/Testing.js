@@ -150,9 +150,16 @@ const TestingLocations = () => {
 		return (
 			<div className="full-width">
 				<Title>Testing locations</Title>
-				<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://documenter.getpostman.com/view/8854915/SzS7PR3t?version=latest"> TESTING API</a></Text> <br/><br/>
-			
-				
+				<span className="sub-heading margin-small-bottom">
+					Source:&nbsp;
+					<a
+						target="blank"
+						href="https://documenter.getpostman.com/view/8854915/SzS7PR3t?version=latest"
+						className="color-blue"
+					>
+						Testing Location API
+					</a>
+				</span>
 				<label>
 					Select state:&nbsp;
 					<Select

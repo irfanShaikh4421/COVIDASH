@@ -49,17 +49,19 @@ const Vaccine = () => {
 	return (
 		<div>
 			<Title>Vaccines for COVID-19</Title>
-			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh/docs/#/COVID-19%3A%20Vaccine"> VACCINE TYPE</a></Text> <br/><br/>
-			
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a
+					target="blank"
+					href="https://disease.sh/docs/#/COVID-19%3A%20Vaccine"
+					className="color-blue"
+				>
+					Disease.sh
+				</a>
+			</span>
 			<Row gutter={[40, 30]}>
 				{vaccineData.map((item, index) => (
-					<Col
-						className="gutter-row full-width"
-						sm={24}
-						md={12}
-						lg={8}
-						key={index}
-					>
+					<Col className="full-width" sm={24} md={12} lg={8} key={index}>
 						<Card hoverable className="flex-column news-card">
 							<span className="card-title">{item.candidate}</span>
 							<span className="sub-heading">Mechanism:</span>

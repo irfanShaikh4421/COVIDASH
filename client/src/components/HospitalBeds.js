@@ -151,8 +151,16 @@ const HospitalBeds = () => {
 	return (
 		<div className="flex-column full-width">
 			<Title>Hospital's bed utilization</Title>
-			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://opendata.arcgis.com"> HOSPITAL BED API</a></Text> <br/><br/>
-
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a
+					target="blank"
+					href="https://opendata.arcgis.com"
+					className="color-blue"
+				>
+					ArcGIS hub
+				</a>
+			</span>
 			<label>
 				Select state:&nbsp;
 				<Select
@@ -165,6 +173,7 @@ const HospitalBeds = () => {
 					filterOption={(input, option) =>
 						option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 					}
+					className="margin-bottom"
 				>
 					{usStates.map((state, index) => (
 						<Option key={index} value={state.name}>

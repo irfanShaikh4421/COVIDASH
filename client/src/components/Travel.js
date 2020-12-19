@@ -567,8 +567,16 @@ const Travel = () => {
 	return (
 		<div>
 			<Title>Travel regulations</Title>
-            <Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://www.notion.so/Covid-19-travel-restrictions-and-lockdown-measures-API-fc88674524014137aaae96a11ece0040"> TRAVEL REGULATION API</a></Text> <br/><br/>
-
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a
+					target="blank"
+					href="https://www.notion.so/Covid-19-travel-restrictions-and-lockdown-measures-API-fc88674524014137aaae96a11ece0040"
+					className="color-blue"
+				>
+					Travel API
+				</a>
+			</span>
 			<label>
 				Select country&nbsp;
 				<Select

@@ -21,7 +21,7 @@ import {
 } from 'recharts';
 import { Select, Typography } from 'antd';
 
-const { Text } = Typography
+const { Text } = Typography;
 
 function Charts() {
 	const [location] = useContext(LocationContext);
@@ -413,20 +413,13 @@ function Charts() {
 	return (
 		<div className="chart">
 			<Title>Charts</Title>
-			
-			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://disease.sh"> TRACKING API</a></Text> <br/><br/>
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a target="blank" href="https://disease.sh" className="color-blue">
+					Disease.sh
+				</a>
+			</span>
 			<span className="sub-info">Top 5 countries (#cases)</span>
-			{/*<label>
-				Choose country:&nbsp;
-				<br />
-				<Select defaultValue={countryIndex} onChange={handleChange}>
-					{allCountries.map((item, key) => (
-						<Option key={key} value={item._id}>
-							{item.country}
-						</Option>
-					))}
-				</Select>
-			</label>*/}
 			<br />
 			{renderBarChart}
 			<div className="big-margin-top">

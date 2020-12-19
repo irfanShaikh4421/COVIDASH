@@ -7,7 +7,16 @@ const Guidelines = () => {
 	return (
 		<div>
 			<Title>Things to know about the COVID-19</Title>
-			<Text type='secondary'>SOURCE : <a style={{letterSpacing: '2px'}} target="__blank" href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/need-to-know.html"> GUIDELINES</a></Text> <br/><br/>
+			<span className="sub-heading margin-small-bottom">
+				Source:&nbsp;
+				<a
+					target="blank"
+					href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/need-to-know.html"
+					className="color-blue"
+				>
+					CDC
+				</a>
+			</span>
 			<Card className="news-card margin-bottom">
 				<div className="card-content">
 					<span className="card-title">
@@ -181,7 +190,6 @@ const Guidelines = () => {
 					</span>
 				</div>
 			</Card>
-			
 		</div>
 	);
 };
