@@ -9,7 +9,7 @@ const Vaccine = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(undefined);
 
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 	const { Panel } = Collapse;
 
 	useEffect(() => {

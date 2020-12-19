@@ -267,7 +267,7 @@ const News = () => {
 	const [error, setError] = useState(undefined);
 
 	const { Option } = Select;
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 
 	function findCountry(countryId) {
 		//countryID should be passed as location context.countryCode

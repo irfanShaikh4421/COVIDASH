@@ -502,6 +502,12 @@ button:focus {
 	color: #6d7488 !important;
 }
 
+button:disabled {
+	background-color: transparent !important;
+	border: 1px solid #6d7488 !important;
+	color: #6d7488 !important;
+}
+
 /* COLORS */
 
 .color-green {
@@ -574,6 +580,7 @@ button:focus {
 		right: 0;
 		margin: 20px;
 		z-index: 1;
+		background-color: #001529;
 	}
 
 	.App-body {

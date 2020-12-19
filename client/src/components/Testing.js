@@ -67,7 +67,7 @@ const TestingLocations = () => {
 	);
 
 	const { Option } = Select;
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 
 	const [noData, setNoData] = useState(false);
 	const [loading, setLoading] = useState(false);

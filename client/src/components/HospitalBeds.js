@@ -66,7 +66,7 @@ const HospitalBeds = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(undefined);
 	const { Option } = Select;
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 
 	const [currentStateData, setCurrentStateData] = useState([]);
 

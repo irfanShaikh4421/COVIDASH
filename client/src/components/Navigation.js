@@ -37,7 +37,7 @@ const Navigation = () => {
 					}}
 				>
 					<Menu theme="dark" defaultSelectedKeys={['0']} mode="inline">
-						<Menu.Item key="0" className="logo">
+						<Menu.Item key="1" className="logo">
 							<Link to="/">COVIDASH</Link>
 						</Menu.Item>
 						<Menu.Item key="1" icon={<HomeOutlined />}>
@@ -73,9 +73,6 @@ const Navigation = () => {
 						<Menu.Item key="11" icon={<UserOutlined />}>
 							<Link to="/account">Account</Link>
 						</Menu.Item>
-						{/* <Menu.Item key="12" icon={<LogoutOutlined />}>
-							<span onClick={doSignOut}>Sign out</span>
-						</Menu.Item> */}
 					</Menu>
 				</Sider>
 			</Layout>

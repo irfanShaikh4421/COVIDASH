@@ -21,8 +21,6 @@ import {
 } from 'recharts';
 import { Select, Typography } from 'antd';
 
-const { Text } = Typography;
-
 function Charts() {
 	const [location] = useContext(LocationContext);
 	const [chartArr, setChartArr] = useState([]);

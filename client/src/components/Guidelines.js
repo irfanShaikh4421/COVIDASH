@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Card } from 'antd';
 
 const Guidelines = () => {
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 
 	return (
 		<div>

@@ -516,7 +516,7 @@ const Travel = () => {
 	const [error, setError] = useState(false);
 	const [countryData, setCountryData] = useState(null);
 	const { Option } = Select;
-	const { Title, Text } = Typography;
+	const { Title } = Typography;
 
 	const options = countriesList.map((k, i) => (
 		<Option key={i} value={k.value}>
