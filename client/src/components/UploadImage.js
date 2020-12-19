@@ -39,7 +39,7 @@ function UploadImage() {
 				});
 		}
 		getUserData();
-	}, [url]);
+	}, [url,uid]);
 
 	if (currentUser) {
 		uid = currentUser.uid;

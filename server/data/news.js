@@ -113,9 +113,14 @@ async function getNews(country) {
                 let newsIds = await client.smembersAsync(countryParam);
 
                 for (let i = 0; i < newsIds.length; i++) {
-                    let indiNewsObj = await client.hgetallAsync(newsIds[i]);
-                    let unflatIndiNewsObj = unflatten(indiNewsObj);
-                    showNews.push(unflatIndiNewsObj);
+                    let indiNewsExists = await client.existsAsync(newsIds[i])
+                    if(indiNewsExists)
+                    {
+                        let indiNewsObj = await client.hgetallAsync(newsIds[i]);
+                        let unflatIndiNewsObj = unflatten(indiNewsObj);
+                        showNews.push(unflatIndiNewsObj);
+                    }
+                    
                 }
 
                 let newsObj = {
@@ -179,9 +184,14 @@ async function getNews(country) {
                 let newsIds = await client.smembersAsync('world');
 
                 for (let i = 0; i < newsIds.length; i++) {
-                    let indiNewsObj = await client.hgetallAsync(newsIds[i]);
-                    let unflatIndiNewsObj = unflatten(indiNewsObj);
-                    showNews.push(unflatIndiNewsObj);
+                    let indiNewsExists = await client.existsAsync(newsIds[i])
+                    if(indiNewsExists)
+                    {
+                        let indiNewsObj = await client.hgetallAsync(newsIds[i]);
+                        let unflatIndiNewsObj = unflatten(indiNewsObj);
+                        showNews.push(unflatIndiNewsObj);
+                    }
+                    
                 }
 
                 let newsObj = {
