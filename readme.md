@@ -1,7 +1,9 @@
 # COVIDASH
-  
+
   ![Screenshot](/client/public/ss.png)
 Comprehensive COVID-19 Tracker.
+
+  Check out the [walkthrough video](https://youtu.be/5f-lvFPgfjI)
 
 # TEAM MEMBERS
 - Loughlin Claus (*10423561*)
